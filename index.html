@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nova Defense - Protección Anti-Raid Profesional para Discord</title>
+    <title>Nova Defense - Edición Navidad 2024 🎄</title>
     <meta name="description" content="El sistema de protección más avanzado para servidores Discord. Anti-raid, anti-spam y seguridad 24/7 con IA.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -20,6 +20,23 @@
             overflow-x: hidden;
         }
 
+
+        .snowflake {
+            position: fixed;
+            top: -10px;
+            z-index: 9999;
+            color: #fff;
+            font-size: 1.5em;
+            pointer-events: none;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+
         .bg-animation {
             position: fixed;
             width: 100%;
@@ -27,7 +44,7 @@
             top: 0;
             left: 0;
             z-index: 0;
-            background: linear-gradient(135deg, #0a0e17 0%, #0f1729 50%, #1a1f3a 100%);
+            background: linear-gradient(135deg, #0a0e17 0%, #1a0f1f 50%, #1a1f3a 100%);
         }
 
         .bg-grid {
@@ -35,8 +52,8 @@
             width: 100%;
             height: 100%;
             background-image: 
-                linear-gradient(rgba(59, 130, 246, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(59, 130, 246, 0.05) 1px, transparent 1px);
+                linear-gradient(rgba(220, 38, 38, 0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(34, 197, 94, 0.08) 1px, transparent 1px);
             background-size: 50px 50px;
             animation: gridMove 20s linear infinite;
         }
@@ -57,7 +74,7 @@
         .orb-1 {
             width: 500px;
             height: 500px;
-            background: radial-gradient(circle, #3b82f6 0%, transparent 70%);
+            background: radial-gradient(circle, #dc2626 0%, transparent 70%);
             top: -10%;
             left: -10%;
             animation-delay: 0s;
@@ -66,7 +83,7 @@
         .orb-2 {
             width: 400px;
             height: 400px;
-            background: radial-gradient(circle, #2563eb 0%, transparent 70%);
+            background: radial-gradient(circle, #22c55e 0%, transparent 70%);
             bottom: -10%;
             right: -10%;
             animation-delay: 7s;
@@ -78,6 +95,36 @@
             66% { transform: translate(-30px, 30px) scale(0.9); }
         }
 
+
+        .christmas-lights {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            z-index: 999;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .light {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            animation: blink 1.5s infinite;
+        }
+
+        .light:nth-child(1) { background: #dc2626; animation-delay: 0s; }
+        .light:nth-child(2) { background: #22c55e; animation-delay: 0.3s; }
+        .light:nth-child(3) { background: #eab308; animation-delay: 0.6s; }
+        .light:nth-child(4) { background: #3b82f6; animation-delay: 0.9s; }
+        .light:nth-child(5) { background: #dc2626; animation-delay: 1.2s; }
+
+        @keyframes blink {
+            0%, 50%, 100% { opacity: 1; box-shadow: 0 0 20px currentColor; }
+            25%, 75% { opacity: 0.3; box-shadow: none; }
+        }
+
         header {
             position: fixed;
             width: 100%;
@@ -85,7 +132,7 @@
             z-index: 1000;
             background: rgba(10, 14, 23, 0.95);
             backdrop-filter: blur(15px);
-            border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+            border-bottom: 2px solid rgba(220, 38, 38, 0.3);
             padding: 15px 0;
         }
 
@@ -108,59 +155,157 @@
             width: 45px;
             height: 45px;
             object-fit: contain;
-            filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.5));
+            filter: drop-shadow(0 0 10px rgba(220, 38, 38, 0.5));
+            animation: santaHat 3s ease-in-out infinite;
+        }
+
+        @keyframes santaHat {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
         }
 
         .logo-text {
             font-size: 24px;
             font-weight: 700;
-            background: linear-gradient(90deg, #3b82f6, #60a5fa);
+            background: linear-gradient(90deg, #dc2626, #22c55e, #eab308);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            animation: shimmer 3s linear infinite;
+            background-size: 200% auto;
         }
 
-        nav {
+        @keyframes shimmer {
+            to { background-position: 200% center; }
+        }
+
+        .menu-toggle {
             display: flex;
-            gap: 35px;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 22px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            z-index: 1100;
         }
 
-        nav a {
-            color: #94a3b8;
+        .menu-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .menu-toggle .bar {
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #dc2626, #22c55e);
+            border-radius: 2px;
+            box-shadow: 0 0 8px rgba(220, 38, 38, 0.6);
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle.hidden {
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(0.8);
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(5, 10, 20, 0.7);
+            backdrop-filter: blur(4px);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s;
+            z-index: 900;
+        }
+
+        .overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: -320px;
+            width: 300px;
+            height: 100vh;
+            background: linear-gradient(180deg, rgba(15,20,35,0.98), rgba(10,15,25,1));
+            box-shadow: -5px 0 25px rgba(220, 38, 38, 0.3);
+            transition: right 0.5s cubic-bezier(0.25, 1, 0.3, 1);
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            z-index: 1001;
+            border-left: 2px solid rgba(220, 38, 38, 0.3);
+            overflow: hidden;
+        }
+
+        .sidebar.active {
+            right: 0;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.8rem;
+            align-self: flex-end;
+            cursor: pointer;
+            transition: transform 0.2s ease, color 0.3s ease;
+        }
+
+        .close-btn:hover {
+            transform: rotate(90deg);
+            color: #dc2626;
+        }
+
+        .sidebar-links {
+            display: flex;
+            flex-direction: column;
+            margin-top: 60px;
+            gap: 25px;
+        }
+
+        .sidebar-links a {
+            color: #e2e8f0;
             text-decoration: none;
+            font-size: 1.2rem;
             font-weight: 500;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
             position: relative;
-            font-size: 15px;
+            padding-bottom: 4px;
+            overflow: hidden;
         }
 
-        nav a::before {
-            content: '';
+        .sidebar-links a::before {
+            content: "";
             position: absolute;
-            width: 0;
+            left: 0;
+            bottom: 0;
+            width: 0%;
             height: 2px;
-            bottom: -5px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #3b82f6;
-            transition: width 0.3s;
-            box-shadow: 0 0 10px rgba(59, 130, 246, 0.6);
+            background: linear-gradient(90deg, #dc2626, #22c55e);
+            transition: width 0.3s ease;
         }
 
-        nav a:hover {
-            color: #3b82f6;
-        }
-
-        nav a:hover::before {
+        .sidebar-links a:hover::before {
             width: 100%;
         }
 
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: #3b82f6;
-            font-size: 24px;
-            cursor: pointer;
+        .sidebar-links a:hover {
+            color: #22c55e;
+            text-shadow: 0 0 10px rgba(34, 197, 94, 0.6);
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         .hero {
@@ -181,11 +326,11 @@
 
         .hero-badge {
             display: inline-block;
-            background: rgba(59, 130, 246, 0.15);
-            border: 2px solid rgba(59, 130, 246, 0.5);
+            background: rgba(220, 38, 38, 0.15);
+            border: 2px solid rgba(220, 38, 38, 0.5);
             padding: 8px 20px;
             border-radius: 25px;
-            color: #60a5fa;
+            color: #fca5a5;
             font-weight: 600;
             font-size: 13px;
             text-transform: uppercase;
@@ -196,10 +341,10 @@
 
         @keyframes badge-glow {
             0%, 100% { 
-                box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+                box-shadow: 0 0 20px rgba(220, 38, 38, 0.4);
             }
             50% { 
-                box-shadow: 0 0 35px rgba(59, 130, 246, 0.7);
+                box-shadow: 0 0 35px rgba(220, 38, 38, 0.7);
             }
         }
 
@@ -213,10 +358,11 @@
         }
 
         .hero h1 .highlight {
-            background: linear-gradient(90deg, #3b82f6, #60a5fa);
+            background: linear-gradient(90deg, #dc2626, #22c55e, #eab308);
+            background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 40px rgba(59, 130, 246, 0.6);
+            animation: shimmer 3s linear infinite;
         }
 
         .hero p {
@@ -247,24 +393,24 @@
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
             color: white;
-            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
+            box-shadow: 0 10px 30px rgba(220, 38, 38, 0.4);
         }
 
         .btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(59, 130, 246, 0.6);
+            box-shadow: 0 15px 40px rgba(220, 38, 38, 0.6);
         }
 
         .btn-secondary {
-            background: rgba(59, 130, 246, 0.1);
-            color: #3b82f6;
-            border: 2px solid #3b82f6;
+            background: rgba(34, 197, 94, 0.1);
+            color: #22c55e;
+            border: 2px solid #22c55e;
         }
 
         .btn-secondary:hover {
-            background: rgba(59, 130, 246, 0.2);
+            background: rgba(34, 197, 94, 0.2);
             transform: translateY(-3px);
         }
 
@@ -289,7 +435,7 @@
             transform: translate(-50%, -50%);
             width: 350px;
             height: 350px;
-            background: radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(220, 38, 38, 0.3) 0%, transparent 70%);
             border-radius: 50%;
             animation: pulse 3s ease-in-out infinite;
         }
@@ -306,9 +452,10 @@
             transform: translate(-50%, -50%);
             width: 380px;
             height: 380px;
-            border: 2px solid rgba(59, 130, 246, 0.3);
+            border: 2px solid rgba(220, 38, 38, 0.3);
             border-radius: 50%;
-            border-top-color: #3b82f6;
+            border-top-color: #dc2626;
+            border-right-color: #22c55e;
             animation: rotate 8s linear infinite;
         }
 
@@ -328,23 +475,57 @@
         .shield-svg {
             width: 200px;
             height: 240px;
-            filter: drop-shadow(0 0 30px rgba(59, 130, 246, 0.6));
+            filter: drop-shadow(0 0 30px rgba(220, 38, 38, 0.6));
+        }
+
+
+        .santa-hat {
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 48px;
+            animation: wiggle 2s ease-in-out infinite;
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: translateX(-50%) rotate(-5deg); }
+            50% { transform: translateX(-50%) rotate(5deg); }
         }
 
         .particle {
             position: absolute;
             width: 8px;
             height: 8px;
-            background: #3b82f6;
             border-radius: 50%;
-            box-shadow: 0 0 20px rgba(59, 130, 246, 0.8);
+            box-shadow: 0 0 20px currentColor;
             animation: particle-float 4s ease-in-out infinite;
         }
 
-        .particle:nth-child(1) { top: 20%; left: 20%; animation-delay: 0s; }
-        .particle:nth-child(2) { top: 20%; right: 20%; animation-delay: 1s; }
-        .particle:nth-child(3) { bottom: 20%; left: 20%; animation-delay: 2s; }
-        .particle:nth-child(4) { bottom: 20%; right: 20%; animation-delay: 3s; }
+        .particle:nth-child(1) { 
+            top: 20%; 
+            left: 20%; 
+            background: #dc2626;
+            animation-delay: 0s; 
+        }
+        .particle:nth-child(2) { 
+            top: 20%; 
+            right: 20%; 
+            background: #22c55e;
+            animation-delay: 1s; 
+        }
+        .particle:nth-child(3) { 
+            bottom: 20%; 
+            left: 20%; 
+            background: #eab308;
+            animation-delay: 2s; 
+        }
+        .particle:nth-child(4) { 
+            bottom: 20%; 
+            right: 20%; 
+            background: #3b82f6;
+            animation-delay: 3s; 
+        }
 
         @keyframes particle-float {
             0%, 100% { transform: translateY(0); opacity: 1; }
@@ -367,9 +548,11 @@
             font-size: 48px;
             font-weight: 800;
             margin-bottom: 15px;
-            background: linear-gradient(90deg, #3b82f6, #60a5fa);
+            background: linear-gradient(90deg, #dc2626, #22c55e, #eab308);
+            background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            animation: shimmer 3s linear infinite;
         }
 
         .section-header p {
@@ -385,7 +568,7 @@
 
         .system-card {
             background: rgba(15, 23, 41, 0.6);
-            border: 1px solid rgba(59, 130, 246, 0.2);
+            border: 1px solid rgba(220, 38, 38, 0.2);
             border-radius: 20px;
             padding: 40px 30px;
             transition: all 0.4s;
@@ -400,7 +583,7 @@
             left: 0;
             width: 100%;
             height: 5px;
-            background: linear-gradient(90deg, #3b82f6, #60a5fa);
+            background: linear-gradient(90deg, #dc2626, #22c55e, #eab308);
             transform: scaleX(0);
             transition: transform 0.4s;
         }
@@ -411,23 +594,23 @@
 
         .system-card:hover {
             transform: translateY(-10px);
-            border-color: rgba(59, 130, 246, 0.5);
-            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.3);
+            border-color: rgba(220, 38, 38, 0.5);
+            box-shadow: 0 20px 40px rgba(220, 38, 38, 0.3);
             background: rgba(15, 23, 41, 0.8);
         }
 
         .system-icon {
             width: 80px;
             height: 80px;
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(59, 130, 246, 0.1));
+            background: linear-gradient(135deg, rgba(220, 38, 38, 0.2), rgba(34, 197, 94, 0.1));
             border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 25px;
             font-size: 36px;
-            color: #3b82f6;
-            border: 1px solid rgba(59, 130, 246, 0.3);
+            color: #dc2626;
+            border: 1px solid rgba(220, 38, 38, 0.3);
         }
 
         .system-card h3 {
@@ -446,7 +629,7 @@
             position: relative;
             padding: 100px 40px;
             background: rgba(10, 14, 23, 0.8);
-            border-top: 1px solid rgba(59, 130, 246, 0.2);
+            border-top: 1px solid rgba(220, 38, 38, 0.2);
         }
 
         .pricing-grid {
@@ -460,7 +643,7 @@
 
         .pricing-card {
             background: rgba(15, 23, 41, 0.8);
-            border: 2px solid rgba(59, 130, 246, 0.3);
+            border: 2px solid rgba(220, 38, 38, 0.3);
             border-radius: 25px;
             padding: 45px 35px;
             position: relative;
@@ -475,7 +658,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), transparent);
+            background: linear-gradient(135deg, rgba(220, 38, 38, 0.05), transparent);
             opacity: 0;
             transition: opacity 0.4s;
         }
@@ -486,13 +669,13 @@
 
         .pricing-card:hover {
             transform: translateY(-10px);
-            border-color: rgba(59, 130, 246, 0.6);
-            box-shadow: 0 25px 50px rgba(59, 130, 246, 0.3);
+            border-color: rgba(220, 38, 38, 0.6);
+            box-shadow: 0 25px 50px rgba(220, 38, 38, 0.3);
         }
 
         .pricing-card-featured {
-            border-color: #3b82f6;
-            background: rgba(59, 130, 246, 0.1);
+            border-color: #22c55e;
+            background: rgba(34, 197, 94, 0.1);
             transform: scale(1.05);
         }
 
@@ -500,7 +683,7 @@
             position: absolute;
             top: 20px;
             right: 20px;
-            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            background: linear-gradient(135deg, #22c55e, #16a34a);
             color: white;
             padding: 6px 16px;
             border-radius: 20px;
@@ -508,7 +691,7 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.5);
+            box-shadow: 0 4px 15px rgba(34, 197, 94, 0.5);
         }
 
         .pricing-header h3 {
@@ -525,7 +708,9 @@
         .price-amount {
             font-size: 56px;
             font-weight: 900;
-            color: #3b82f6;
+            background: linear-gradient(90deg, #dc2626, #22c55e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .price-period {
@@ -550,7 +735,7 @@
         }
 
         .pricing-features i {
-            color: #3b82f6;
+            color: #22c55e;
             font-size: 16px;
             margin-top: 2px;
         }
@@ -570,25 +755,25 @@
 
         .btn-plan-free {
             background: transparent;
-            color: #3b82f6;
-            border: 2px solid #3b82f6;
+            color: #dc2626;
+            border: 2px solid #dc2626;
         }
 
         .btn-plan-free:hover {
-            background: rgba(59, 130, 246, 0.1);
+            background: rgba(220, 38, 38, 0.1);
             transform: translateY(-2px);
         }
 
         .btn-plan-basic, .btn-plan-pro {
-            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            background: linear-gradient(135deg, #22c55e, #16a34a);
             color: white;
             border: none;
-            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4);
+            box-shadow: 0 10px 25px rgba(34, 197, 94, 0.4);
         }
 
         .btn-plan-basic:hover, .btn-plan-pro:hover {
             transform: translateY(-2px);
-            box-shadow: 0 15px 35px rgba(59, 130, 246, 0.6);
+            box-shadow: 0 15px 35px rgba(34, 197, 94, 0.6);
         }
 
         .collaborators {
@@ -607,7 +792,7 @@
 
         .collaborator-card {
             background: rgba(15, 23, 41, 0.6);
-            border: 1px solid rgba(59, 130, 246, 0.2);
+            border: 1px solid rgba(220, 38, 38, 0.2);
             border-radius: 20px;
             padding: 40px 30px;
             text-align: center;
@@ -623,7 +808,7 @@
             left: 0;
             width: 100%;
             height: 4px;
-            background: linear-gradient(90deg, #3b82f6, #60a5fa);
+            background: linear-gradient(90deg, #dc2626, #22c55e, #eab308);
             transform: scaleX(0);
             transition: transform 0.4s;
         }
@@ -634,8 +819,8 @@
 
         .collaborator-card:hover {
             transform: translateY(-10px);
-            border-color: rgba(59, 130, 246, 0.5);
-            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.3);
+            border-color: rgba(220, 38, 38, 0.5);
+            box-shadow: 0 20px 40px rgba(220, 38, 38, 0.3);
             background: rgba(15, 23, 41, 0.8);
         }
 
@@ -644,14 +829,14 @@
             height: 120px;
             margin: 0 auto 25px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            background: linear-gradient(135deg, #dc2626, #22c55e);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 48px;
             color: white;
-            border: 4px solid rgba(59, 130, 246, 0.3);
-            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
+            border: 4px solid rgba(220, 38, 38, 0.3);
+            box-shadow: 0 10px 30px rgba(220, 38, 38, 0.4);
         }
 
         .collaborator-card h3 {
@@ -661,7 +846,7 @@
         }
 
         .collaborator-role {
-            color: #3b82f6;
+            color: #22c55e;
             font-size: 14px;
             font-weight: 600;
             text-transform: uppercase;
@@ -686,20 +871,20 @@
             width: 40px;
             height: 40px;
             border-radius: 10px;
-            background: rgba(59, 130, 246, 0.1);
-            border: 1px solid rgba(59, 130, 246, 0.3);
+            background: rgba(220, 38, 38, 0.1);
+            border: 1px solid rgba(220, 38, 38, 0.3);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #3b82f6;
+            color: #dc2626;
             text-decoration: none;
             transition: all 0.3s;
             font-size: 18px;
         }
 
         .social-link:hover {
-            background: rgba(59, 130, 246, 0.2);
-            border-color: #3b82f6;
+            background: rgba(220, 38, 38, 0.2);
+            border-color: #dc2626;
             transform: translateY(-3px);
         }
 
@@ -707,9 +892,9 @@
             position: relative;
             padding: 80px 40px;
             text-align: center;
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(37, 99, 235, 0.08));
-            border-top: 1px solid rgba(59, 130, 246, 0.2);
-            border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+            background: linear-gradient(135deg, rgba(220, 38, 38, 0.15), rgba(34, 197, 94, 0.08));
+            border-top: 1px solid rgba(220, 38, 38, 0.2);
+            border-bottom: 1px solid rgba(220, 38, 38, 0.2);
         }
 
         .stats-content h4 {
@@ -723,18 +908,20 @@
         .stats-number {
             font-size: 64px;
             font-weight: 900;
-            background: linear-gradient(90deg, #3b82f6, #60a5fa);
+            background: linear-gradient(90deg, #dc2626, #22c55e, #eab308);
+            background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             display: block;
             margin-bottom: 20px;
+            animation: shimmer 3s linear infinite;
         }
 
         footer {
             position: relative;
             padding: 50px 40px 30px;
             background: rgba(10, 14, 23, 0.95);
-            border-top: 1px solid rgba(59, 130, 246, 0.2);
+            border-top: 1px solid rgba(220, 38, 38, 0.2);
         }
 
         .footer-content {
@@ -762,7 +949,7 @@
             text-decoration: none;
             font-size: 14px;
             padding: 8px 16px;
-            border: 1px solid rgba(59, 130, 246, 0.3);
+            border: 1px solid rgba(220, 38, 38, 0.3);
             border-radius: 8px;
             transition: all 0.3s;
             display: flex;
@@ -771,9 +958,9 @@
         }
 
         .footer-btn:hover {
-            color: #3b82f6;
-            border-color: #3b82f6;
-            background: rgba(59, 130, 246, 0.1);
+            color: #dc2626;
+            border-color: #dc2626;
+            background: rgba(220, 38, 38, 0.1);
         }
 
         @media (max-width: 1024px) {
@@ -800,27 +987,6 @@
             .shield-svg {
                 width: 150px;
                 height: 180px;
-            }
-
-            nav {
-                position: fixed;
-                top: 80px;
-                left: -100%;
-                width: 100%;
-                background: rgba(10, 14, 23, 0.98);
-                flex-direction: column;
-                padding: 30px;
-                gap: 20px;
-                transition: left 0.3s;
-                border-bottom: 1px solid rgba(59, 130, 246, 0.3);
-            }
-
-            nav.active {
-                left: 0;
-            }
-
-            .mobile-menu-btn {
-                display: block;
             }
 
             .pricing-card-featured {
@@ -865,355 +1031,411 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 </head>
 <body>
-    <div class="bg-animation">
-        <div class="bg-grid"></div>
-        <div class="gradient-orb orb-1"></div>
-        <div class="gradient-orb orb-2"></div>
+
+<div class="christmas-lights">
+    <div class="light"></div>
+    <div class="light"></div>
+    <div class="light"></div>
+    <div class="light"></div>
+    <div class="light"></div>
+    <div class="light"></div>
+    <div class="light"></div>
+    <div class="light"></div>
+    <div class="light"></div>
+    <div class="light"></div>
+</div>
+
+<div class="bg-animation">
+    <div class="bg-grid"></div>
+    <div class="gradient-orb orb-1"></div>
+    <div class="gradient-orb orb-2"></div>
+</div>
+
+<header>
+    <div class="nav-container">
+        <div class="logo-container">
+            <img src="Logo1.png" alt="Nova Defense" class="logo">
+            <div class="logo-text">Nova Defense 🎄</div>
+        </div>
+
+        <button class="menu-toggle" id="menu-toggle">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
     </div>
 
-    <header>
-        <div class="nav-container">
-            <div class="logo-container">
-                <img src="Logo1.png" alt="Nova Defense" class="logo">
-                <div class="logo-text">Nova Defense</div>
-            </div>
-            <button class="mobile-menu-btn" onclick="toggleMenu()">
-                <i class="fas fa-bars"></i>
-            </button>
-            <nav id="nav">
-                <a href="#inicio" onclick="closeMenu()">Inicio</a>
-                <a href="#sistemas" onclick="closeMenu()">Características</a>
-                <a href="#equipo" onclick="closeMenu()">Equipo</a>
-                <a href="colaboradores.html" onclick="closeMenu()">Colaboradores</a>
-                <a href="#planes" onclick="closeMenu()">Planes</a>
-                <a href="https://dashboardnovadefense.netlify.app" onclick="closeMenu()">Dashboard</a>
-            </nav>
-        </div>
-    </header>
+    <div class="overlay" id="overlay"></div>
 
-    <section class="hero" id="inicio">
-        <div class="hero-content">
-            <div class="hero-badge">Seguridad Avanzada</div>
-            <h1>
-                Protección <span class="highlight">Anti-Raid</span> para Discord
-            </h1>
-            <p>
-                Sistema de seguridad empresarial diseñado para proteger tu comunidad contra raids, 
-                spam y ataques automatizados. Monitoreo en tiempo real las 24 horas del día.
-            </p>
-            <div class="cta-buttons">
-                <a href="https://discord.com/oauth2/authorize?client_id=1403752400761913445&scope=bot+applications.commands&permissions=8&integration_type=0" 
-                   target="_blank" 
-                   class="btn btn-primary">
-                    <i class="fas fa-plus-circle"></i>
-                    Añadir a Discord
-                </a>
-                <a href="https://discord.com/oauth2/authorize?client_id=1403752400761913445&response_type=code&redirect_uri=https%3A%2F%2Fdashboard.novadefense.es&scope=identify+guilds" 
-                   class="btn btn-secondary">
-                    <i class="fas fa-cog"></i>
-                    Abrir Dashboard
-                </a>
-            </div>
-        </div>
-
-        <div class="hero-visual">
-            <div class="shield-container">
-                <div class="shield-glow"></div>
-                <div class="rotating-ring"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
-                <div class="shield" id="shield">
-                    <svg class="shield-svg" viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M100 10L20 50V110C20 165 55 215 100 230C145 215 180 165 180 110V50L100 10Z" fill="url(#shield-gradient)" stroke="#3b82f6" stroke-width="3"/>
-                        <path d="M70 110L90 130L130 85" stroke="#ffffff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-                        <defs>
-                            <linearGradient id="shield-gradient" x1="100" y1="10" x2="100" y2="230" gradientUnits="userSpaceOnUse">
-                                <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.8"/>
-                                <stop offset="100%" stop-color="#1e40af" stop-opacity="0.9"/>
-                            </linearGradient>
-                        </defs>
-                    </svg>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="systems" id="sistemas">
-        <div class="section-header">
-            <h2>Características</h2>
-            <p>Sistema completo de protección para tu servidor</p>
-        </div>
-        <div class="systems-grid">
-            <div class="system-card">
-                <div class="system-icon">
-                    <i class="fas fa-shield-alt"></i>
-                </div>
-                <h3>Antiraid</h3>
-                <p>Más de 15 sistemas Antiraid distintos que podrás configurar según tu preferencia. Protección inteligente contra ataques masivos.</p>
-            </div>
-            <div class="system-card">
-                <div class="system-icon">
-                    <i class="fas fa-shield-virus"></i>
-                </div>
-                <h3>Seguridad opcional</h3>
-                <p>Disponibles opciones extra de seguridad que ayudarán a mantener tu servidor más seguro con configuraciones personalizables.</p>
-            </div>
-            <div class="system-card">
-                <div class="system-icon">
-                    <i class="fas fa-user-times"></i>
-                </div>
-                <h3>Detección de usuarios maliciosos</h3>
-                <p>Blacklist global con miles de bots y usuarios maliciosos que serán sancionados en caso de intentar acceder a tu servidor.</p>
-            </div>
-            <div class="system-card">
-                <div class="system-icon">
-                    <i class="fas fa-copy"></i>
-                </div>
-                <h3>Copias de Seguridad</h3>
-                <p>Podrás realizar copias de seguridad avanzadas de tu servidor y restaurarlas cuando lo necesites en minutos.</p>
-            </div>
-            <div class="system-card">
-                <div class="system-icon">
-                    <i class="fas fa-user-plus"></i>
-                </div>
-                <h3>Whitelist de usuarios</h3>
-                <p>Mantén tu servidor seguro al incluir en la whitelist a personas de confianza, reduciendo el riesgo de sanciones accidentales.</p>
-            </div>
-            <div class="system-card">
-                <div class="system-icon">
-                    <i class="fas fa-chart-line"></i>
-                </div>
-                <h3>Dashboard</h3>
-                <p>Interfaz amigable donde podrás configurar el bot por completo con estadísticas en tiempo real y panel de control avanzado.</p>
-            </div>
-        </div>
-    </section>
-
-<section class="collaborators" id="equipo">
-    <div class="section-header">
-        <h2>Nuestro Equipo</h2>
-        <p>Personas detrás del desarrollo y mantenimiento de ParlaAI</p>
+    <div class="sidebar" id="sidebar">
+        <button class="close-btn" id="close-btn">✕</button>
+        <nav class="sidebar-links">
+            <a href="#inicio"> Inicio</a>
+            <a href="#sistemas"> Características</a>
+            <a href="#equipo"> Equipo</a>
+            <a href="#colaboradores"> Colaboradores</a>
+            <a href="#planes"> Planes</a>
+            <a href="https://dashboard.novadefense.es" target="_blank"> Dashboard</a>
+            <a href="https://discord.gg/FsbvgQWKYy" target="_blank"> Discord</a>
+        </nav>
     </div>
-    <div class="collaborators-grid">
-        
-        <div class="collaborator-card">
-            <div class="collaborator-avatar">
-                <i class="fas fa-crown"></i>
-            </div>
-            <h3>Gonzalo (gonzalo2323_)</h3>
-            <div class="collaborator-role">Fundador</div>
-            <p class="collaborator-description">
-                Fundador y desarrollador principal de ParlaAI. Programador del bot, enfocado en la innovación, seguridad y optimización del sistema para ofrecer la mejor experiencia a los usuarios.
-            </p>
-        </div>
+</header>
 
-        <div class="collaborator-card">
-            <div class="collaborator-avatar">
-                <i class="fas fa-code"></i>
-            </div>
-            <h3>Kurok (kurok4259)</h3>
-            <div class="collaborator-role">Fundador</div>
-            <p class="collaborator-description">
-                Fundador y desarrollador de backend. Programador del bot especializado en rendimiento y estabilidad del sistema, trabajando en la integración y mejora continua de Nova Defense.
-            </p>
+<section class="hero" id="inicio">
+    <div class="hero-content">
+        <div class="hero-badge">🎄 Edición Navidad 2025 🎅</div>
+        <h1>
+            Protección <span class="highlight">Anti-Raid</span> para Discord
+        </h1>
+        <p>
+            Sistema de seguridad empresarial diseñado para proteger tu comunidad contra raids, 
+            spam y ataques automatizados. Monitoreo en tiempo real las 24 horas del día.
+        </p>
+        <div class="cta-buttons">
+            <a href="https://discord.com/oauth2/authorize?client_id=1403752400761913445&scope=bot+applications.commands&permissions=8&integration_type=0" 
+               target="_blank" 
+               class="btn btn-primary">
+                <i class="fas fa-gift"></i>
+                Añadir a Discord
+            </a>
+            <a href="https://discord.com/oauth2/authorize?client_id=1403752400761913445&response_type=code&redirect_uri=https%3A%2F%2Fdashboard.novadefense.es&scope=identify+guilds" 
+               class="btn btn-secondary">
+                <i class="fas fa-snowflake"></i>
+                Abrir Dashboard
+            </a>
         </div>
+    </div>
 
+    <div class="hero-visual">
+        <div class="shield-container">
+            <div class="shield-glow"></div>
+            <div class="rotating-ring"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="shield" id="shield">
+                <div class="santa-hat">🎅</div>
+                <svg class="shield-svg" viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M100 10L20 50V110C20 165 55 215 100 230C145 215 180 165 180 110V50L100 10Z" fill="url(#shield-gradient)" stroke="#dc2626" stroke-width="3"/>
+                    <path d="M70 110L90 130L130 85" stroke="#ffffff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                    <defs>
+                        <linearGradient id="shield-gradient" x1="100" y1="10" x2="100" y2="230" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#dc2626" stop-opacity="0.8"/>
+                            <stop offset="50%" stop-color="#22c55e" stop-opacity="0.6"/>
+                            <stop offset="100%" stop-color="#16a34a" stop-opacity="0.9"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+        </div>
     </div>
 </section>
 
-
-    <section class="collaborators" id="colaboradores">
-        <div class="section-header">
-            <h2>Nuestros Colaboradores</h2>
-            <p>Alianzas estratégicas que potencian la seguridad de tu comunidad</p>
+<section class="systems" id="sistemas">
+    <div class="section-header">
+        <h2>🎁 Características</h2>
+        <p>Sistema completo de protección para tu servidor</p>
+    </div>
+    <div class="systems-grid">
+        <div class="system-card">
+            <div class="system-icon">
+                <i class="fas fa-shield-alt"></i>
+            </div>
+            <h3>Antiraid 🎄</h3>
+            <p>Más de 15 sistemas Antiraid distintos que podrás configurar según tu preferencia. Protección inteligente contra ataques masivos.</p>
         </div>
-        <div class="collaborators-grid">
-            <div class="collaborator-card">
-                <div class="collaborator-avatar">
-                    <i class="fas fa-robot"></i>
-                </div>
-                <h3>ParlaAI</h3>
-                <div class="collaborator-role">Colaborador Oficial - IA Conversacional</div>
-                <p class="collaborator-description">
-                    ParlaAI es una inteligencia artificial creada para ayudarte en tu día a día. Te apoya generando ideas, redactando textos y resolviendo dudas de forma rápida y sencilla. Es un asistente pensado para colaborar contigo, hacerte la vida más fácil y mejorar la forma en que trabajas o te comunicas.
-                </p>
-                <div style="margin: 20px 0; padding: 15px; background: rgba(59, 130, 246, 0.1); border-radius: 12px; border-left: 4px solid #3b82f6;">
-                    <p style="color: #94a3b8; font-size: 13px; line-height: 1.6; margin: 0;">
-                        <strong style="color: #3b82f6;">CEO:</strong> sr_conway<br>
-                        <strong style="color: #3b82f6;">Fundador:</strong> alexpanto
-                    </p>
-                </div>
-                <div class="collaborator-links">
-                    <a href="https://parlaai.es" target="_blank" class="social-link" title="Sitio Web"><i class="fas fa-globe"></i></a>
-                    <a href="https://discord.gg/PaQxCBKaJb" target="_blank" class="social-link" title="Discord"><i class="fab fa-discord"></i></a>
-                </div>
+        <div class="system-card">
+            <div class="system-icon">
+                <i class="fas fa-shield-virus"></i>
             </div>
-
-            <div class="collaborator-card">
-                <div class="collaborator-avatar">
-                    <i class="fas fa-handshake"></i>
-                </div>
-                <h3>¿Quieres colaborar?</h3>
-                <div class="collaborator-role">Buscamos Aliados Estratégicos</div>
-                <p class="collaborator-description">
-                    Si tienes un proyecto relacionado con seguridad, bots de Discord o herramientas para comunidades, nos encantaría conocerte y explorar posibles colaboraciones.
-                </p>
-                <div class="collaborator-links">
-                    <a href="https://discord.gg/5x7WFj5g" target="_blank" class="social-link" title="Contactar"><i class="fas fa-envelope"></i></a>
-                </div>
-            </div>
+            <h3>Seguridad opcional ⭐</h3>
+            <p>Disponibles opciones extra de seguridad que ayudarán a mantener tu servidor más seguro con configuraciones personalizables.</p>
         </div>
-    </section>
-
-    <section class="pricing" id="planes">
-        <div class="section-header">
-            <h2>Planes de Protección</h2>
-            <p>Elige el plan que mejor se adapte a las necesidades de tu servidor</p>
+        <div class="system-card">
+            <div class="system-icon">
+                <i class="fas fa-user-times"></i>
+            </div>
+            <h3>Detección de usuarios maliciosos 🎅</h3>
+            <p>Blacklist global con miles de bots y usuarios maliciosos que serán sancionados en caso de intentar acceder a tu servidor.</p>
         </div>
-        <div class="pricing-grid">
-            <div class="pricing-card">
-                <div class="pricing-header">
-                    <h3>Estándar</h3>
-                    <div class="pricing-price">
-                        <span class="price-amount">0€</span>
-                        <span class="price-period">/mes</span>
-                    </div>
-                </div>
-                <ul class="pricing-features">
-                    <li><i class="fas fa-check"></i><span>Protección básica Anti-raid</span></li>
-                    <li><i class="fas fa-check"></i><span>Registro básico de eventos en un canal</span></li>
-                    <li><i class="fas fa-check"></i><span>Límites bajos de protección (hasta 3 baneos/kicks en 5 minutos)</span></li>
-                    <li><i class="fas fa-check"></i><span>Sistema Blacklist</span></li>
-                    <li><i class="fas fa-check"></i><span>Sistema Whitelist</span></li>
-                    <li><i class="fas fa-check"></i><span>Soporte limitado</span></li>
-                </ul>
-                <a href="https://discord.com/oauth2/authorize?client_id=1403752400761913445&scope=bot+applications.commands&permissions=8&integration_type=0" 
-                   target="_blank" 
-                   class="btn-plan btn-plan-free">
-                    Comenzar Gratis
-                </a>
+        <div class="system-card">
+            <div class="system-icon">
+                <i class="fas fa-copy"></i>
             </div>
-
-            <div class="pricing-card pricing-card-featured">
-                <div class="featured-badge">Más Popular</div>
-                <div class="pricing-header">
-                    <h3>Básico</h3>
-                    <div class="pricing-price">
-                        <span class="price-amount">2€</span>
-                        <span class="price-period">/mes</span>
-                    </div>
-                </div>
-                <ul class="pricing-features">
-                    <li><i class="fas fa-check"></i><span>Todo lo del plan Gratis</span></li>
-                    <li><i class="fas fa-check"></i><span>Protección Avanzada</span></li>
-                    <li><i class="fas fa-check"></i><span>Alertas en canal dedicado además de DM</span></li>
-                    <li><i class="fas fa-check"></i><span>Whitelist de usuarios/roles para evitar bloqueos accidentales</span></li>
-                    <li><i class="fas fa-check"></i><span>Sistema de backups básico</span></li>
-                    <li><i class="fas fa-check"></i><span>Límites de acción configurables por el owner</span></li>
-                    <li><i class="fas fa-check"></i><span>Prioridad premium en el soporte</span></li>
-                </ul>
-                <a href="https://discord.gg/5x7WFj5g" 
-                   target="_blank" 
-                   class="btn-plan btn-plan-basic">
-                    Obtener Básico
-                </a>
-            </div>
-
-            <div class="pricing-card">
-                <div class="pricing-header">
-                    <h3>Pro</h3>
-                    <div class="pricing-price">
-                        <span class="price-amount">4€</span>
-                        <span class="price-period">/mes</span>
-                    </div>
-                </div>
-                <ul class="pricing-features">
-                    <li><i class="fas fa-check"></i><span>Todo lo del plan Basic y Estándar</span></li>
-                    <li><i class="fas fa-check"></i><span>Sistema antinuke avanzado</span></li>
-                    <li><i class="fas fa-check"></i><span>Protección contra webhooks y emojis</span></li>
-                    <li><i class="fas fa-check"></i><span>Gestión multi-servidor</span></li>
-                    <li><i class="fas fa-check"></i><span>Notificaciones configurables (DM, canal, webhooks)</span></li>
-                    <li><i class="fas fa-check"></i><span>Sistema de copias de seguridad Pro</span></li>
-                    <li><i class="fas fa-check"></i><span>Soporte VIP 24/7</span></li>
-                    <li><i class="fas fa-check"></i><span>Asesor personal para tu servidor</span></li>
-                </ul>
-                <a href="https://discord.gg/5x7WFj5g" 
-                   target="_blank" 
-                   class="btn-plan btn-plan-pro">
-                    Obtener Pro
-                </a>
-            </div>
+            <h3>Copias de Seguridad 🎁</h3>
+            <p>Podrás realizar copias de seguridad avanzadas de tu servidor y restaurarlas cuando lo necesites en minutos.</p>
         </div>
-    </section>
+        <div class="system-card">
+            <div class="system-icon">
+                <i class="fas fa-user-plus"></i>
+            </div>
+            <h3>Whitelist de usuarios ❄️</h3>
+            <p>Mantén tu servidor seguro al incluir en la whitelist a personas de confianza, reduciendo el riesgo de sanciones accidentales.</p>
+        </div>
+        <div class="system-card">
+            <div class="system-icon">
+                <i class="fas fa-chart-line"></i>
+            </div>
+            <h3>Dashboard 🌟</h3>
+            <p>Interfaz amigable donde podrás configurar el bot por completo con estadísticas en tiempo real y panel de control avanzado.</p>
+        </div>
+    </div>
+</section>
 
-    <section class="stats">
-        <div class="stats-content">
-            <h4>Servidores Protegidos</h4>
-            <span class="stats-number">10,000+</span>
-            <p style="color: #94a3b8; font-size: 16px; max-width: 600px; margin: 0 auto;">
-                Únete a miles de comunidades que confían en Nova Defense para mantener sus servidores seguros
+<section class="collaborators" id="equipo">
+    <div class="section-header">
+        <h2>⭐ Nuestro Equipo</h2>
+        <p>El equipo detrás del desarrollo y mantenimiento de Nova Defense</p>
+    </div>
+<div class="collaborators-grid">
+    <div class="collaborator-card">
+        <div class="collaborator-avatar">
+            <i class="fa-solid fa-crown" style="color: gold; font-size: 28px;"></i>
+        </div>
+        <h3>Gonzalo (gonzalo2323_)</h3>
+        <div class="collaborator-role">🎅 Fundador / Dueño</div>
+        <p class="collaborator-description">
+            Visionario detrás de Nova Defense. Se encarga del diseño, desarrollo y arquitectura general del bot, asegurando innovación, seguridad y protección de comunidades frente a ataques y raids.
+        </p>
+    </div>
+
+    <div class="collaborator-card">
+        <div class="collaborator-avatar">
+            <i class="fa-solid fa-code" style="color: #00ffcc; font-size: 28px;"></i>
+        </div>
+        <h3>Kurok (kurok4259)</h3>
+        <div class="collaborator-role">🎄 Fundador / Dueño</div>
+        <p class="collaborator-description">
+            Especialista en backend y optimización del bot. Se asegura de que Nova Defense funcione rápido, estable y confiable, manteniendo la infraestructura lista ante cualquier amenaza.
+        </p>
+    </div>
+
+    <div class="collaborator-card">
+        <div class="collaborator-avatar">
+            <i class="fa-solid fa-gem" style="color: #00bfff; font-size: 28px;"></i>
+        </div>
+        <h3>Silver (1__silver__1)</h3>
+        <div class="collaborator-role">💎 Co-Fundador / Desarrollo</div>
+        <p class="collaborator-description">
+            Experto en desarrollo y mejoras del bot. Su trabajo garantiza que Nova Defense sea eficiente y moderno, aportando nuevas funcionalidades y optimizando el rendimiento general.
+        </p>
+    </div>
+</div>
+
+
+</section>
+
+<section class="collaborators" id="colaboradores">
+    <div class="section-header">
+        <h2>🤝 Nuestros Colaboradores</h2>
+        <p>Alianzas estratégicas que potencian la seguridad de tu comunidad</p>
+    </div>
+    <div class="collaborators-grid">
+        <div class="collaborator-card">
+            <div class="collaborator-avatar" style="background: none; box-shadow: none;">
+                <img src="Logo2.png" alt="Logo ParlaAI" style="width: 80px; height: 80px; border-radius: 50%; object-fit: contain; background: none; box-shadow: none;">
+            </div>
+            <h3>ParlaAI</h3>
+            <div class="collaborator-role">Colaborador Oficial - IA Conversacional</div>
+            <p class="collaborator-description">
+                ParlaAI es una inteligencia artificial creada para ayudarte en tu día a día. Te apoya generando ideas, redactando textos y resolviendo dudas de forma rápida y sencilla. Es un asistente pensado para colaborar contigo, hacerte la vida más fácil y mejorar la forma en que trabajas o te comunicas.
             </p>
-        </div>
-    </section>
-
-    <footer>
-        <div class="footer-content">
-            <p>© 2025 Nova Defense - Tu mejor aliado en seguridad</p>
-            <div class="footer-links">
-                <a href="https://politicadeprivacidadnovadefense.netlify.app" target="_blank" class="footer-btn">
-                    <i class="fas fa-shield-alt"></i> Política de Privacidad
-                </a>
-                <a href="https://terminosdeservicionovadefense.netlify.app" target="_blank" class="footer-btn">
-                    <i class="fas fa-file-contract"></i> Términos de Servicio
-                </a>
+            <div style="margin: 20px 0; padding: 15px; background: rgba(220, 38, 38, 0.1); border-radius: 12px; border-left: 4px solid #dc2626;">
+                <p style="color: #94a3b8; font-size: 13px; line-height: 1.6; margin: 0;">
+                    <strong style="color: #dc2626;">CEO:</strong> sr_conway<br>
+                    <strong style="color: #22c55e;">Fundador:</strong> alexpanto
+                </p>
+            </div>
+            <div class="collaborator-links">
+                <a href="https://parlaai.es" target="_blank" class="social-link" title="Sitio Web"><i class="fas fa-globe"></i></a>
+                <a href="https://discord.gg/PaQxCBKaJb" target="_blank" class="social-link" title="Discord"><i class="fab fa-discord"></i></a>
             </div>
         </div>
-    </footer>
 
-    <script>
-        function toggleMenu() {
-            const nav = document.getElementById('nav');
-            nav.classList.toggle('active');
+        <div class="collaborator-card">
+            <div class="collaborator-avatar">
+                <i class="fas fa-handshake"></i>
+            </div>
+            <h3>¿Quieres colaborar? 🎄</h3>
+            <div class="collaborator-role">Buscamos Aliados Estratégicos</div>
+            <p class="collaborator-description">
+                Si tienes un proyecto relacionado con seguridad, bots de Discord o herramientas para comunidades, nos encantaría conocerte y explorar posibles colaboraciones.
+            </p>
+            <div class="collaborator-links">
+                <a href="https://discord.gg/FsbvgQWKYy" target="_blank" class="social-link" title="Contactar"><i class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="pricing" id="planes">
+    <div class="section-header">
+        <h2>🎄 Planes de Protección</h2>
+        <p>Elige el plan que mejor se adapte a las necesidades de tu servidor</p>
+    </div>
+    <div class="pricing-grid">
+        <div class="pricing-card">
+            <div class="pricing-header">
+                <h3>Estándar 🎁</h3>
+                <div class="pricing-price">
+                    <span class="price-amount">0€</span>
+                    <span class="price-period">/mes</span>
+                </div>
+            </div>
+            <ul class="pricing-features">
+                <li><i class="fas fa-check"></i><span>Protección básica Anti-raid</span></li>
+                <li><i class="fas fa-check"></i><span>Registro básico de eventos en un canal</span></li>
+                <li><i class="fas fa-check"></i><span>Límites bajos de protección (hasta 3 baneos/kicks en 5 minutos)</span></li>
+                <li><i class="fas fa-check"></i><span>Sistema Blacklist</span></li>
+                <li><i class="fas fa-check"></i><span>Sistema Whitelist</span></li>
+                <li><i class="fas fa-check"></i><span>Soporte limitado</span></li>
+            </ul>
+
+        </div>
+
+        <div class="pricing-card pricing-card-featured">
+            <div class="featured-badge">⭐ Más Popular</div>
+            <div class="pricing-header">
+                <h3>Básico 🎄</h3>
+                <div class="pricing-price">
+                    <span class="price-amount">2€</span>
+                    <span class="price-period">/mes</span>
+                </div>
+            </div>
+            <ul class="pricing-features">
+                <li><i class="fas fa-check"></i><span>Todo lo del plan Gratis</span></li>
+                <li><i class="fas fa-check"></i><span>Protección Avanzada</span></li>
+                <li><i class="fas fa-check"></i><span>Alertas en canal dedicado además de DM</span></li>
+                <li><i class="fas fa-check"></i><span>Whitelist de usuarios/roles para evitar bloqueos accidentales</span></li>
+                <li><i class="fas fa-check"></i><span>Sistema de backups básico</span></li>
+                <li><i class="fas fa-check"></i><span>Límites de acción configurables por el owner</span></li>
+                <li><i class="fas fa-check"></i><span>Prioridad premium en el soporte</span></li>
+            </ul>
+
+        </div>
+
+        <div class="pricing-card">
+            <div class="pricing-header">
+                <h3>Pro 🌟</h3>
+                <div class="pricing-price">
+                    <span class="price-amount">4€</span>
+                    <span class="price-period">/mes</span>
+                </div>
+            </div>
+            <ul class="pricing-features">
+                <li><i class="fas fa-check"></i><span>Todo lo del plan Basic y Estándar</span></li>
+                <li><i class="fas fa-check"></i><span>Sistema antinuke avanzado</span></li>
+                <li><i class="fas fa-check"></i><span>Protección contra webhooks y emojis</span></li>
+                <li><i class="fas fa-check"></i><span>Gestión multi-servidor</span></li>
+                <li><i class="fas fa-check"></i><span>Notificaciones configurables (DM, canal, webhooks)</span></li>
+                <li><i class="fas fa-check"></i><span>Sistema de copias de seguridad Pro</span></li>
+                <li><i class="fas fa-check"></i><span>Soporte VIP 24/7</span></li>
+                <li><i class="fas fa-check"></i><span>Asesor personal para tu servidor</span></li>
+            </ul>
+
+        </div>
+    </div>
+</section>
+
+<section class="stats">
+    <div class="stats-content">
+        <h4>🎄 Nova Defense - Edición Navidad 2024 🎅</h4>
+        <span class="stats-number">❄️</span>
+        <p style="color: #94a3b8; font-size: 16px; max-width: 600px; margin: 0 auto;">
+            Mete a Nova defense a tu servidor y protege tu comunidad en menos de 7 minutos. ¡Feliz Navidad! 🎁
+        </p>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-content">
+        <p>© 2025 Nova Defense - Tu mejor aliado en seguridad 🎄</p>
+        <div class="footer-links">
+            <a href="https://politicadeprivacidadnovadefense.netlify.app" target="_blank" class="footer-btn">
+                <i class="fas fa-shield-alt"></i> Política de Privacidad
+            </a>
+            <a href="https://terminosdeservicionovadefense.netlify.app" target="_blank" class="footer-btn">
+                <i class="fas fa-file-contract"></i> Términos de Servicio
+            </a>
+        </div>
+    </div>
+</footer>
+
+<script>
+
+    function createSnowflake() {
+        const snowflake = document.createElement('div');
+        snowflake.classList.add('snowflake');
+        snowflake.innerHTML = '❄';
+        snowflake.style.left = Math.random() * 100 + '%';
+        snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
+        snowflake.style.opacity = Math.random();
+        snowflake.style.fontSize = Math.random() * 10 + 10 + 'px';
+        
+        document.body.appendChild(snowflake);
+        
+        setTimeout(() => {
+            snowflake.remove();
+        }, 5000);
+    }
+
+    setInterval(createSnowflake, 200);
+
+    const menuToggle = document.getElementById("menu-toggle");
+    const sidebar = document.getElementById("sidebar");
+    const closeBtn = document.getElementById("close-btn");
+    const overlay = document.getElementById("overlay");
+
+    menuToggle.addEventListener("click", () => {
+        sidebar.classList.add("active");
+        overlay.classList.add("show");
+        menuToggle.classList.add("hidden");
+    });
+
+    closeBtn.addEventListener("click", closeMenu);
+    overlay.addEventListener("click", closeMenu);
+    document.querySelectorAll('.sidebar-links a').forEach(link => {
+        link.addEventListener('click', closeMenu);
+    });
+
+    function closeMenu() {
+        sidebar.classList.remove("active");
+        overlay.classList.remove("show");
+        menuToggle.classList.remove("hidden");
+    }
+
+    window.addEventListener("load", () => {
+        setTimeout(() => {
+            window.scrollTo({ top: 0, behavior: "instant" });
+            history.replaceState(null, null, " ");
+        }, 50);
+    });
+
+
+    document.addEventListener('mousemove', (e) => {
+        const shield = document.getElementById('shield');
+        if (shield && window.innerWidth > 1024) {
+            const x = (e.clientX / window.innerWidth - 0.5) * 20;
+            const y = (e.clientY / window.innerHeight - 0.5) * 20;
+            shield.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
         }
+    });
 
-        function closeMenu() {
-            const nav = document.getElementById('nav');
-            nav.classList.remove('active');
+    window.addEventListener('scroll', () => {
+        const header = document.querySelector('header');
+        if (window.scrollY > 50) {
+            header.style.background = 'rgba(10, 14, 23, 0.98)';
+            header.style.boxShadow = '0 4px 20px rgba(220, 38, 38, 0.2)';
+        } else {
+            header.style.background = 'rgba(10, 14, 23, 0.95)';
+            header.style.boxShadow = 'none';
         }
-
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
-
-        document.addEventListener('mousemove', (e) => {
-            const shield = document.getElementById('shield');
-            if (shield && window.innerWidth > 1024) {
-                const x = (e.clientX / window.innerWidth - 0.5) * 20;
-                const y = (e.clientY / window.innerHeight - 0.5) * 20;
-                shield.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
-            }
-        });
-
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > 50) {
-                header.style.background = 'rgba(10, 14, 23, 0.98)';
-                header.style.boxShadow = '0 4px 20px rgba(59, 130, 246, 0.2)';
-            } else {
-                header.style.background = 'rgba(10, 14, 23, 0.95)';
-                header.style.boxShadow = 'none';
-            }
-        });
-    </script>
+    });
+</script>
 </body>
 </html>
