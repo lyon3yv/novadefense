@@ -3,152 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nova Defense - Edición Navidad 2025</title>
-    <meta name="description" content="El sistema de protección más avanzado para servidores Discord. Anti-raid, anti-spam y seguridad 24/7 con IA.">
+    <title>Nova Defense | Seguridad Avanzada para Discord</title>
+    <meta name="description" content="El sistema de protección definitivo. Anti-raid, firewall y gestión de comunidades con tecnología de vanguardia.">
 
-
-    <link rel="icon" type="image/png" href="/Logo1.png">
-    <link rel="shortcut icon" type="image/png" href="/Logo1.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/Logo1.png">
-
-
-    <meta property="og:title" content="Nova Defense - Edición Navidad 2025">
-    <meta property="og:description" content="El sistema de protección más avanzado para servidores Discord. Anti-raid, anti-spam y seguridad 24/7 con IA.">
-    <meta property="og:image" content="https://tudominio.com/Logo1.png">
-    <meta property="og:url" content="https://tudominio.com">
-    <meta name="twitter:card" content="summary_large_image">
-
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="Logo1.png">
+    
+    <!-- Fuentes Google Fonts: Outfit (Tech/Moderno) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <style>
+        :root {
+            --primary: #00E5FF; /* Cyan Nova */
+            --primary-dark: #00B8D4;
+            --accent: #2979FF; /* Azul profundo */
+            --bg-dark: #030712; /* Casi negro */
+            --bg-card: rgba(17, 24, 39, 0.6); /* Más transparencia */
+            --text-main: #F3F4F6;
+            --text-muted: #9CA3AF;
+            --gradient: linear-gradient(135deg, #00E5FF 0%, #2979FF 100%);
+            --glass-border: 1px solid rgba(255, 255, 255, 0.08);
+            --glow-shadow: 0 0 30px rgba(0, 229, 255, 0.15);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #0a0e17;
-            color: #e0e6ed;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
             overflow-x: hidden;
+            line-height: 1.6;
         }
 
+        h1, h2, h3, h4, .price-amount, .stat-number {
+            font-family: 'Outfit', sans-serif;
+        }
 
-        .snowflake {
+        /* --- FONDO ANIMADO (CYBER GRID) --- */
+        .background-fx {
             position: fixed;
-            top: -10px;
-            z-index: 9999;
-            color: #fff;
-            font-size: 1.5em;
-            pointer-events: none;
-            animation: fall linear infinite;
-        }
-
-        @keyframes fall {
-            to {
-                transform: translateY(100vh) rotate(360deg);
-            }
-        }
-
-        .bg-animation {
-            position: fixed;
-            width: 100%;
-            height: 100%;
             top: 0;
             left: 0;
-            z-index: 0;
-            background: linear-gradient(135deg, #0a0e17 0%, #1a0f1f 50%, #1a1f3a 100%);
-        }
-
-        .bg-grid {
-            position: absolute;
             width: 100%;
             height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 15% 50%, rgba(41, 121, 255, 0.05), transparent 40%), 
+                radial-gradient(circle at 85% 30%, rgba(0, 229, 255, 0.05), transparent 40%);
+            overflow: hidden;
+        }
+
+        .grid-lines {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
             background-image: 
-                linear-gradient(rgba(220, 38, 38, 0.08) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(34, 197, 94, 0.08) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: gridMove 20s linear infinite;
+                linear-gradient(rgba(0, 229, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 229, 255, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            transform: perspective(500px) rotateX(60deg);
+            animation: gridMove 25s linear infinite;
+            opacity: 0.6;
         }
 
         @keyframes gridMove {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(50px, 50px); }
+            0% { transform: perspective(500px) rotateX(60deg) translateY(0); }
+            100% { transform: perspective(500px) rotateX(60deg) translateY(50px); }
         }
 
-        .gradient-orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.3;
-            animation: float 15s ease-in-out infinite;
-        }
-
-        .orb-1 {
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, #dc2626 0%, transparent 70%);
-            top: -10%;
-            left: -10%;
-            animation-delay: 0s;
-        }
-
-        .orb-2 {
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, #22c55e 0%, transparent 70%);
-            bottom: -10%;
-            right: -10%;
-            animation-delay: 7s;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(50px, -50px) scale(1.1); }
-            66% { transform: translate(-30px, 30px) scale(0.9); }
-        }
-
-
-        .christmas-lights {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            z-index: 999;
-            display: flex;
-            justify-content: space-around;
-        }
-
-        .light {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            animation: blink 1.5s infinite;
-        }
-
-        .light:nth-child(1) { background: #dc2626; animation-delay: 0s; }
-        .light:nth-child(2) { background: #22c55e; animation-delay: 0.3s; }
-        .light:nth-child(3) { background: #eab308; animation-delay: 0.6s; }
-        .light:nth-child(4) { background: #3b82f6; animation-delay: 0.9s; }
-        .light:nth-child(5) { background: #dc2626; animation-delay: 1.2s; }
-
-        @keyframes blink {
-            0%, 50%, 100% { opacity: 1; box-shadow: 0 0 20px currentColor; }
-            25%, 75% { opacity: 0.3; box-shadow: none; }
-        }
-
+        /* --- HEADER & NAV --- */
         header {
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            background: rgba(10, 14, 23, 0.95);
-            backdrop-filter: blur(15px);
-            border-bottom: 2px solid rgba(220, 38, 38, 0.3);
+            padding: 20px 0;
+            transition: all 0.4s ease;
+        }
+
+        header.scrolled {
+            background: rgba(3, 7, 18, 0.9);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             padding: 15px 0;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
         }
 
         .nav-container {
@@ -164,1293 +114,1203 @@
             display: flex;
             align-items: center;
             gap: 12px;
+            text-decoration: none;
         }
 
         .logo {
-            width: 45px;
-            height: 45px;
+            width: 40px;
+            height: 40px;
             object-fit: contain;
-            filter: drop-shadow(0 0 10px rgba(220, 38, 38, 0.5));
-            animation: santaHat 3s ease-in-out infinite;
-        }
-
-        @keyframes santaHat {
-            0%, 100% { transform: rotate(-5deg); }
-            50% { transform: rotate(5deg); }
+            filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.4));
         }
 
         .logo-text {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 700;
-            background: linear-gradient(90deg, #dc2626, #22c55e, #eab308);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: shimmer 3s linear infinite;
-            background-size: 200% auto;
-        }
-
-        @keyframes shimmer {
-            to { background-position: 200% center; }
-        }
-
-        .menu-toggle {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            width: 30px;
-            height: 22px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 0;
-            transition: opacity 0.3s ease, transform 0.3s ease;
-            z-index: 1100;
-        }
-
-        .menu-toggle:hover {
-            transform: scale(1.1);
-        }
-
-        .menu-toggle .bar {
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, #dc2626, #22c55e);
-            border-radius: 2px;
-            box-shadow: 0 0 8px rgba(220, 38, 38, 0.6);
-            transition: all 0.3s ease;
-        }
-
-        .menu-toggle.hidden {
-            opacity: 0;
-            pointer-events: none;
-            transform: scale(0.8);
-        }
-
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(5, 10, 20, 0.7);
-            backdrop-filter: blur(4px);
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.4s ease, visibility 0.4s;
-            z-index: 900;
-        }
-
-        .overlay.show {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .sidebar {
-            position: fixed;
-            top: 0;
-            right: -320px;
-            width: 300px;
-            height: 100vh;
-            background: linear-gradient(180deg, rgba(15,20,35,0.98), rgba(10,15,25,1));
-            box-shadow: -5px 0 25px rgba(220, 38, 38, 0.3);
-            transition: right 0.5s cubic-bezier(0.25, 1, 0.3, 1);
-            padding: 25px;
-            display: flex;
-            flex-direction: column;
-            z-index: 1001;
-            border-left: 2px solid rgba(220, 38, 38, 0.3);
-            overflow: hidden;
-        }
-
-        .sidebar.active {
-            right: 0;
-        }
-
-        .close-btn {
-            background: none;
-            border: none;
             color: #fff;
-            font-size: 1.8rem;
-            align-self: flex-end;
-            cursor: pointer;
-            transition: transform 0.2s ease, color 0.3s ease;
+            letter-spacing: -0.5px;
         }
 
-        .close-btn:hover {
-            transform: rotate(90deg);
-            color: #dc2626;
-        }
-
-        .sidebar-links {
+        .nav-links {
             display: flex;
-            flex-direction: column;
-            margin-top: 60px;
-            gap: 25px;
+            gap: 30px;
         }
 
-        .sidebar-links a {
-            color: #e2e8f0;
+        .nav-links a {
+            color: var(--text-muted);
             text-decoration: none;
-            font-size: 1.2rem;
             font-weight: 500;
-            transition: all 0.3s ease;
+            font-size: 15px;
+            transition: all 0.3s;
             position: relative;
-            padding-bottom: 4px;
-            overflow: hidden;
         }
 
-        .sidebar-links a::before {
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 0%;
-            height: 2px;
-            background: linear-gradient(90deg, #dc2626, #22c55e);
-            transition: width 0.3s ease;
+        .nav-links a:hover {
+            color: var(--primary);
+            text-shadow: 0 0 10px rgba(0, 229, 255, 0.4);
         }
 
-        .sidebar-links a:hover::before {
-            width: 100%;
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
         }
 
-        .sidebar-links a:hover {
-            color: #22c55e;
-            text-shadow: 0 0 10px rgba(34, 197, 94, 0.6);
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
+        /* --- HERO SECTION --- */
         .hero {
-            position: relative;
             min-height: 100vh;
             display: flex;
             align-items: center;
-            padding: 120px 40px 60px;
+            justify-content: center;
+            padding: 160px 40px 100px;
             max-width: 1400px;
             margin: 0 auto;
+            position: relative;
         }
 
         .hero-content {
             flex: 1;
-            max-width: 600px;
-            z-index: 10;
+            max-width: 650px;
+            z-index: 2;
         }
 
-        .hero-badge {
-            display: inline-block;
-            background: rgba(220, 38, 38, 0.15);
-            border: 2px solid rgba(220, 38, 38, 0.5);
-            padding: 8px 20px;
-            border-radius: 25px;
-            color: #fca5a5;
-            font-weight: 600;
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(0, 229, 255, 0.08);
+            border: 1px solid rgba(0, 229, 255, 0.2);
+            padding: 8px 18px;
+            border-radius: 50px;
             font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            color: var(--primary);
+            font-weight: 600;
             margin-bottom: 30px;
-            animation: badge-glow 2s infinite;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.1);
         }
 
-        @keyframes badge-glow {
-            0%, 100% { 
-                box-shadow: 0 0 20px rgba(220, 38, 38, 0.4);
-            }
-            50% { 
-                box-shadow: 0 0 35px rgba(220, 38, 38, 0.7);
-            }
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--primary);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.7); opacity: 1; }
+            70% { box-shadow: 0 0 0 10px rgba(0, 229, 255, 0); opacity: 0.8; }
+            100% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0); opacity: 1; }
         }
 
         .hero h1 {
-            font-size: 58px;
-            font-weight: 900;
-            margin-bottom: 25px;
+            font-size: 68px;
             line-height: 1.1;
+            font-weight: 800;
+            margin-bottom: 25px;
             letter-spacing: -2px;
             color: #fff;
         }
 
-        .hero h1 .highlight {
-            background: linear-gradient(90deg, #dc2626, #22c55e, #eab308);
-            background-size: 200% auto;
+        .text-gradient {
+            background: var(--gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: shimmer 3s linear infinite;
+            position: relative;
+            z-index: 1;
         }
 
         .hero p {
-            font-size: 18px;
-            color: #94a3b8;
-            margin-bottom: 40px;
-            line-height: 1.7;
+            font-size: 20px;
+            color: var(--text-muted);
+            margin-bottom: 45px;
+            max-width: 540px;
+            font-weight: 300;
         }
 
-        .cta-buttons {
+        .cta-group {
             display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
+            gap: 20px;
         }
 
         .btn {
-            padding: 16px 32px;
+            padding: 16px 36px;
             border-radius: 12px;
-            font-size: 16px;
             font-weight: 600;
+            font-size: 16px;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            transition: all 0.3s;
-            cursor: pointer;
+            gap: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
             border: none;
+            cursor: pointer;
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #dc2626, #b91c1c);
-            color: white;
-            box-shadow: 0 10px 30px rgba(220, 38, 38, 0.4);
+            background: var(--primary);
+            color: #030712;
+            box-shadow: 0 0 30px rgba(0, 229, 255, 0.25);
         }
 
         .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(220, 38, 38, 0.6);
+            transform: translateY(-2px);
+            box-shadow: 0 0 50px rgba(0, 229, 255, 0.4);
+            background: #fff;
         }
 
-        .btn-secondary {
-            background: rgba(34, 197, 94, 0.1);
-            color: #22c55e;
-            border: 2px solid #22c55e;
+        .btn-glass {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            backdrop-filter: blur(10px);
         }
 
-        .btn-secondary:hover {
-            background: rgba(34, 197, 94, 0.2);
-            transform: translateY(-3px);
+        .btn-glass:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
         }
 
+        /* --- VISUAL 3D --- */
         .hero-visual {
             flex: 1;
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             position: relative;
+            perspective: 1200px;
         }
 
-        .shield-container {
+        .shield-wrapper {
             position: relative;
-            width: 400px;
-            height: 400px;
-        }
-
-        .shield-glow {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 350px;
-            height: 350px;
-            background: radial-gradient(circle, rgba(220, 38, 38, 0.3) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: pulse 3s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
-            50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.8; }
-        }
-
-        .rotating-ring {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 380px;
-            height: 380px;
-            border: 2px solid rgba(220, 38, 38, 0.3);
-            border-radius: 50%;
-            border-top-color: #dc2626;
-            border-right-color: #22c55e;
-            animation: rotate 8s linear infinite;
-        }
-
-        @keyframes rotate {
-            0% { transform: translate(-50%, -50%) rotate(0deg); }
-            100% { transform: translate(-50%, -50%) rotate(360deg); }
-        }
-
-        .shield {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            width: 450px;
+            height: 450px;
+            transform-style: preserve-3d;
             transition: transform 0.1s ease-out;
         }
 
-        .shield-svg {
-            width: 200px;
-            height: 240px;
-            filter: drop-shadow(0 0 30px rgba(220, 38, 38, 0.6));
-        }
-
-
-        .santa-hat {
+        .shield-core {
             position: absolute;
-            top: -40px;
+            top: 50%;
             left: 50%;
-            transform: translateX(-50%);
-            font-size: 48px;
-            animation: wiggle 2s ease-in-out infinite;
+            transform: translate(-50%, -50%) translateZ(60px);
+            width: 300px;
+            filter: drop-shadow(0 0 60px rgba(0, 229, 255, 0.4));
+            z-index: 10;
         }
 
-        @keyframes wiggle {
-            0%, 100% { transform: translateX(-50%) rotate(-5deg); }
-            50% { transform: translateX(-50%) rotate(5deg); }
-        }
-
-        .particle {
+        .shield-ring {
             position: absolute;
-            width: 8px;
-            height: 8px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) translateZ(20px);
+            width: 420px;
+            height: 420px;
+            border: 1px solid rgba(0, 229, 255, 0.2);
             border-radius: 50%;
-            box-shadow: 0 0 20px currentColor;
-            animation: particle-float 4s ease-in-out infinite;
+            border-top: 2px solid var(--primary);
+            border-right: 2px solid transparent;
+            animation: spin 15s linear infinite;
+            box-shadow: 0 0 30px rgba(0, 229, 255, 0.05) inset;
         }
 
-        .particle:nth-child(1) { 
-            top: 20%; 
-            left: 20%; 
-            background: #dc2626;
-            animation-delay: 0s; 
-        }
-        .particle:nth-child(2) { 
-            top: 20%; 
-            right: 20%; 
-            background: #22c55e;
-            animation-delay: 1s; 
-        }
-        .particle:nth-child(3) { 
-            bottom: 20%; 
-            left: 20%; 
-            background: #eab308;
-            animation-delay: 2s; 
-        }
-        .particle:nth-child(4) { 
-            bottom: 20%; 
-            right: 20%; 
-            background: #3b82f6;
-            animation-delay: 3s; 
+        .shield-ring.inner {
+            width: 340px;
+            height: 340px;
+            border: 1px solid rgba(41, 121, 255, 0.2);
+            border-bottom: 2px solid var(--accent);
+            border-left: 2px solid transparent;
+            animation: spin 20s linear infinite reverse;
         }
 
-        @keyframes particle-float {
-            0%, 100% { transform: translateY(0); opacity: 1; }
-            50% { transform: translateY(-30px); opacity: 0.5; }
+        @keyframes spin {
+            100% { transform: translate(-50%, -50%) translateZ(20px) rotate(360deg); }
         }
 
-        .systems {
-            position: relative;
-            padding: 100px 40px;
+        /* --- SECCIONES COMUNES --- */
+        .section {
+            padding: 120px 40px;
             max-width: 1400px;
             margin: 0 auto;
         }
 
         .section-header {
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 90px;
         }
 
-        .section-header h2 {
-            font-size: 48px;
+        .section-title {
+            font-size: 42px;
             font-weight: 800;
-            margin-bottom: 15px;
-            background: linear-gradient(90deg, #dc2626, #22c55e, #eab308);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: shimmer 3s linear infinite;
-        }
-
-        .section-header p {
-            font-size: 18px;
-            color: #94a3b8;
-        }
-
-        .systems-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-        }
-
-        .system-card {
-            background: rgba(15, 23, 41, 0.6);
-            border: 1px solid rgba(220, 38, 38, 0.2);
-            border-radius: 20px;
-            padding: 40px 30px;
-            transition: all 0.4s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .system-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, #dc2626, #22c55e, #eab308);
-            transform: scaleX(0);
-            transition: transform 0.4s;
-        }
-
-        .system-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .system-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(220, 38, 38, 0.5);
-            box-shadow: 0 20px 40px rgba(220, 38, 38, 0.3);
-            background: rgba(15, 23, 41, 0.8);
-        }
-
-        .system-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, rgba(220, 38, 38, 0.2), rgba(34, 197, 94, 0.1));
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 25px;
-            font-size: 36px;
-            color: #dc2626;
-            border: 1px solid rgba(220, 38, 38, 0.3);
-        }
-
-        .system-card h3 {
-            font-size: 24px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             color: #fff;
         }
 
-        .system-card p {
-            color: #94a3b8;
-            line-height: 1.7;
-            font-size: 15px;
-        }
-
-        .pricing {
-            position: relative;
-            padding: 100px 40px;
-            background: rgba(10, 14, 23, 0.8);
-            border-top: 1px solid rgba(220, 38, 38, 0.2);
-        }
-
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            gap: 30px;
-            max-width: 1400px;
+        .section-desc {
+            color: var(--text-muted);
+            font-size: 18px;
+            max-width: 600px;
             margin: 0 auto;
-            margin-top: 60px;
         }
 
-        .pricing-card {
-            background: rgba(15, 23, 41, 0.8);
-            border: 2px solid rgba(220, 38, 38, 0.3);
-            border-radius: 25px;
+        /* --- FEATURES (MEJORADO) --- */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 35px;
+        }
+
+        .feature-card {
+            background: rgba(17, 24, 39, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
             padding: 45px 35px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
-            transition: all 0.4s;
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
         }
 
-        .pricing-card::before {
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 15px 40px rgba(0, 229, 255, 0.1);
+            background: rgba(17, 24, 39, 0.8);
+        }
+
+        .feature-card::after {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(220, 38, 38, 0.05), transparent);
+            background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(255,255,255,0.03), transparent 40%);
+            z-index: 1;
             opacity: 0;
             transition: opacity 0.4s;
         }
 
-        .pricing-card:hover::before {
+        .feature-card:hover::after {
             opacity: 1;
         }
 
-        .pricing-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(220, 38, 38, 0.6);
-            box-shadow: 0 25px 50px rgba(220, 38, 38, 0.3);
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: var(--primary);
+            margin-bottom: 25px;
+            background: linear-gradient(135deg, rgba(0, 229, 255, 0.1), rgba(41, 121, 255, 0.05));
+            border: 1px solid rgba(0, 229, 255, 0.2);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transition: all 0.4s;
         }
 
-        .pricing-card-featured {
-            border-color: #22c55e;
-            background: rgba(34, 197, 94, 0.1);
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1) rotate(5deg);
+            background: var(--primary);
+            color: #030712;
+            box-shadow: 0 0 30px var(--primary);
+            border-color: transparent;
+        }
+
+        .feature-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 16px;
+            line-height: 1.7;
+            flex-grow: 1;
+        }
+
+        /* --- COMANDOS (GALLERY) --- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .command-card {
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            background: #0f141e;
+        }
+
+        .command-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            z-index: 10;
+            border-color: var(--primary);
+            box-shadow: 0 20px 50px rgba(0, 229, 255, 0.15);
+        }
+
+        .command-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s;
+        }
+
+        .command-card:hover img {
             transform: scale(1.05);
         }
 
-        .featured-badge {
+        .command-overlay {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            background: linear-gradient(135deg, #22c55e, #16a34a);
-            color: white;
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 4px 15px rgba(34, 197, 94, 0.5);
-        }
-
-        .pricing-header h3 {
-            font-size: 32px;
-            font-weight: 800;
-            color: #fff;
-            margin-bottom: 15px;
-        }
-
-        .pricing-price {
-            margin-bottom: 30px;
-        }
-
-        .price-amount {
-            font-size: 56px;
-            font-weight: 900;
-            background: linear-gradient(90deg, #dc2626, #22c55e);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .price-period {
-            font-size: 18px;
-            color: #94a3b8;
-            font-weight: 500;
-        }
-
-        .pricing-features {
-            list-style: none;
-            margin: 30px 0;
-        }
-
-        .pricing-features li {
-            padding: 14px 0;
-            color: #94a3b8;
-            font-size: 15px;
-            line-height: 1.6;
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-        }
-
-        .pricing-features i {
-            color: #22c55e;
-            font-size: 16px;
-            margin-top: 2px;
-        }
-
-        .btn-plan {
+            bottom: 0;
+            left: 0;
             width: 100%;
-            padding: 16px 30px;
-            border-radius: 12px;
-            font-size: 16px;
+            background: linear-gradient(to top, rgba(3, 7, 18, 0.95), transparent);
+            padding: 30px 20px 20px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+
+        .command-card:hover .command-overlay {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .command-overlay h4 {
+            color: #fff;
+            font-size: 18px;
             font-weight: 600;
-            text-decoration: none;
-            display: inline-block;
-            text-align: center;
-            transition: all 0.3s;
-            margin-top: 25px;
         }
 
-        .btn-plan-free {
-            background: transparent;
-            color: #dc2626;
-            border: 2px solid #dc2626;
-        }
-
-        .btn-plan-free:hover {
-            background: rgba(220, 38, 38, 0.1);
-            transform: translateY(-2px);
-        }
-
-        .btn-plan-basic, .btn-plan-pro {
-            background: linear-gradient(135deg, #22c55e, #16a34a);
-            color: white;
-            border: none;
-            box-shadow: 0 10px 25px rgba(34, 197, 94, 0.4);
-        }
-
-        .btn-plan-basic:hover, .btn-plan-pro:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 35px rgba(34, 197, 94, 0.6);
-        }
-
-        .collaborators {
+        /* --- VIDEO TUTORIAL --- */
+        .video-container {
             position: relative;
-            padding: 100px 40px;
-            max-width: 1400px;
-            margin: 0 auto;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            overflow: hidden;
+            border-radius: 24px;
+            border: 1px solid rgba(0, 229, 255, 0.3);
+            box-shadow: 0 0 60px rgba(0, 229, 255, 0.1);
+            background: #000;
         }
 
-        .collaborators-grid {
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* --- TEAM --- */
+        .team-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 35px;
-            margin-top: 60px;
+            gap: 40px;
         }
 
-        .collaborator-card {
-            background: rgba(15, 23, 41, 0.6);
-            border: 1px solid rgba(220, 38, 38, 0.2);
-            border-radius: 20px;
+        .team-card {
+            background: var(--bg-card);
+            border: var(--glass-border);
+            border-radius: 24px;
             padding: 40px 30px;
             text-align: center;
             transition: all 0.4s;
             position: relative;
-            overflow: hidden;
         }
 
-        .collaborator-card::before {
+        .team-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            background: rgba(17, 24, 39, 0.8);
+        }
+
+        .team-avatar {
+            width: 110px;
+            height: 110px;
+            margin: 0 auto 25px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: #fff;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+            border: 4px solid rgba(255,255,255,0.1);
+            overflow: hidden; /* Para que la imagen no se salga */
+        }
+        
+        .team-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .team-card h3 {
+            font-size: 22px;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .team-role {
+            color: var(--primary);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        /* --- PRECIOS --- */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .price-card {
+            background: var(--bg-card);
+            border: var(--glass-border);
+            border-radius: 30px;
+            padding: 50px 40px;
+            position: relative;
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .price-card.popular {
+            background: linear-gradient(160deg, rgba(17, 24, 39, 0.9), rgba(0, 229, 255, 0.05));
+            border: 1px solid rgba(0, 229, 255, 0.4);
+            box-shadow: 0 0 40px rgba(0, 229, 255, 0.05);
+            transform: scale(1.05);
+            z-index: 10;
+        }
+
+        .price-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .price-card.popular:hover {
+            transform: scale(1.05) translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 0 50px rgba(0, 229, 255, 0.15);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: #000;
+            font-weight: 800;
+            font-size: 11px;
+            padding: 6px 14px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .price-header h3 {
+            font-size: 24px;
+            color: #fff;
+            margin-bottom: 15px;
+        }
+
+        .price-amount {
+            font-size: 52px;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: baseline;
+            gap: 5px;
+        }
+
+        .price-amount span {
+            font-size: 18px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .price-desc {
+            color: var(--text-muted);
+            font-size: 15px;
+            margin-bottom: 35px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 30px;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-bottom: 40px;
+            flex-grow: 1;
+        }
+
+        .feature-list li {
+            margin-bottom: 18px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            color: #D1D5DB;
+            font-size: 15px;
+        }
+
+        .feature-list i {
+            color: var(--primary);
+            margin-top: 4px;
+        }
+
+        .feature-list li.disabled {
+            color: #4B5563;
+            text-decoration: line-through;
+        }
+
+        .feature-list li.disabled i {
+            color: #4B5563;
+        }
+
+        .btn-price {
+            width: 100%;
+            padding: 16px;
+            border-radius: 12px;
+            font-weight: 600;
+            text-align: center;
+            text-decoration: none;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            transition: all 0.3s;
+        }
+
+        .btn-price:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        .btn-price.glow {
+            background: var(--primary);
+            color: #000;
+            border: none;
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
+        }
+
+        .btn-price.glow:hover {
+            box-shadow: 0 0 40px rgba(0, 229, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        /* --- STATS SECTION (CARDS) --- */
+        .stats-section {
+            padding: 100px 40px;
+            background: radial-gradient(circle at center, rgba(41, 121, 255, 0.03), transparent 70%);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .stat-card {
+            background: rgba(17, 24, 39, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 40px 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(0, 229, 255, 0.3);
+            background: rgba(17, 24, 39, 0.8);
+            box-shadow: 0 10px 40px rgba(0, 229, 255, 0.1);
+        }
+
+        .stat-card::after {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 4px;
-            background: linear-gradient(90deg, #dc2626, #22c55e, #eab308);
-            transform: scaleX(0);
-            transition: transform 0.4s;
+            background: var(--gradient);
+            opacity: 0;
+            transition: opacity 0.3s;
         }
 
-        .collaborator-card:hover::before {
-            transform: scaleX(1);
+        .stat-card:hover::after {
+            opacity: 1;
         }
 
-        .collaborator-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(220, 38, 38, 0.5);
-            box-shadow: 0 20px 40px rgba(220, 38, 38, 0.3);
-            background: rgba(15, 23, 41, 0.8);
-        }
-
-        .collaborator-avatar {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 25px;
+        .stat-icon {
+            font-size: 32px;
+            color: var(--primary);
+            margin-bottom: 20px;
+            display: inline-block;
+            background: rgba(0, 229, 255, 0.1);
+            padding: 15px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #dc2626, #22c55e);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 48px;
-            color: white;
-            border: 4px solid rgba(220, 38, 38, 0.3);
-            box-shadow: 0 10px 30px rgba(220, 38, 38, 0.4);
         }
 
-        .collaborator-card h3 {
-            font-size: 24px;
+        .stat-number {
+            display: block;
+            font-size: 48px;
+            font-weight: 800;
             color: #fff;
             margin-bottom: 10px;
-        }
-
-        .collaborator-role {
-            color: #22c55e;
-            font-size: 14px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 20px;
-        }
-
-        .collaborator-description {
-            color: #94a3b8;
-            line-height: 1.7;
-            font-size: 15px;
-            margin-bottom: 25px;
-        }
-
-        .collaborator-links {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-        }
-
-        .social-link {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            background: rgba(220, 38, 38, 0.1);
-            border: 1px solid rgba(220, 38, 38, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #dc2626;
-            text-decoration: none;
-            transition: all 0.3s;
-            font-size: 18px;
-        }
-
-        .social-link:hover {
-            background: rgba(220, 38, 38, 0.2);
-            border-color: #dc2626;
-            transform: translateY(-3px);
-        }
-
-        .stats {
-            position: relative;
-            padding: 80px 40px;
-            text-align: center;
-            background: linear-gradient(135deg, rgba(220, 38, 38, 0.15), rgba(34, 197, 94, 0.08));
-            border-top: 1px solid rgba(220, 38, 38, 0.2);
-            border-bottom: 1px solid rgba(220, 38, 38, 0.2);
-        }
-
-        .stats-content h4 {
-            font-size: 18px;
-            color: #94a3b8;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .stats-number {
-            font-size: 64px;
-            font-weight: 900;
-            background: linear-gradient(90deg, #dc2626, #22c55e, #eab308);
-            background-size: 200% auto;
+            background: var(--gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            display: block;
-            margin-bottom: 20px;
-            animation: shimmer 3s linear infinite;
         }
 
-        footer {
+        .stat-label {
+            font-size: 14px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        /* --- RAID GRAPH SECTION --- */
+        .raid-graph-section {
+            padding: 100px 40px;
             position: relative;
-            padding: 50px 40px 30px;
-            background: rgba(10, 14, 23, 0.95);
-            border-top: 1px solid rgba(220, 38, 38, 0.2);
+        }
+
+        .graph-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(15, 20, 30, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 30px;
+            padding: 40px;
+            position: relative;
+        }
+
+        .graph-svg {
+            width: 100%;
+            height: auto;
+            overflow: visible;
+        }
+
+        .graph-line {
+            fill: none;
+            stroke: var(--primary);
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            filter: drop-shadow(0 0 10px var(--primary));
+            stroke-dasharray: 2000;
+            stroke-dashoffset: 2000;
+            animation: drawLine 4s ease-out forwards;
+        }
+
+        .graph-area {
+            fill: url(#graphGradient);
+            opacity: 0.2;
+        }
+
+        .graph-axis {
+            stroke: rgba(255,255,255,0.1);
+            stroke-width: 1;
+        }
+        
+        .graph-text {
+            fill: var(--text-muted);
+            font-size: 12px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        @keyframes drawLine {
+            to { stroke-dashoffset: 0; }
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            border-top: 1px solid rgba(255,255,255,0.05);
+            background: #020610;
+            padding: 100px 40px 40px;
         }
 
         .footer-content {
             max-width: 1400px;
             margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 80px;
         }
 
-        .footer-content p {
-            color: #64748b;
-            font-size: 14px;
+        .footer-brand h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #fff;
         }
 
-        .footer-links {
-            display: flex;
-            gap: 15px;
+        .footer-brand p {
+            color: var(--text-muted);
+            max-width: 320px;
+            font-size: 15px;
         }
 
-        .footer-btn {
-            color: #94a3b8;
+        .footer-col h4 {
+            color: #fff;
+            margin-bottom: 25px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .footer-col a {
+            display: block;
+            color: var(--text-muted);
             text-decoration: none;
+            margin-bottom: 15px;
             font-size: 14px;
-            padding: 8px 16px;
-            border: 1px solid rgba(220, 38, 38, 0.3);
-            border-radius: 8px;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            transition: color 0.3s;
         }
 
-        .footer-btn:hover {
-            color: #dc2626;
-            border-color: #dc2626;
-            background: rgba(220, 38, 38, 0.1);
+        .footer-col a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 40px;
+            text-align: center;
+            color: rgba(255,255,255,0.2);
+            font-size: 13px;
+        }
+
+        /* --- ANIMACIONES DE ENTRADA (SCROLL REVEAL) --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         @media (max-width: 1024px) {
             .hero {
                 flex-direction: column;
                 text-align: center;
-                padding-top: 140px;
+                padding-top: 160px;
             }
-
+            
             .hero-content {
-                max-width: 100%;
+                margin-bottom: 80px;
             }
 
-            .cta-buttons {
+            .cta-group {
                 justify-content: center;
             }
 
-            .shield-container {
-                margin-top: 50px;
-                width: 300px;
-                height: 300px;
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
             }
 
-            .shield-svg {
-                width: 150px;
-                height: 180px;
-            }
-
-            .pricing-card-featured {
+            .price-card.popular {
                 transform: scale(1);
+            }
+            
+            .price-card.popular:hover {
+                transform: translateY(-10px);
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
             }
         }
 
         @media (max-width: 768px) {
-            .nav-container, .hero, .systems, .pricing, .collaborators, .stats {
-                padding-left: 20px;
-                padding-right: 20px;
-            }
-
-            .hero h1 {
-                font-size: 36px;
-            }
-
-            .section-header h2 {
-                font-size: 36px;
-            }
-
-            .systems-grid, .pricing-grid, .collaborators-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .stats-number {
-                font-size: 48px;
-            }
-
-            .footer-content {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .footer-links {
-                flex-direction: column;
-                width: 100%;
-            }
-
-            .footer-btn {
-                justify-content: center;
-            }
+            .hero h1 { font-size: 42px; }
+            .section-title { font-size: 32px; }
+            .footer-content { grid-template-columns: 1fr; }
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
 </head>
 <body>
 
-<div class="christmas-lights">
-    <div class="light"></div>
-    <div class="light"></div>
-    <div class="light"></div>
-    <div class="light"></div>
-    <div class="light"></div>
-    <div class="light"></div>
-    <div class="light"></div>
-    <div class="light"></div>
-    <div class="light"></div>
-    <div class="light"></div>
-</div>
+    <!-- Fondo Cyber Grid -->
+    <div class="background-fx">
+        <div class="grid-lines"></div>
+    </div>
 
-<div class="bg-animation">
-    <div class="bg-grid"></div>
-    <div class="gradient-orb orb-1"></div>
-    <div class="gradient-orb orb-2"></div>
-</div>
+    <!-- Navegación -->
+    <header id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo-container">
+                <img src="Logo1.png" alt="Logo" class="logo">
+                <span class="logo-text">Nova Defense</span>
+            </a>
+            <nav class="nav-links">
+                <a href="#features">Características</a>
+                <a href="#commands">Comandos</a>
+                <a href="#pricing">Planes</a>
+                <a href="#team">Equipo</a>
+                <a href="https://discord.gg/FsbvgQWKYy" target="_blank">Soporte</a>
+            </nav>
+            <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+        </div>
+    </header>
 
-<header>
-    <div class="nav-container">
-        <div class="logo-container">
-            <img src="Logo1.png" alt="Nova Defense" class="logo">
-            <div class="logo-text">Nova Defense 🎄</div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content reveal">
+            <div class="status-badge">
+                <span class="status-dot"></span>
+                Sistemas Operativos v2.0
+            </div>
+            <h1>Seguridad <br><span class="text-gradient">Avanzada</span></h1>
+            <p>
+                Protege tu comunidad de Discord con la inteligencia artificial de Nova Defense. 
+                Anti-raid avanzado, firewall y gestión automática en una sola herramienta.
+            </p>
+            <div class="cta-group">
+                <a href="https://discord.com/oauth2/authorize?client_id=1403752400761913445&scope=bot+applications.commands&permissions=8&integration_type=0" target="_blank" class="btn btn-primary">
+                    <i class="fab fa-discord"></i> Añadir a Discord
+                </a>
+                <a href="#tutorial" class="btn btn-glass">
+                    Ver Tutorial
+                </a>
+            </div>
         </div>
 
-        <button class="menu-toggle" id="menu-toggle">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-        </button>
-    </div>
-
-    <div class="overlay" id="overlay"></div>
-
-    <div class="sidebar" id="sidebar">
-        <button class="close-btn" id="close-btn">✕</button>
-        <nav class="sidebar-links">
-            <a href="#inicio"> Inicio</a>
-            <a href="#sistemas"> Características</a>
-            <a href="#equipo"> Equipo</a>
-            <a href="#colaboradores"> Colaboradores</a>
-            <a href="#planes"> Planes</a>
-            <a href="https://dashboard.novadefense.es" target="_blank"> Dashboard</a>
-            <a href="https://discord.gg/FsbvgQWKYy" target="_blank"> Discord</a>
-        </nav>
-    </div>
-</header>
-
-<section class="hero" id="inicio">
-    <div class="hero-content">
-        <div class="hero-badge">🎄 Edición Navidad 2025 🎅</div>
-        <h1>
-            Protección <span class="highlight">Anti-Raid</span> para Discord
-        </h1>
-        <p>
-            Sistema de seguridad empresarial diseñado para proteger tu comunidad contra raids, 
-            spam y ataques automatizados. Monitoreo en tiempo real las 24 horas del día.
-        </p>
-        <div class="cta-buttons">
-            <a href="https://discord.com/oauth2/authorize?client_id=1403752400761913445&scope=bot+applications.commands&permissions=8&integration_type=0" 
-               target="_blank" 
-               class="btn btn-primary">
-                <i class="fas fa-gift"></i>
-                Añadir a Discord
-            </a>
-            <a href="https://discord.com/oauth2/authorize?client_id=1403752400761913445&response_type=code&redirect_uri=https%3A%2F%2Fdashboard.novadefense.es&scope=identify+guilds" 
-               class="btn btn-secondary">
-                <i class="fas fa-snowflake"></i>
-                Abrir Dashboard
-            </a>
-        </div>
-    </div>
-
-    <div class="hero-visual">
-        <div class="shield-container">
-            <div class="shield-glow"></div>
-            <div class="rotating-ring"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="shield" id="shield">
-                <div class="santa-hat">🎅</div>
-                <svg class="shield-svg" viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M100 10L20 50V110C20 165 55 215 100 230C145 215 180 165 180 110V50L100 10Z" fill="url(#shield-gradient)" stroke="#dc2626" stroke-width="3"/>
-                    <path d="M70 110L90 130L130 85" stroke="#ffffff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+        <div class="hero-visual reveal">
+            <div class="shield-wrapper" id="shieldWrapper">
+                <div class="shield-ring"></div>
+                <div class="shield-ring inner"></div>
+                <!-- Escudo SVG Moderno -->
+                <svg class="shield-core" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L3 7V12C3 17 7 21 12 22C17 21 21 17 21 12V7L12 2Z" fill="url(#shield-gradient)" stroke="#00E5FF" stroke-width="0.5"/>
+                    <path d="M12 6L12 18M12 12L16 12M8 12L12 12" stroke="white" stroke-width="2" stroke-linecap="round"/>
                     <defs>
-                        <linearGradient id="shield-gradient" x1="100" y1="10" x2="100" y2="230" gradientUnits="userSpaceOnUse">
-                            <stop offset="0%" stop-color="#dc2626" stop-opacity="0.8"/>
-                            <stop offset="50%" stop-color="#22c55e" stop-opacity="0.6"/>
-                            <stop offset="100%" stop-color="#16a34a" stop-opacity="0.9"/>
+                        <linearGradient id="shield-gradient" x1="12" y1="2" x2="12" y2="22" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#00E5FF" stop-opacity="0.2"/>
+                            <stop offset="1" stop-color="#2979FF" stop-opacity="0.4"/>
                         </linearGradient>
                     </defs>
                 </svg>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<section class="systems" id="sistemas">
-    <div class="section-header">
-        <h2>🎁 Características</h2>
-        <p>Sistema completo de protección para tu servidor</p>
-    </div>
-    <div class="systems-grid">
-        <div class="system-card">
-            <div class="system-icon">
-                <i class="fas fa-shield-alt"></i>
+    <!-- Stats Section (CARDS) -->
+    <section class="stats-section reveal" id="stats">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-users"></i></div>
+                <span class="stat-number">+13K</span>
+                <span class="stat-label">Usuarios Protegidos</span>
             </div>
-            <h3>Antiraid 🎄</h3>
-            <p>Más de 15 sistemas Antiraid distintos que podrás configurar según tu preferencia. Protección inteligente contra ataques masivos.</p>
-        </div>
-        <div class="system-card">
-            <div class="system-icon">
-                <i class="fas fa-shield-virus"></i>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-server"></i></div>
+                <span class="stat-number">+100</span>
+                <span class="stat-label">Servidores Activos</span>
             </div>
-            <h3>Seguridad opcional ⭐</h3>
-            <p>Disponibles opciones extra de seguridad que ayudarán a mantener tu servidor más seguro con configuraciones personalizables.</p>
-        </div>
-        <div class="system-card">
-            <div class="system-icon">
-                <i class="fas fa-user-times"></i>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-shield-alt"></i></div>
+                <span class="stat-number">24/7</span>
+                <span class="stat-label">Monitoreo Activo</span>
             </div>
-            <h3>Detección de usuarios maliciosos 🎅</h3>
-            <p>Blacklist global con miles de bots y usuarios maliciosos que serán sancionados en caso de intentar acceder a tu servidor.</p>
-        </div>
-        <div class="system-card">
-            <div class="system-icon">
-                <i class="fas fa-copy"></i>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-bolt"></i></div>
+                <span class="stat-number">20ms</span>
+                <span class="stat-label">Latencia de Defensa</span>
             </div>
-            <h3>Copias de Seguridad 🎁</h3>
-            <p>Podrás realizar copias de seguridad avanzadas de tu servidor y restaurarlas cuando lo necesites en minutos.</p>
         </div>
-        <div class="system-card">
-            <div class="system-icon">
-                <i class="fas fa-user-plus"></i>
-            </div>
-            <h3>Whitelist de usuarios ❄️</h3>
-            <p>Mantén tu servidor seguro al incluir en la whitelist a personas de confianza, reduciendo el riesgo de sanciones accidentales.</p>
-        </div>
-        <div class="system-card">
-            <div class="system-icon">
-                <i class="fas fa-chart-line"></i>
-            </div>
-            <h3>Dashboard 🌟</h3>
-            <p>Interfaz amigable donde podrás configurar el bot por completo con estadísticas en tiempo real y panel de control avanzado.</p>
-        </div>
-    </div>
-</section>
+    </section>
 
-<section class="collaborators" id="equipo">
-    <div class="section-header">
-        <h2>⭐ Nuestro Equipo</h2>
-        <p>El equipo detrás del desarrollo y mantenimiento de Nova Defense</p>
-    </div>
-<div class="collaborators-grid">
-    <div class="collaborator-card">
-        <div class="collaborator-avatar">
-            <i class="fa-solid fa-crown" style="color: gold; font-size: 28px;"></i>
-        </div>
-        <h3>Gonzalo (gonzalo2323_)</h3>
-        <div class="collaborator-role">🎅 Fundador / Dueño</div>
-        <p class="collaborator-description">
-            Visionario detrás de Nova Defense. Se encarga del diseño, desarrollo y arquitectura general del bot, asegurando innovación, seguridad y protección de comunidades frente a ataques y raids.
-        </p>
-    </div>
-
-    <div class="collaborator-card">
-        <div class="collaborator-avatar">
-            <i class="fa-solid fa-code" style="color: #00ffcc; font-size: 28px;"></i>
-        </div>
-        <h3>Kurok (kurok4259)</h3>
-        <div class="collaborator-role">🎄 Fundador / Dueño</div>
-        <p class="collaborator-description">
-            Especialista en backend y optimización del bot. Se asegura de que Nova Defense funcione rápido, estable y confiable, manteniendo la infraestructura lista ante cualquier amenaza.
-        </p>
-    </div>
-
-    <div class="collaborator-card">
-        <div class="collaborator-avatar">
-            <i class="fa-solid fa-gem" style="color: #00bfff; font-size: 28px;"></i>
-        </div>
-        <h3>Silver (1__silver__1)</h3>
-        <div class="collaborator-role">💎 Co-Fundador / Desarrollo</div>
-        <p class="collaborator-description">
-            Experto en desarrollo y mejoras del bot. Su trabajo garantiza que Nova Defense sea eficiente y moderno, aportando nuevas funcionalidades y optimizando el rendimiento general.
-        </p>
-    </div>
-</div>
-
-
-</section>
-
-<section class="collaborators" id="colaboradores">
-    <div class="section-header">
-        <h2>🤝 Nuestros Colaboradores</h2>
-        <p>Alianzas estratégicas que potencian la seguridad de tu comunidad</p>
-    </div>
-    <div class="collaborators-grid">
-        <div class="collaborator-card">
-            <div class="collaborator-avatar" style="background: none; box-shadow: none;">
-                <img src="Logo2.png" alt="Logo ParlaAI" style="width: 80px; height: 80px; border-radius: 50%; object-fit: contain; background: none; box-shadow: none;">
-            </div>
-            <h3>ParlaAI</h3>
-            <div class="collaborator-role">Colaborador Oficial - IA Conversacional</div>
-            <p class="collaborator-description">
-                ParlaAI es una inteligencia artificial creada para ayudarte en tu día a día. Te apoya generando ideas, redactando textos y resolviendo dudas de forma rápida y sencilla. Es un asistente pensado para colaborar contigo, hacerte la vida más fácil y mejorar la forma en que trabajas o te comunicas.
-            </p>
-            <div style="margin: 20px 0; padding: 15px; background: rgba(220, 38, 38, 0.1); border-radius: 12px; border-left: 4px solid #dc2626;">
-                <p style="color: #94a3b8; font-size: 13px; line-height: 1.6; margin: 0;">
-                    <strong style="color: #dc2626;">CEO:</strong> sr_conway<br>
-                    <strong style="color: #22c55e;">Fundador:</strong> alexpanto
-                </p>
-            </div>
-            <div class="collaborator-links">
-                <a href="https://parlaai.es" target="_blank" class="social-link" title="Sitio Web"><i class="fas fa-globe"></i></a>
-                <a href="https://discord.gg/PaQxCBKaJb" target="_blank" class="social-link" title="Discord"><i class="fab fa-discord"></i></a>
-            </div>
+    <!-- Features Section -->
+    <section class="section" id="features">
+        <div class="section-header reveal">
+            <h2 class="section-title">Nuestras Herramientas de <span class="text-gradient">Defensa</span></h2>
+            <p class="section-desc">Tecnología de vanguardia diseñada para neutralizar amenazas sin afectar la experiencia de usuario.</p>
         </div>
 
-        <div class="collaborator-card">
-            <div class="collaborator-avatar">
-                <i class="fas fa-handshake"></i>
+        <div class="features-grid">
+            <div class="feature-card reveal">
+                <div class="feature-icon"><i class="fas fa-shield-halved"></i></div>
+                <h3>Anti-Raid Neural</h3>
+                <p>Detecta y detiene ataques masivos en milisegundos analizando patrones de comportamiento anómalos.</p>
             </div>
-            <h3>¿Quieres colaborar? 🎄</h3>
-            <div class="collaborator-role">Buscamos Aliados Estratégicos</div>
-            <p class="collaborator-description">
-                Si tienes un proyecto relacionado con seguridad, bots de Discord o herramientas para comunidades, nos encantaría conocerte y explorar posibles colaboraciones.
-            </p>
-            <div class="collaborator-links">
-                <a href="https://discord.gg/FsbvgQWKYy" target="_blank" class="social-link" title="Contactar"><i class="fas fa-envelope"></i></a>
+            <div class="feature-card reveal">
+                <div class="feature-icon"><i class="fas fa-robot"></i></div>
+                <h3>Captcha Verification</h3>
+                <p>Sistema de verificación interactivo para filtrar bots automatizados antes de que accedan al servidor.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon"><i class="fas fa-database"></i></div>
+                <h3>Global Blacklist</h3>
+                <p>Base de datos de reputación compartida para bloquear preventivamente a usuarios maliciosos conocidos.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon"><i class="fas fa-server"></i></div>
+                <h3>Backup & Restore</h3>
+                <p>Instantáneas completas de la configuración del servidor para una recuperación rápida ante desastres.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon"><i class="fas fa-fingerprint"></i></div>
+                <h3>Auditoría Forense</h3>
+                <p>Logs detallados e inmutables de todas las acciones para un control y transparencia total.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon"><i class="fas fa-lock"></i></div>
+                <h3>Cifrado</h3>
+                <p>Tus datos quedan completamente cifrados y protegidos en nuestra vps privada</p>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<section class="pricing" id="planes">
-    <div class="section-header">
-        <h2>🎄 Planes de Protección</h2>
-        <p>Elige el plan que mejor se adapte a las necesidades de tu servidor</p>
-    </div>
-    <div class="pricing-grid">
-        <div class="pricing-card">
-            <div class="pricing-header">
-                <h3>Estándar 🎁</h3>
-                <div class="pricing-price">
-                    <span class="price-amount">0€</span>
-                    <span class="price-period">/mes</span>
+    <!-- Command Gallery (Screenshots) -->
+    <section class="section" id="commands">
+        <div class="section-header reveal">
+            <h2 class="section-title">Interfaz de <span class="text-gradient">Comando</span></h2>
+            <p class="section-desc">Control total al alcance de tu mano. Diseño limpio y respuestas inmediatas.</p>
+        </div>
+        <div class="gallery-grid">
+            <div class="command-card reveal">
+                <img src="https://media.discordapp.net/attachments/1403137396048138331/1446246557522595860/image.png?ex=69334991&is=6931f811&hm=6f4efdcf7ba5e86ab7b7d1f6a9bf3056a7e92fec6151a6ee7355707c859a375b&=&format=webp&quality=lossless&width=952&height=813" alt="Configuración">
+                <div class="command-overlay"><h4>Configuración Avanzada</h4></div>
+            </div>
+            <div class="command-card reveal">
+                <img src="https://media.discordapp.net/attachments/1403137396048138331/1446246467206381619/image.png?ex=6933497b&is=6931f7fb&hm=998ab58e1dddf453c39f0e80b761f0170d0e02385d95e5e47c5b6bd07a04e888&=&format=webp&quality=lossless&width=1217&height=524" alt="Verificación">
+                <div class="command-overlay"><h4>Panel de Verificación</h4></div>
+            </div>
+            <div class="command-card reveal">
+                <img src="https://media.discordapp.net/attachments/1403137396048138331/1446246395718795338/image.png?ex=6933496a&is=6931f7ea&hm=d28779d87c3f10a47a12f29691ffc6827da8684857e89d9ff6117fc804638624&=&format=webp&quality=lossless&width=649&height=481" alt="Ayuda">
+                <div class="command-overlay"><h4>Sistema de Ayuda</h4></div>
+            </div>
+            <div class="command-card reveal">
+                <img src="https://media.discordapp.net/attachments/1403137396048138331/1446246285903396924/image.png?ex=69334950&is=6931f7d0&hm=fdda420f111989fd1db3f563fa72c5a59afefa6c7a440e34b7d71aa11d39c524&=&format=webp&quality=lossless&width=1056&height=813" alt="Moderación">
+                <div class="command-overlay"><h4>Herramientas de Moderación</h4></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Tutorial -->
+    <section class="section" id="tutorial">
+        <div class="section-header reveal">
+            <h2 class="section-title">Aprende a <span class="text-gradient">Configurar</span></h2>
+            <p class="section-desc">Guía rápida para blindar tu servidor en menos de 5 minutos.</p>
+        </div>
+        <div class="video-container reveal" style="max-width: 900px; margin: 0 auto;">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/wXW_ZQqZ3Bs?si=KxX_jZqQZqQZqQZq" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="section" id="team">
+        <div class="section-header reveal">
+            <h2 class="section-title">Equipo</h2>
+            <p class="section-desc">Los expertos detrás de la infraestructura de Nova Defense.</p>
+        </div>
+        <div class="team-grid">
+            <div class="team-card reveal">
+                <div class="team-avatar">
+                    <img src="https://images-ext-1.discordapp.net/external/KzcMTKS-42I-uyzVq0_1sPWHyoP4b7K2mmxp-nvMmjg/https/cdn.discordapp.com/avatars/1008003141553369121/8e69bb368c04a86001a65bc2453a43e7.png?format=webp&quality=lossless&width=176&height=176" alt="Gonzalo">
                 </div>
+                <h3>Gonzalo</h3>
+                <span class="team-role">Owner</span>
+                <p style="color:var(--text-muted); font-size:14px;">Arquitectura de sistemas y dirección de proyecto.</p>
             </div>
-            <ul class="pricing-features">
-                <li><i class="fas fa-check"></i><span>Protección básica Anti-raid</span></li>
-                <li><i class="fas fa-check"></i><span>Registro básico de eventos en un canal</span></li>
-                <li><i class="fas fa-check"></i><span>Límites bajos de protección (hasta 3 baneos/kicks en 5 minutos)</span></li>
-                <li><i class="fas fa-check"></i><span>Sistema Blacklist</span></li>
-                <li><i class="fas fa-check"></i><span>Sistema Whitelist</span></li>
-                <li><i class="fas fa-check"></i><span>Soporte limitado</span></li>
-            </ul>
-
-        </div>
-
-        <div class="pricing-card pricing-card-featured">
-            <div class="featured-badge">⭐ Más Popular</div>
-            <div class="pricing-header">
-                <h3>Básico 🎄</h3>
-                <div class="pricing-price">
-                    <span class="price-amount">2€</span>
-                    <span class="price-period">/mes</span>
+            <div class="team-card reveal">
+                <div class="team-avatar">
+                     <img src="https://images-ext-1.discordapp.net/external/7l6dwShgR4VCAh_A8V4bv3zjNSb3aGxGzByK63Yl0Bk/https/cdn.discordapp.com/avatars/1013940337150005279/525f297b1bc1edc4acacabd6b9c8984f.png?format=webp&quality=lossless&width=176&height=176" alt="Kurok">
                 </div>
+                <h3>Kurok</h3>
+                <span class="team-role">Owner</span>
+                <p style="color:var(--text-muted); font-size:14px;">Optimización de Rust y estabilidad del núcleo.</p>
             </div>
-            <ul class="pricing-features">
-                <li><i class="fas fa-check"></i><span>Todo lo del plan Gratis</span></li>
-                <li><i class="fas fa-check"></i><span>Protección Avanzada</span></li>
-                <li><i class="fas fa-check"></i><span>Alertas en canal dedicado además de DM</span></li>
-                <li><i class="fas fa-check"></i><span>Whitelist de usuarios/roles para evitar bloqueos accidentales</span></li>
-                <li><i class="fas fa-check"></i><span>Sistema de backups básico</span></li>
-                <li><i class="fas fa-check"></i><span>Límites de acción configurables por el owner</span></li>
-                <li><i class="fas fa-check"></i><span>Prioridad premium en el soporte</span></li>
-            </ul>
-
-        </div>
-
-        <div class="pricing-card">
-            <div class="pricing-header">
-                <h3>Pro 🌟</h3>
-                <div class="pricing-price">
-                    <span class="price-amount">4€</span>
-                    <span class="price-period">/mes</span>
+            <div class="team-card reveal">
+                <div class="team-avatar">
+                     <img src="https://images-ext-1.discordapp.net/external/kYbTGyhoYJ757k-C6aMnXxkLi_C1Qi4vjoU8-_CPo5M/https/cdn.discordapp.com/avatars/1390643298795917322/3a7790c6d67f5b617b2a0a5f2ae214d9.png?format=webp&quality=lossless&width=176&height=176" alt="Silver">
                 </div>
+                <h3>Silver</h3>
+                <span class="team-role">Co-Owner</span>
+                <p style="color:var(--text-muted); font-size:14px;">Implementación de comandos y seguridad.</p>
             </div>
-            <ul class="pricing-features">
-                <li><i class="fas fa-check"></i><span>Todo lo del plan Basic y Estándar</span></li>
-                <li><i class="fas fa-check"></i><span>Sistema antinuke avanzado</span></li>
-                <li><i class="fas fa-check"></i><span>Protección contra webhooks y emojis</span></li>
-                <li><i class="fas fa-check"></i><span>Gestión multi-servidor</span></li>
-                <li><i class="fas fa-check"></i><span>Notificaciones configurables (DM, canal, webhooks)</span></li>
-                <li><i class="fas fa-check"></i><span>Sistema de copias de seguridad Pro</span></li>
-                <li><i class="fas fa-check"></i><span>Soporte VIP 24/7</span></li>
-                <li><i class="fas fa-check"></i><span>Asesor personal para tu servidor</span></li>
-            </ul>
-
         </div>
-    </div>
-</section>
+    </section>
 
-<section class="stats">
-    <div class="stats-content">
-        <h4>🎄 Nova Defense - Edición Navidad 2024 🎅</h4>
-        <span class="stats-number">❄️</span>
-        <p style="color: #94a3b8; font-size: 16px; max-width: 600px; margin: 0 auto;">
-            Mete a Nova defense a tu servidor y protege tu comunidad en menos de 7 minutos. ¡Feliz Navidad! 🎁
-        </p>
-    </div>
-</section>
-
-<footer>
-    <div class="footer-content">
-        <p>© 2025 Nova Defense - Tu mejor aliado en seguridad 🎄</p>
-        <div class="footer-links">
-            <a href="https://politicadeprivacidadnovadefense.netlify.app" target="_blank" class="footer-btn">
-                <i class="fas fa-shield-alt"></i> Política de Privacidad
-            </a>
-            <a href="https://terminosdeservicionovadefense.netlify.app" target="_blank" class="footer-btn">
-                <i class="fas fa-file-contract"></i> Términos de Servicio
-            </a>
+    <!-- Pricing Section -->
+    <section class="section" id="pricing">
+        <div class="section-header reveal">
+            <h2 class="section-title">Planes Flexibles</h2>
+            <p class="section-desc">Seguridad de grado militar accesible para todos.</p>
         </div>
-    </div>
-</footer>
+        <div class="pricing-grid">
+            <!-- (Mismos planes) -->
+            <div class="price-card reveal">
+                <div class="price-header">
+                    <h3>Estándar</h3>
+                    <div class="price-amount">0€ <span>/mes</span></div>
+                    <p class="price-desc">Esencial para comunidades pequeñas.</p>
+                </div>
+                <ul class="feature-list">
+                    <li><i class="fas fa-check"></i> Protección básica</li>
+                    <li><i class="fas fa-check"></i> Logs básicos</li>
+                    <li class="disabled"><i class="fas fa-times"></i> Backups</li>
+                </ul>
+                <a href="#" class="btn-price">Añadir Gratis</a>
+            </div>
 
-<script>
+            <div class="price-card popular reveal">
+                <div class="popular-badge">Recomendado</div>
+                <div class="price-header">
+                    <h3>Básico</h3>
+                    <div class="price-amount">2€ <span>/mes</span></div>
+                    <p class="price-desc">Seguridad avanzada para servidores en crecimiento.</p>
+                </div>
+                <ul class="feature-list">
+                    <li><i class="fas fa-check"></i> <strong>Todo lo de Estándar</strong></li>
+                    <li><i class="fas fa-check"></i> Protección Avanzada</li>
+                    <li><i class="fas fa-check"></i> Sistema de Backups</li>
+                    <li><i class="fas fa-check"></i> Soporte Prioritario</li>
+                </ul>
+                <a href="#" class="btn-price glow">Comenzar Ahora</a>
+            </div>
 
-    function createSnowflake() {
-        const snowflake = document.createElement('div');
-        snowflake.classList.add('snowflake');
-        snowflake.innerHTML = '❄';
-        snowflake.style.left = Math.random() * 100 + '%';
-        snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
-        snowflake.style.opacity = Math.random();
-        snowflake.style.fontSize = Math.random() * 10 + 10 + 'px';
-        
-        document.body.appendChild(snowflake);
-        
-        setTimeout(() => {
-            snowflake.remove();
-        }, 5000);
-    }
+            <div class="price-card reveal">
+                <div class="price-header">
+                    <h3>Pro</h3>
+                    <div class="price-amount">4€ <span>/mes</span></div>
+                    <p class="price-desc">Máxima seguridad para grandes comunidades.</p>
+                </div>
+                <ul class="feature-list">
+                    <li><i class="fas fa-check"></i> <strong>Todo lo de Básico</strong></li>
+                    <li><i class="fas fa-check"></i> Anti-Nuke Total</li>
+                    <li><i class="fas fa-check"></i> Gestión Multi-servidor</li>
+                    <li><i class="fas fa-check"></i> Asesor Personal</li>
+                </ul>
+                <a href="#" class="btn-price">Obtener Pro</a>
+            </div>
+        </div>
+    </section>
 
-    setInterval(createSnowflake, 200);
+    <!-- Intelligence Graph (SVG Line Chart) -->
+    <section class="raid-graph-section reveal">
+        <div class="section-header">
+            <h2 class="section-title">Inteligencia de <span class="text-gradient">Amenazas</span></h2>
+            <p class="section-desc">Incremento global de intentos de raid bloqueados en los últimos 30 días.</p>
+        </div>
+        <div class="graph-container">
+            <svg class="graph-svg" viewBox="0 0 1000 400" preserveAspectRatio="none">
+                <defs>
+                    <linearGradient id="graphGradient" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#00E5FF" stop-opacity="0.4"/>
+                        <stop offset="100%" stop-color="#00E5FF" stop-opacity="0"/>
+                    </linearGradient>
+                </defs>
+                <!-- Grid Lines -->
+                <line x1="0" y1="100" x2="1000" y2="100" class="graph-axis" />
+                <line x1="0" y1="200" x2="1000" y2="200" class="graph-axis" />
+                <line x1="0" y1="300" x2="1000" y2="300" class="graph-axis" />
+                
+                <!-- The Area Fill -->
+                <path d="M0,350 Q100,340 200,250 T400,200 T600,150 T800,80 T1000,20 V400 H0 Z" class="graph-area" />
+                
+                <!-- The Line -->
+                <path d="M0,350 Q100,340 200,250 T400,200 T600,150 T800,80 T1000,20" class="graph-line" />
+            </svg>
+        </div>
+    </section>
 
-    const menuToggle = document.getElementById("menu-toggle");
-    const sidebar = document.getElementById("sidebar");
-    const closeBtn = document.getElementById("close-btn");
-    const overlay = document.getElementById("overlay");
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h2>Nova Defense</h2>
+                <p>La solución definitiva de seguridad para comunidades modernas en Discord.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <a href="https://politicadeprivacidadnovadefense.netlify.app">Privacidad</a>
+                <a href="https://terminosdeservicionovadefense.netlify.app">Términos</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Nova Defense. Todos los derechos reservados.</p>
+        </div>
+    </footer>
 
-    menuToggle.addEventListener("click", () => {
-        sidebar.classList.add("active");
-        overlay.classList.add("show");
-        menuToggle.classList.add("hidden");
-    });
+    <script>
+        // Efecto Parallax
+        document.addEventListener('mousemove', (e) => {
+            const shield = document.getElementById('shieldWrapper');
+            if(shield) {
+                const x = (window.innerWidth / 2 - e.pageX) / 30;
+                const y = (window.innerHeight / 2 - e.pageY) / 30;
+                shield.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
+            }
+        });
 
-    closeBtn.addEventListener("click", closeMenu);
-    overlay.addEventListener("click", closeMenu);
-    document.querySelectorAll('.sidebar-links a').forEach(link => {
-        link.addEventListener('click', closeMenu);
-    });
+        // Feature Cards Effect (Spotlight)
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
 
-    function closeMenu() {
-        sidebar.classList.remove("active");
-        overlay.classList.remove("show");
-        menuToggle.classList.remove("hidden");
-    }
-
-    window.addEventListener("load", () => {
-        setTimeout(() => {
-            window.scrollTo({ top: 0, behavior: "instant" });
-            history.replaceState(null, null, " ");
-        }, 50);
-    });
-
-
-    document.addEventListener('mousemove', (e) => {
-        const shield = document.getElementById('shield');
-        if (shield && window.innerWidth > 1024) {
-            const x = (e.clientX / window.innerWidth - 0.5) * 20;
-            const y = (e.clientY / window.innerHeight - 0.5) * 20;
-            shield.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
-        }
-    });
-
-    window.addEventListener('scroll', () => {
-        const header = document.querySelector('header');
-        if (window.scrollY > 50) {
-            header.style.background = 'rgba(10, 14, 23, 0.98)';
-            header.style.boxShadow = '0 4px 20px rgba(220, 38, 38, 0.2)';
-        } else {
-            header.style.background = 'rgba(10, 14, 23, 0.95)';
-            header.style.boxShadow = 'none';
-        }
-    });
-</script>
+        // Scroll Effects
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('navbar');
+            if (window.scrollY > 50) header.classList.add('scrolled');
+            else header.classList.remove('scrolled');
+            
+            // Reveal
+            const windowHeight = window.innerHeight;
+            document.querySelectorAll('.reveal').forEach(el => {
+                const top = el.getBoundingClientRect().top;
+                if(top < windowHeight - 100) el.classList.add('active');
+            });
+        });
+    </script>
 </body>
 </html>
