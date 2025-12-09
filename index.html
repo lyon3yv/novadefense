@@ -8,12 +8,10 @@
 
     <link rel="icon" type="image/png" href="Logo1.png">
     
-    <!-- Fuentes Google Fonts: Outfit (Tech/Moderno) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     
-    <!-- Iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <style>
@@ -37,17 +35,142 @@
             scroll-behavior: smooth;
         }
 
+        /* Scrollbar Personalizado */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #020610; }
+        ::-webkit-scrollbar-thumb { background: var(--primary-dark); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-dark);
             color: var(--text-main);
             overflow-x: hidden;
             line-height: 1.6;
+            /* Ocultar scroll durante la intro */
+            overflow-y: hidden; 
+        }
+
+        body.loaded {
+            overflow-y: auto;
         }
 
         h1, h2, h3, h4, .price-amount, .stat-number {
             font-family: 'Outfit', sans-serif;
         }
+
+        /* =========================================
+           INTRO ANIMATION STYLES
+           ========================================= */
+        #intro-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #02040a;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
+        }
+
+        .intro-content {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Animación del Escudo SVG */
+        .intro-shield-svg {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 30px;
+            overflow: visible;
+        }
+
+        .shield-path {
+            fill: none;
+            stroke: var(--primary);
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-dasharray: 400;
+            stroke-dashoffset: 400;
+            animation: drawShield 2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            filter: drop-shadow(0 0 15px var(--primary));
+        }
+
+        .shield-fill {
+            fill: var(--primary);
+            opacity: 0;
+            animation: fillShield 1s ease forwards 1.8s;
+        }
+
+        @keyframes drawShield {
+            to { stroke-dashoffset: 0; }
+        }
+
+        @keyframes fillShield {
+            to { opacity: 0.1; }
+        }
+
+        /* Textos de la Intro */
+        .intro-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3rem;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: 4px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUpText 0.8s ease forwards 1.2s;
+            text-transform: uppercase;
+        }
+
+        .intro-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.2rem;
+            color: var(--primary);
+            letter-spacing: 2px;
+            opacity: 0;
+            margin-top: 10px;
+            animation: fadeInSimple 0.8s ease forwards 2s;
+            text-transform: uppercase;
+        }
+
+        /* Efecto de partículas de fondo en la intro */
+        .intro-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(0, 229, 255, 0.05) 0%, transparent 50%);
+            z-index: 1;
+        }
+
+        /* Clases para ocultar la intro */
+        body.loaded #intro-overlay {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        /* Animaciones Keyframes */
+        @keyframes fadeUpText {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInSimple {
+            to { opacity: 1; }
+        }
+
+        /* =========================================
+           REST OF THE WEBSITE STYLES
+           ========================================= */
 
         /* --- FONDO ANIMADO (CYBER GRID) --- */
         .background-fx {
@@ -91,7 +214,11 @@
             z-index: 1000;
             padding: 20px 0;
             transition: all 0.4s ease;
+            opacity: 0; /* Oculto inicialmente */
+            animation: fadeInHeader 1s ease forwards 3.5s; /* Aparece tras la intro */
         }
+
+        @keyframes fadeInHeader { to { opacity: 1; } }
 
         header.scrolled {
             background: rgba(3, 7, 18, 0.9);
@@ -560,7 +687,7 @@
             color: #fff;
             box-shadow: 0 15px 30px rgba(0,0,0,0.4);
             border: 4px solid rgba(255,255,255,0.1);
-            overflow: hidden; /* Para que la imagen no se salga */
+            overflow: hidden;
         }
         
         .team-avatar img {
@@ -835,7 +962,12 @@
             filter: drop-shadow(0 0 10px var(--primary));
             stroke-dasharray: 2000;
             stroke-dashoffset: 2000;
-            animation: drawLine 4s ease-out forwards;
+            /* La animación se activará con JS al hacer scroll */
+            transition: stroke-dashoffset 2s ease-out;
+        }
+        
+        .graph-line.active {
+            stroke-dashoffset: 0;
         }
 
         .graph-area {
@@ -852,10 +984,6 @@
             fill: var(--text-muted);
             font-size: 12px;
             font-family: 'Inter', sans-serif;
-        }
-
-        @keyframes drawLine {
-            to { stroke-dashoffset: 0; }
         }
 
         /* --- FOOTER --- */
@@ -923,7 +1051,8 @@
             transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
 
-        .reveal.active {
+        /* Modificado para que no se muestre hasta después de la intro */
+        .intro-done .reveal.active {
             opacity: 1;
             transform: translateY(0);
         }
@@ -968,17 +1097,28 @@
             .hero h1 { font-size: 42px; }
             .section-title { font-size: 32px; }
             .footer-content { grid-template-columns: 1fr; }
+            .intro-title { font-size: 2rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Fondo Cyber Grid -->
+    <div id="intro-overlay">
+        <div class="intro-particles"></div>
+        <div class="intro-content">
+            <svg class="intro-shield-svg" viewBox="0 0 100 120">
+                <path class="shield-path" d="M50 10 L10 30 V60 C10 85 25 105 50 115 C75 105 90 85 90 60 V30 L50 10 Z" />
+                <path class="shield-fill" d="M50 10 L10 30 V60 C10 85 25 105 50 115 C75 105 90 85 90 60 V30 L50 10 Z" />
+            </svg>
+            <h1 class="intro-title">Nova Defense</h1>
+            <p class="intro-subtitle">Protege tu servidor</p>
+        </div>
+    </div>
+
     <div class="background-fx">
         <div class="grid-lines"></div>
     </div>
 
-    <!-- Navegación -->
     <header id="navbar">
         <div class="nav-container">
             <a href="#" class="logo-container">
@@ -996,7 +1136,6 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content reveal">
             <div class="status-badge">
@@ -1006,7 +1145,7 @@
             <h1>Seguridad <br><span class="text-gradient">Avanzada</span></h1>
             <p>
                 Protege tu comunidad de Discord con la inteligencia artificial de Nova Defense. 
-                Anti-raid avanzado, firewall y gestión automática en una sola herramienta.
+                Anti-raid, firewall y gestión automática en una sola herramienta.
             </p>
             <div class="cta-group">
                 <a href="https://discord.com/oauth2/authorize?client_id=1403752400761913445&scope=bot+applications.commands&permissions=8&integration_type=0" target="_blank" class="btn btn-primary">
@@ -1022,7 +1161,6 @@
             <div class="shield-wrapper" id="shieldWrapper">
                 <div class="shield-ring"></div>
                 <div class="shield-ring inner"></div>
-                <!-- Escudo SVG Moderno -->
                 <svg class="shield-core" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12 2L3 7V12C3 17 7 21 12 22C17 21 21 17 21 12V7L12 2Z" fill="url(#shield-gradient)" stroke="#00E5FF" stroke-width="0.5"/>
                     <path d="M12 6L12 18M12 12L16 12M8 12L12 12" stroke="white" stroke-width="2" stroke-linecap="round"/>
@@ -1037,7 +1175,6 @@
         </div>
     </section>
 
-    <!-- Stats Section (CARDS) -->
     <section class="stats-section reveal" id="stats">
         <div class="stats-grid">
             <div class="stat-card">
@@ -1063,7 +1200,6 @@
         </div>
     </section>
 
-    <!-- Features Section -->
     <section class="section" id="features">
         <div class="section-header reveal">
             <h2 class="section-title">Nuestras Herramientas de <span class="text-gradient">Defensa</span></h2>
@@ -1104,7 +1240,6 @@
         </div>
     </section>
 
-    <!-- Command Gallery (Screenshots) -->
     <section class="section" id="commands">
         <div class="section-header reveal">
             <h2 class="section-title">Interfaz de <span class="text-gradient">Comando</span></h2>
@@ -1130,7 +1265,6 @@
         </div>
     </section>
 
-    <!-- Video Tutorial -->
     <section class="section" id="tutorial">
         <div class="section-header reveal">
             <h2 class="section-title">Aprende a <span class="text-gradient">Configurar</span></h2>
@@ -1141,7 +1275,6 @@
         </div>
     </section>
 
-    <!-- Team Section -->
     <section class="section" id="team">
         <div class="section-header reveal">
             <h2 class="section-title">Equipo</h2>
@@ -1175,14 +1308,12 @@
         </div>
     </section>
 
-    <!-- Pricing Section -->
     <section class="section" id="pricing">
         <div class="section-header reveal">
             <h2 class="section-title">Planes Flexibles</h2>
             <p class="section-desc">Seguridad de grado militar accesible para todos.</p>
         </div>
         <div class="pricing-grid">
-            <!-- (Mismos planes) -->
             <div class="price-card reveal">
                 <div class="price-header">
                     <h3>Estándar</h3>
@@ -1230,7 +1361,6 @@
         </div>
     </section>
 
-    <!-- Intelligence Graph (SVG Line Chart) -->
     <section class="raid-graph-section reveal">
         <div class="section-header">
             <h2 class="section-title">Inteligencia de <span class="text-gradient">Amenazas</span></h2>
@@ -1244,21 +1374,17 @@
                         <stop offset="100%" stop-color="#00E5FF" stop-opacity="0"/>
                     </linearGradient>
                 </defs>
-                <!-- Grid Lines -->
                 <line x1="0" y1="100" x2="1000" y2="100" class="graph-axis" />
                 <line x1="0" y1="200" x2="1000" y2="200" class="graph-axis" />
                 <line x1="0" y1="300" x2="1000" y2="300" class="graph-axis" />
                 
-                <!-- The Area Fill -->
                 <path d="M0,350 Q100,340 200,250 T400,200 T600,150 T800,80 T1000,20 V400 H0 Z" class="graph-area" />
                 
-                <!-- The Line -->
-                <path d="M0,350 Q100,340 200,250 T400,200 T600,150 T800,80 T1000,20" class="graph-line" />
+                <path id="animGraph" d="M0,350 Q100,340 200,250 T400,200 T600,150 T800,80 T1000,20" class="graph-line" />
             </svg>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="footer-content">
             <div class="footer-brand">
@@ -1277,7 +1403,28 @@
     </footer>
 
     <script>
-        // Efecto Parallax
+        // LOGICA DE LA INTRO (SPLASH SCREEN)
+        window.addEventListener('load', () => {
+            const body = document.body;
+            
+            // Tiempo total de la intro (3.5 segundos)
+            // 0s: Inicia animación escudo
+            // 1.5s: Inicia texto "NOVA DEFENSE"
+            // 2.0s: Inicia texto "PROTEGE TU SERVIDOR"
+            // 3.5s: Desaparece la intro
+            
+            setTimeout(() => {
+                body.classList.add('intro-done'); // Permite que los elementos .reveal funcionen
+                body.classList.add('loaded'); // Habilita el scroll
+                
+                // Activar animaciones iniciales del Hero
+                const heroReveals = document.querySelectorAll('.hero .reveal');
+                heroReveals.forEach(el => el.classList.add('active'));
+
+            }, 3500);
+        });
+
+        // Efecto Parallax del Escudo Hero
         document.addEventListener('mousemove', (e) => {
             const shield = document.getElementById('shieldWrapper');
             if(shield) {
@@ -1298,18 +1445,27 @@
             });
         });
 
-        // Scroll Effects
+        // Scroll Effects (Navbar y Reveals)
         window.addEventListener('scroll', () => {
             const header = document.getElementById('navbar');
             if (window.scrollY > 50) header.classList.add('scrolled');
             else header.classList.remove('scrolled');
             
-            // Reveal
-            const windowHeight = window.innerHeight;
-            document.querySelectorAll('.reveal').forEach(el => {
-                const top = el.getBoundingClientRect().top;
-                if(top < windowHeight - 100) el.classList.add('active');
-            });
+            // Reveal Elements solo si la intro terminó
+            if(document.body.classList.contains('intro-done')){
+                const windowHeight = window.innerHeight;
+                document.querySelectorAll('.reveal').forEach(el => {
+                    const top = el.getBoundingClientRect().top;
+                    if(top < windowHeight - 100) el.classList.add('active');
+                });
+
+                // Activar animación del gráfico si es visible
+                const graph = document.getElementById('animGraph');
+                const graphPos = graph.getBoundingClientRect().top;
+                if(graphPos < windowHeight - 100) {
+                    graph.classList.add('active');
+                }
+            }
         });
     </script>
 </body>
