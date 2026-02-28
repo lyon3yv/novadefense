@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nova Defense | Seguridad Avanzada para Discord</title>
-    <meta name="description" content="El sistema de protección definitivo. Anti-raid, firewall y gestión de comunidades con tecnología de vanguardia.">
+    <title>Nova Defense | Ciberseguridad Avanzada para Web y Comunidades</title>
+    <meta name="description" content="Empresa de ciberseguridad especializada en protección de páginas web, servidores de Discord y Telegram. Conoce nuestro ecosistema de defensa.">
 
     <link rel="icon" type="image/png" href="Logo1.png">
     
@@ -13,6 +13,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
     <style>
         :root {
@@ -582,6 +585,87 @@
         }
 
         /* =========================================
+           NUEVO: SERVICES SECTION (Empresa)
+           ========================================= */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .service-card {
+            background: linear-gradient(180deg, rgba(13, 17, 26, 0.8) 0%, rgba(2, 4, 10, 0.9) 100%);
+            border: var(--glass-border);
+            border-radius: 32px;
+            padding: 50px 40px;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(20px);
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 4px;
+            background: var(--gradient);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(0, 229, 255, 0.1);
+            border-color: rgba(0, 229, 255, 0.3);
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-icon {
+            font-size: 48px;
+            color: var(--primary);
+            margin-bottom: 30px;
+            background: -webkit-linear-gradient(135deg, #00E5FF, #2979FF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .service-card h3 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .service-card p {
+            color: var(--text-muted);
+            font-size: 16px;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        .service-features {
+            list-style: none;
+            margin-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 20px;
+        }
+
+        .service-features li {
+            color: #E5E7EB;
+            margin-bottom: 12px;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .service-features li i { color: var(--primary); font-size: 12px; }
+
+        /* =========================================
            STATS SECTION
            ========================================= */
         .stats-section {
@@ -651,8 +735,16 @@
         }
 
         /* =========================================
-           FEATURES SECTION
+           FEATURES SECTION (Proyecto Bot)
            ========================================= */
+        .bot-project-wrapper {
+            background: radial-gradient(circle at center, rgba(13, 17, 26, 0.8) 0%, transparent 70%);
+            border-radius: 40px;
+            padding: 80px 40px;
+            border: 1px solid rgba(0, 229, 255, 0.05);
+            margin-top: 40px;
+        }
+
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
@@ -748,6 +840,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 30px;
+            margin-top: 60px;
         }
 
         .command-card {
@@ -1172,7 +1265,7 @@
         }
 
         /* =========================================
-           ANIMACIONES SCROLL REVEAL
+           ANIMACIONES SCROLL REVEAL CLÁSICO (Fallback)
            ========================================= */
         .reveal {
             opacity: 0;
@@ -1184,6 +1277,10 @@
             opacity: 1;
             transform: translateY(0);
         }
+        
+        /* Clases auxiliares para GSAP */
+        .gsap-fade-up { opacity: 0; transform: translateY(60px); }
+        .gsap-scale-up { opacity: 0; transform: scale(0.9); }
 
         /* =========================================
            MEDIA QUERIES
@@ -1235,7 +1332,7 @@
                 <path class="shield-fill" d="M50 10 L10 30 V60 C10 85 25 105 50 115 C75 105 90 85 90 60 V30 L50 10 Z" />
             </svg>
             <h1 class="intro-title">Nova Defense</h1>
-            <p class="intro-subtitle">Protege tu servidor</p>
+            <p class="intro-subtitle">Empresa de Ciberseguridad</p>
         </div>
     </div>
 
@@ -1253,15 +1350,15 @@
             
             <div class="nav-right">
                 <nav class="nav-links">
-                    <a href="#features">Características</a>
-                    <a href="#commands">Comandos</a>
+                    <a href="#services">Servicios</a>
+                    <a href="#project">Proyecto Bot</a>
                     <a href="#pricing">Planes</a>
                     <a href="#team">Equipo</a>
                     <a href="https://discord.gg/FsbvgQWKYy" target="_blank">Soporte</a>
                 </nav>
                 
                 <a href="https://dashboard.novadefense.es" class="btn-nav-dashboard">
-                    <i class="fas fa-chart-pie"></i> Dashboard
+                    <i class="fas fa-chart-pie"></i> Acceso Clientes
                 </a>
                 
                 <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
@@ -1269,28 +1366,27 @@
         </div>
     </header>
 
-    <section class="hero">
+    <section class="hero" id="home">
         <div class="hero-content reveal">
             <div class="status-badge">
                 <span class="status-dot"></span>
-                Sistemas Operativos v2.0
+                Sistemas de Defensa Activos
             </div>
-            <h1>Seguridad <br><span class="text-gradient">Avanzada</span></h1>
+            <h1>Protección Digital de <br><span class="text-gradient">Siguiente Nivel</span></h1>
             <p>
-                Protege tu comunidad de Discord con la inteligencia artificial de Nova Defense. 
-                Anti-raid, firewall y gestión automática en una sola herramienta diseñada para el futuro.
+                Aseguramos tu infraestructura. Proveemos software de ciberseguridad corporativa para páginas web y moderación automática blindada para comunidades en Discord y Telegram.
             </p>
             <div class="cta-group">
-                <a href="https://discord.com/oauth2/authorize?client_id=1403752400761913445&scope=bot+applications.commands&permissions=8&integration_type=0" target="_blank" class="btn btn-primary">
-                    <i class="fab fa-discord"></i> Añadir a Discord
+                <a href="#services" class="btn btn-primary">
+                    <i class="fas fa-shield-check"></i> Ver Servicios
                 </a>
-                <a href="#tutorial" class="btn btn-glass">
-                    Ver Tutorial
+                <a href="#project" class="btn btn-glass">
+                    Nuestro Proyecto Bot
                 </a>
             </div>
         </div>
 
-        <div class="hero-visual reveal">
+        <div class="hero-visual reveal gsap-hero-shield">
             <div class="shield-wrapper" id="shieldWrapper">
                 <div class="shield-ring"></div>
                 <div class="shield-ring inner"></div>
@@ -1308,8 +1404,50 @@
         </div>
     </section>
 
-    <section class="stats-section reveal" id="stats">
-        <div class="stats-grid">
+    <section class="section" id="services">
+        <div class="section-header gsap-fade-up">
+            <h2 class="section-title">Ecosistema de <span class="text-gradient">Defensa Global</span></h2>
+            <p class="section-desc">Como empresa de ciberseguridad, desarrollamos infraestructuras de protección adaptables a las plataformas más críticas de internet.</p>
+        </div>
+
+        <div class="services-grid">
+            <div class="service-card gsap-fade-up">
+                <i class="fas fa-globe service-icon"></i>
+                <h3>Protección Web</h3>
+                <p>Mitigación de ataques DDoS Capa 7, Web Application Firewall (WAF) y monitoreo de vulnerabilidades en tiempo real para tu negocio online.</p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check"></i> Redirección de tráfico malicioso</li>
+                    <li><i class="fas fa-check"></i> Cifrado y análisis de logs</li>
+                    <li><i class="fas fa-check"></i> 99.9% de Uptime garantizado</li>
+                </ul>
+            </div>
+            
+            <div class="service-card gsap-fade-up">
+                <i class="fab fa-discord service-icon"></i>
+                <h3>Seguridad Discord</h3>
+                <p>Nuestra división especializada. Prevenimos raids masivos, bloqueamos ataques de nuking y filtramos spam con IA antes de que afecte a tus usuarios.</p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check"></i> Algoritmos Anti-Raid Neurales</li>
+                    <li><i class="fas fa-check"></i> Backups de infraestructura</li>
+                    <li><i class="fas fa-check"></i> Integración instantánea</li>
+                </ul>
+            </div>
+
+            <div class="service-card gsap-fade-up">
+                <i class="fab fa-telegram-plane service-icon"></i>
+                <h3>Defensa Telegram</h3>
+                <p>Gestión automatizada de comunidades grandes. Eliminación de bots maliciosos, control de flood y análisis de reputación de usuarios.</p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check"></i> Captcha multi-nivel</li>
+                    <li><i class="fas fa-check"></i> Global Blacklist sincronizada</li>
+                    <li><i class="fas fa-check"></i> Filtros de contenido avanzado</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats-section" id="stats">
+        <div class="stats-grid gsap-scale-up">
             <div class="stat-item">
                 <div class="stat-icon"><i class="fas fa-users"></i></div>
                 <span class="stat-number">+23K</span>
@@ -1318,12 +1456,12 @@
             <div class="stat-item">
                 <div class="stat-icon"><i class="fas fa-server"></i></div>
                 <span class="stat-number">+106</span>
-                <span class="stat-label">Servidores Activos</span>
+                <span class="stat-label">Servidores/Redes Activas</span>
             </div>
             <div class="stat-item">
                 <div class="stat-icon"><i class="fas fa-shield-alt"></i></div>
                 <span class="stat-number">24/7</span>
-                <span class="stat-label">Monitoreo Activo</span>
+                <span class="stat-label">Monitoreo Activo SOC</span>
             </div>
             <div class="stat-item">
                 <div class="stat-icon"><i class="fas fa-bolt"></i></div>
@@ -1333,174 +1471,175 @@
         </div>
     </section>
 
-    <section class="section" id="features">
-        <div class="section-header reveal">
-            <h2 class="section-title">Nuestras Herramientas de <span class="text-gradient">Defensa</span></h2>
-            <p class="section-desc">Tecnología de vanguardia diseñada para neutralizar amenazas sin afectar la experiencia de usuario de tu comunidad.</p>
+    <section class="section" id="project">
+        <div class="section-header gsap-fade-up">
+            <h2 class="section-title">Proyecto Destacado: <span class="text-gradient">Nova Bot</span></h2>
+            <p class="section-desc">Conoce nuestro producto insignia para la protección de servidores de Discord. Una herramienta todo en uno impulsada por nuestra tecnología base.</p>
+            
+            <a href="https://discord.com/oauth2/authorize?client_id=1403752400761913445&scope=bot+applications.commands&permissions=8&integration_type=0" target="_blank" class="btn btn-primary" style="margin-top: 20px;">
+                <i class="fab fa-discord"></i> Instalar Nova Bot
+            </a>
         </div>
 
-        <div class="features-grid">
-            <div class="feature-card reveal">
-                <div class="feature-icon"><i class="fas fa-shield-halved"></i></div>
-                <h3>Anti-Raid Neural</h3>
-                <p>Detecta y detiene ataques masivos en milisegundos analizando patrones de comportamiento anómalos.</p>
+        <div class="bot-project-wrapper">
+            <h3 style="color: white; font-size: 32px; margin-bottom: 40px; text-align: center; font-family: 'Outfit';">Herramientas del Bot</h3>
+            <div class="features-grid">
+                <div class="feature-card gsap-fade-up">
+                    <div class="feature-icon"><i class="fas fa-shield-halved"></i></div>
+                    <h3>Anti-Raid Neural</h3>
+                    <p>Detecta y detiene ataques masivos en milisegundos analizando patrones de comportamiento anómalos en el servidor.</p>
+                </div>
+                <div class="feature-card gsap-fade-up">
+                    <div class="feature-icon"><i class="fas fa-robot"></i></div>
+                    <h3>Captcha Verification</h3>
+                    <p>Sistema de verificación interactivo para filtrar bots automatizados antes de que accedan al servidor.</p>
+                </div>
+                <div class="feature-card gsap-fade-up">
+                    <div class="feature-icon"><i class="fas fa-database"></i></div>
+                    <h3>Global Blacklist</h3>
+                    <p>Base de datos de reputación compartida para bloquear preventivamente a usuarios maliciosos conocidos.</p>
+                </div>
+                <div class="feature-card gsap-fade-up">
+                    <div class="feature-icon"><i class="fas fa-server"></i></div>
+                    <h3>Backup & Restore</h3>
+                    <p>Instantáneas completas de la configuración del servidor para una recuperación rápida ante desastres.</p>
+                </div>
+                <div class="feature-card gsap-fade-up">
+                    <div class="feature-icon"><i class="fas fa-fingerprint"></i></div>
+                    <h3>Auditoría Forense</h3>
+                    <p>Logs detallados e inmutables de todas las acciones para un control y transparencia total.</p>
+                </div>
+                <div class="feature-card gsap-fade-up">
+                    <div class="feature-icon"><i class="fas fa-lock"></i></div>
+                    <h3>Cifrado Total</h3>
+                    <p>Tus datos quedan completamente cifrados y protegidos de extremo a extremo en nuestra VPS privada.</p>
+                </div>
             </div>
-            <div class="feature-card reveal">
-                <div class="feature-icon"><i class="fas fa-robot"></i></div>
-                <h3>Captcha Verification</h3>
-                <p>Sistema de verificación interactivo para filtrar bots automatizados antes de que accedan al servidor.</p>
-            </div>
-            <div class="feature-card reveal">
-                <div class="feature-icon"><i class="fas fa-database"></i></div>
-                <h3>Global Blacklist</h3>
-                <p>Base de datos de reputación compartida para bloquear preventivamente a usuarios maliciosos conocidos.</p>
-            </div>
-            <div class="feature-card reveal">
-                <div class="feature-icon"><i class="fas fa-server"></i></div>
-                <h3>Backup & Restore</h3>
-                <p>Instantáneas completas de la configuración del servidor para una recuperación rápida ante desastres.</p>
-            </div>
-            <div class="feature-card reveal">
-                <div class="feature-icon"><i class="fas fa-fingerprint"></i></div>
-                <h3>Auditoría Forense</h3>
-                <p>Logs detallados e inmutables de todas las acciones para un control y transparencia total.</p>
-            </div>
-            <div class="feature-card reveal">
-                <div class="feature-icon"><i class="fas fa-lock"></i></div>
-                <h3>Cifrado Total</h3>
-                <p>Tus datos quedan completamente cifrados y protegidos de extremo a extremo en nuestra VPS privada.</p>
-            </div>
-        </div>
-    </section>
 
-    <section class="section" id="commands">
-        <div class="section-header reveal">
-            <h2 class="section-title">Interfaz de <span class="text-gradient">Comando</span></h2>
-            <p class="section-desc">Control total al alcance de tu mano. Diseño limpio, intuitivo y respuestas inmediatas del bot.</p>
-        </div>
-        <div class="gallery-grid">
-            <div class="command-card reveal">
-                <img src="https://i.ibb.co/WpV8k6fs/image-1.webp" alt="Configuración">
-                <div class="command-overlay"><h4>Configuración Avanzada</h4></div>
+            <h3 style="color: white; font-size: 32px; margin-top: 80px; margin-bottom: 20px; text-align: center; font-family: 'Outfit';">Interfaz de Comandos</h3>
+            <p style="color: var(--text-muted); text-align: center; margin-bottom: 40px;">Control total al alcance de tu mano. Diseño limpio, intuitivo y respuestas inmediatas.</p>
+            
+            <div class="gallery-grid">
+                <div class="command-card gsap-fade-up">
+                    <img src="https://i.ibb.co/WpV8k6fs/image-1.webp" alt="Configuración">
+                    <div class="command-overlay"><h4>Configuración Avanzada</h4></div>
+                </div>
+                <div class="command-card gsap-fade-up">
+                    <img src="https://i.ibb.co/V0YBngvH/image-2.webp" alt="Verificación">
+                    <div class="command-overlay"><h4>Configúralo a tu gusto</h4></div>
+                </div>
+                <div class="command-card gsap-fade-up">
+                    <img src="https://i.ibb.co/yckC805D/image-3.webp" alt="Ayuda">
+                    <div class="command-overlay"><h4>Sistema de Análisis de Seguridad</h4></div>
+                </div>
+                <div class="command-card gsap-fade-up">
+                    <img src="https://i.ibb.co/whn88mqP/image-4.webp" alt="Moderación">
+                    <div class="command-overlay"><h4>Herramientas de Moderación</h4></div>
+                </div>
             </div>
-            <div class="command-card reveal">
-                <img src="https://i.ibb.co/V0YBngvH/image-2.webp" alt="Verificación">
-                <div class="command-overlay"><h4>Configúralo a tu gusto</h4></div>
+            
+            <div style="margin-top: 80px;">
+                <h3 style="color: white; font-size: 32px; margin-bottom: 20px; text-align: center; font-family: 'Outfit';">Video Tutorial</h3>
+                <div class="video-container gsap-scale-up" style="max-width: 1000px; margin: 0 auto;">
+                    <iframe src="https://www.youtube.com/embed/wXW_ZQqZ3Bs?si=KxX_jZqQZqQZqQZq" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
             </div>
-            <div class="command-card reveal">
-                <img src="https://i.ibb.co/yckC805D/image-3.webp" alt="Ayuda">
-                <div class="command-overlay"><h4>Sistema de Análisis de Seguridad</h4></div>
-            </div>
-            <div class="command-card reveal">
-                <img src="https://i.ibb.co/whn88mqP/image-4.webp" alt="Moderación">
-                <div class="command-overlay"><h4>Herramientas de Moderación</h4></div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section" id="tutorial">
-        <div class="section-header reveal">
-            <h2 class="section-title">Aprende a <span class="text-gradient">Configurar</span></h2>
-            <p class="section-desc">Guía rápida para blindar tu servidor en menos de 5 minutos. Sigue los pasos y despreocúpate.</p>
-        </div>
-        <div class="video-container reveal" style="max-width: 1000px; margin: 0 auto;">
-            <iframe src="https://www.youtube.com/embed/wXW_ZQqZ3Bs?si=KxX_jZqQZqQZqQZq" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
     </section>
 
     <section class="section" id="team">
-        <div class="section-header reveal">
-            <h2 class="section-title">Nuestro <span class="text-gradient">Equipo</span></h2>
-            <p class="section-desc">Los expertos en ciberseguridad y desarrollo detrás de la infraestructura de Nova Defense.</p>
+        <div class="section-header gsap-fade-up">
+            <h2 class="section-title">Ingeniería y <span class="text-gradient">Liderazgo</span></h2>
+            <p class="section-desc">Los expertos en ciberseguridad y desarrollo de software detrás de la infraestructura corporativa de Nova Defense.</p>
         </div>
         <div class="team-grid">
-            <div class="team-card reveal">
+            <div class="team-card gsap-fade-up">
                 <div class="team-avatar">
                     <img src="https://images-ext-1.discordapp.net/external/KzcMTKS-42I-uyzVq0_1sPWHyoP4b7K2mmxp-nvMmjg/https/cdn.discordapp.com/avatars/1008003141553369121/8e69bb368c04a86001a65bc2453a43e7.png?format=webp&quality=lossless&width=176&height=176" alt="Gonzalo">
                 </div>
                 <h3>Gonzalo</h3>
-                <span class="team-role">Owner</span>
-                <p>Arquitectura de sistemas y dirección de proyecto.</p>
+                <span class="team-role">CEO / Lead Architect</span>
+                <p>Arquitectura de sistemas cloud y dirección técnica de la empresa.</p>
             </div>
-            <div class="team-card reveal">
+            <div class="team-card gsap-fade-up">
                 <div class="team-avatar">
                      <img src="https://images-ext-1.discordapp.net/external/7l6dwShgR4VCAh_A8V4bv3zjNSb3aGxGzByK63Yl0Bk/https/cdn.discordapp.com/avatars/1013940337150005279/525f297b1bc1edc4acacabd6b9c8984f.png?format=webp&quality=lossless&width=176&height=176" alt="Kurok">
                 </div>
                 <h3>Kurok</h3>
-                <span class="team-role">Owner</span>
-                <p>Optimización de Rust y estabilidad del núcleo.</p>
+                <span class="team-role">CTO / Security Core</span>
+                <p>Optimización en Rust y estabilidad del núcleo de prevención de intrusiones.</p>
             </div>
-            <div class="team-card reveal">
+            <div class="team-card gsap-fade-up">
                 <div class="team-avatar">
                      <img src="https://images-ext-1.discordapp.net/external/kYbTGyhoYJ757k-C6aMnXxkLi_C1Qi4vjoU8-_CPo5M/https/cdn.discordapp.com/avatars/1390643298795917322/3a7790c6d67f5b617b2a0a5f2ae214d9.png?format=webp&quality=lossless&width=176&height=176" alt="Silver">
                 </div>
                 <h3>Silver</h3>
-                <span class="team-role">Co-Owner</span>
-                <p>Implementación de comandos y seguridad.</p>
+                <span class="team-role">Co-Founder / DevSecOps</span>
+                <p>Implementación de la lógica empresarial, redes y control de calidad.</p>
             </div>
         </div>
     </section>
 
     <section class="section" id="pricing">
-        <div class="section-header reveal">
-            <h2 class="section-title">Planes <span class="text-gradient">Flexibles</span></h2>
-            <p class="section-desc">Seguridad de grado militar accesible para todos. Elige el plan que mejor se adapte a ti.</p>
+        <div class="section-header gsap-fade-up">
+            <h2 class="section-title">Suscripciones <span class="text-gradient">Corporativas</span></h2>
+            <p class="section-desc">Seguridad de grado militar, desde comunidades emergentes hasta infraestructura empresarial dedicada.</p>
         </div>
         <div class="pricing-grid">
-            <div class="price-card reveal">
+            <div class="price-card gsap-fade-up">
                 <div class="price-header">
-                    <h3>Estándar</h3>
+                    <h3>Community (Discord/Telegram)</h3>
                     <div class="price-amount">0€ <span>/mes</span></div>
                     <p class="price-desc">Esencial para comunidades pequeñas que están empezando.</p>
                 </div>
                 <ul class="feature-list">
-                    <li><i class="fas fa-check"></i> Protección básica</li>
-                    <li><i class="fas fa-check"></i> Logs básicos</li>
-                    <li class="disabled"><i class="fas fa-times"></i> Backups</li>
-                    <li class="disabled"><i class="fas fa-times"></i> Anti-Nuke Total</li>
+                    <li><i class="fas fa-check"></i> Protección básica Anti-Raid</li>
+                    <li><i class="fas fa-check"></i> Logs básicos del sistema</li>
+                    <li class="disabled"><i class="fas fa-times"></i> Backups de Servidor</li>
+                    <li class="disabled"><i class="fas fa-times"></i> WAF Web</li>
                 </ul>
                 <a href="#" class="btn-price">Añadir Gratis</a>
             </div>
 
-            <div class="price-card popular reveal">
+            <div class="price-card popular gsap-scale-up">
                 <div class="popular-badge">Recomendado</div>
                 <div class="price-header">
-                    <h3>Básico</h3>
+                    <h3>Advanced Security</h3>
                     <div class="price-amount">2€ <span>/mes</span></div>
-                    <p class="price-desc">Seguridad avanzada para servidores en pleno crecimiento.</p>
+                    <p class="price-desc">Seguridad avanzada para proyectos web y comunidades en crecimiento.</p>
                 </div>
                 <ul class="feature-list">
-                    <li><i class="fas fa-check"></i> <strong>Todo lo de Estándar</strong></li>
-                    <li><i class="fas fa-check"></i> Protección Avanzada</li>
-                    <li><i class="fas fa-check"></i> Sistema de Backups</li>
-                    <li><i class="fas fa-check"></i> Soporte Prioritario</li>
+                    <li><i class="fas fa-check"></i> <strong>Todo lo de Community</strong></li>
+                    <li><i class="fas fa-check"></i> Sistema de Backups Cloud</li>
+                    <li><i class="fas fa-check"></i> Protección Web Básica (DDoS)</li>
+                    <li><i class="fas fa-check"></i> Soporte Técnico Prioritario</li>
                 </ul>
                 <a href="#" class="btn-price glow">Comenzar Ahora</a>
             </div>
 
-            <div class="price-card reveal">
+            <div class="price-card gsap-fade-up">
                 <div class="price-header">
-                    <h3>Pro</h3>
+                    <h3>Enterprise Node</h3>
                     <div class="price-amount">4€ <span>/mes</span></div>
-                    <p class="price-desc">Máxima seguridad sin compromisos para grandes comunidades.</p>
+                    <p class="price-desc">Máxima seguridad sin compromisos y recursos dedicados.</p>
                 </div>
                 <ul class="feature-list">
-                    <li><i class="fas fa-check"></i> <strong>Todo lo de Básico</strong></li>
-                    <li><i class="fas fa-check"></i> Anti-Nuke Total</li>
-                    <li><i class="fas fa-check"></i> Gestión Multi-servidor</li>
-                    <li><i class="fas fa-check"></i> Asesor Personal</li>
+                    <li><i class="fas fa-check"></i> <strong>Todo lo de Advanced</strong></li>
+                    <li><i class="fas fa-check"></i> Anti-Nuke Total y Auditoría</li>
+                    <li><i class="fas fa-check"></i> Gestión Web Multi-dominio</li>
+                    <li><i class="fas fa-check"></i> Asesor / Account Manager</li>
                 </ul>
-                <a href="#" class="btn-price">Obtener Pro</a>
+                <a href="#" class="btn-price">Contactar Ventas</a>
             </div>
         </div>
     </section>
 
-    <section class="raid-graph-section reveal">
-        <div class="section-header">
-            <h2 class="section-title">Inteligencia de <span class="text-gradient">Amenazas</span></h2>
-            <p class="section-desc">Incremento global de intentos de raid bloqueados con éxito en los últimos 30 días.</p>
+    <section class="raid-graph-section">
+        <div class="section-header gsap-fade-up">
+            <h2 class="section-title">Inteligencia de <span class="text-gradient">Amenazas Globales</span></h2>
+            <p class="section-desc">Incremento global de intentos de ataque (Web, Discord, Telegram) bloqueados con éxito en nuestra red durante los últimos 30 días.</p>
         </div>
-        <div class="graph-container">
+        <div class="graph-container gsap-scale-up">
             <svg class="graph-svg" viewBox="0 0 1000 400" preserveAspectRatio="none">
                 <defs>
                     <linearGradient id="graphGradient" x1="0" y1="0" x2="0" y2="1">
@@ -1522,29 +1661,36 @@
         <div class="footer-content">
             <div class="footer-brand">
                 <h2>Nova Defense</h2>
-                <p>La solución definitiva de seguridad para comunidades modernas en Discord. Diseñado para ofrecer tranquilidad absoluta.</p>
+                <p>Empresa líder en software de ciberseguridad. Protegemos infraestructuras web y moderamos de forma autónoma las comunidades más grandes de Discord y Telegram.</p>
             </div>
             <div class="footer-col">
-                <h4>Enlaces Útiles</h4>
-                <a href="https://dashboard.novadefense.es">Dashboard</a>
-                <a href="#features">Características</a>
-                <a href="#pricing">Planes y Precios</a>
+                <h4>Nuestras Soluciones</h4>
+                <a href="#services">Protección Web WAF</a>
+                <a href="#project">Nova Bot (Discord)</a>
+                <a href="#services">Defensa Telegram</a>
+                <a href="https://dashboard.novadefense.es">Acceso Clientes</a>
             </div>
             <div class="footer-col">
-                <h4>Legal</h4>
+                <h4>Legal & Empresa</h4>
                 <a href="https://politicadeprivacidadnovadefense.netlify.app">Política de Privacidad</a>
                 <a href="https://terminosdeservicionovadefense.netlify.app">Términos de Servicio</a>
+                <a href="#">Reportar Vulnerabilidad</a>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 Nova Defense. Todos los derechos reservados.</p>
+            <p>&copy; 2026 Nova Defense Technologies. Todos los derechos reservados.</p>
             <div style="display: flex; gap: 15px;">
                 <a href="https://discord.gg/FsbvgQWKYy" style="color: rgba(255,255,255,0.3); font-size: 18px;"><i class="fab fa-discord"></i></a>
+                <a href="#" style="color: rgba(255,255,255,0.3); font-size: 18px;"><i class="fab fa-telegram"></i></a>
+                <a href="#" style="color: rgba(255,255,255,0.3); font-size: 18px;"><i class="fab fa-twitter"></i></a>
             </div>
         </div>
     </footer>
 
     <script>
+        // Registrar ScrollTrigger de GSAP
+        gsap.registerPlugin(ScrollTrigger);
+
         // LÓGICA DE LA INTRO (SPLASH SCREEN)
         window.addEventListener('load', () => {
             const body = document.body;
@@ -1553,13 +1699,74 @@
                 body.classList.add('intro-done');
                 body.classList.add('loaded');
                 
+                // Fallback para elementos reveal clásicos del hero
                 const heroReveals = document.querySelectorAll('.hero .reveal');
                 heroReveals.forEach(el => el.classList.add('active'));
 
-            }, 3200); // Intro ligeramente más rápida para mejor UX
+                // Iniciar animaciones GSAP después de la carga
+                initGSAPAnimations();
+
+            }, 3200);
         });
 
-        // EFECTO PARALLAX ESCUDO HERO
+        // FUNCIONES GSAP PARA SUPER ANIMACIONES
+        function initGSAPAnimations() {
+            // Parallax increíble para el escudo del hero al hacer scroll
+            gsap.to(".gsap-hero-shield", {
+                y: 150,
+                scale: 0.8,
+                rotationZ: 15,
+                opacity: 0.3,
+                scrollTrigger: {
+                    trigger: ".hero",
+                    start: "top top",
+                    end: "bottom top",
+                    scrub: 1 // Efecto atado al scroll
+                }
+            });
+
+            // Aparecer elementos hacia arriba (Fade Up)
+            gsap.utils.toArray('.gsap-fade-up').forEach(element => {
+                gsap.to(element, {
+                    scrollTrigger: {
+                        trigger: element,
+                        start: "top 85%",
+                        toggleActions: "play none none reverse"
+                    },
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.8,
+                    ease: "power3.out"
+                });
+            });
+
+            // Efecto Zoom in (Scale Up) para tarjetas de stats y pricing
+            gsap.utils.toArray('.gsap-scale-up').forEach(element => {
+                gsap.to(element, {
+                    scrollTrigger: {
+                        trigger: element,
+                        start: "top 85%",
+                        toggleActions: "play none none reverse"
+                    },
+                    scale: 1,
+                    opacity: 1,
+                    duration: 0.8,
+                    ease: "back.out(1.7)"
+                });
+            });
+
+            // Animación del gráfico al hacer scroll
+            const graphLine = document.getElementById('animGraph');
+            if(graphLine) {
+                ScrollTrigger.create({
+                    trigger: ".graph-container",
+                    start: "top 75%",
+                    onEnter: () => graphLine.classList.add('active')
+                });
+            }
+        }
+
+        // EFECTO PARALLAX ESCUDO HERO CON EL RATÓN (Se mantiene intacto)
         document.addEventListener('mousemove', (e) => {
             const shield = document.getElementById('shieldWrapper');
             if(shield) {
@@ -1570,7 +1777,7 @@
         });
 
         // EFECTO SPOTLIGHT CARDS
-        document.querySelectorAll('.feature-card').forEach(card => {
+        document.querySelectorAll('.feature-card, .service-card').forEach(card => {
             card.addEventListener('mousemove', e => {
                 const rect = card.getBoundingClientRect();
                 const x = e.clientX - rect.left;
@@ -1580,26 +1787,19 @@
             });
         });
 
-        // SCROLL EFFECTS (Navbar, Reveals, Graph)
+        // SCROLL EFFECTS (Navbar)
         window.addEventListener('scroll', () => {
             const header = document.getElementById('navbar');
             if (window.scrollY > 50) header.classList.add('scrolled');
             else header.classList.remove('scrolled');
             
+            // Fallback clásico reveal si GSAP falla por algo
             if(document.body.classList.contains('intro-done')){
                 const windowHeight = window.innerHeight;
-                document.querySelectorAll('.reveal').forEach(el => {
+                document.querySelectorAll('.reveal:not(.gsap-fade-up):not(.gsap-scale-up)').forEach(el => {
                     const top = el.getBoundingClientRect().top;
                     if(top < windowHeight - 100) el.classList.add('active');
                 });
-
-                const graph = document.getElementById('animGraph');
-                if (graph) {
-                    const graphPos = graph.getBoundingClientRect().top;
-                    if(graphPos < windowHeight - 100) {
-                        graph.classList.add('active');
-                    }
-                }
             }
         });
 
@@ -1609,13 +1809,9 @@
         });
 
         document.onkeydown = function(e) {
-            // F12
             if(e.keyCode == 123) return false;
-            // Ctrl+Shift+I
             if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false;
-            // Ctrl+Shift+J
             if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false;
-            // Ctrl+U
             if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false;
         }
     </script>
