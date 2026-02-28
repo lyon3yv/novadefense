@@ -17,8 +17,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     
-    <script src="//unpkg.com/three"></script>
-    <script src="//unpkg.com/globe.gl"></script>
+    <script src="https://unpkg.com/three@0.147.0/build/three.min.js"></script>
+    <script src="https://unpkg.com/globe.gl@2.32.2/dist/globe.gl.min.js"></script>
 
     <style>
         :root {
@@ -569,7 +569,7 @@
 
     <script>
         /* =========================================
-           i18n DICTIONARY (Updated with Pinned section)
+           i18n DICTIONARY
            ========================================= */
         const translations = {
             es: {
@@ -680,7 +680,7 @@
         }
 
         /* =========================================
-           ULTRA MEJORA JS: GLOBE 3D SIMULATION
+           GLOBE 3D SIMULATION (CORREGIDO)
            ========================================= */
         let myGlobe;
         function initAttackGlobe() {
@@ -698,23 +698,23 @@
 
             // Inicializar globo con Globe.gl
             myGlobe = Globe()(globeContainer)
-                .globeImageUrl('//unpkg.com/three-globe/example/img/earth-dark.jpg') // Textura oscura premium
+                .globeImageUrl('//unpkg.com/three-globe/example/img/earth-dark.jpg')
                 .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')
                 .backgroundColor('rgba(0,0,0,0)') // Transparente para integrar con el fondo CSS
                 .showAtmosphere(true)
                 .atmosphereColor('#00E5FF') // Cyan atmosphere
                 .atmosphereAltitude(0.15)
                 
-                // Configuración de Arcos (Ataques)
-                .arcColor(() => ['#2979FF', '#00E5FF']) // Gradiente Azul -> Cyan
-                .arcAltitudeAutoScale(0.5) // CORRECCIÓN: .arcAltitudeAutoScale
+                // Configuración de Arcos (Ataques) - CORREGIDO arcAltitudeAutoScale
+                .arcColor(() => ['#2979FF', '#00E5FF'])
+                .arcAltitudeAutoScale(0.5) 
                 .arcStroke(0.5)
                 .arcCurveResolution(64)
                 .arcCircularResolution(64)
                 .arcDashLength(0.9)
                 .arcDashGap(4)
                 .arcDashInitialOffset(() => Math.random() * 5)
-                .arcDashAnimateTime(1000) // Velocidad de la animación del ataque
+                .arcDashAnimateTime(1000)
 
                 // Configuración de Puntos (Impactos mitigados)
                 .pointColor(() => '#00E5FF')
@@ -730,7 +730,7 @@
             function addRandomAttack() {
                 const src = cities[Math.floor(Math.random() * cities.length)];
                 let dst = cities[Math.floor(Math.random() * cities.length)];
-                while (src === dst) dst = cities[Math.floor(Math.random() * cities.length)]; // Evitar misma ciudad
+                while (src === dst) dst = cities[Math.floor(Math.random() * cities.length)];
 
                 const newArc = {
                     startLat: src.lat, startLng: src.lng,
@@ -738,49 +738,42 @@
                     name: `Attack: ${src.name} -> ${dst.name}`
                 };
 
-                // Añadir arco y punto de impacto
                 const currentArcs = myGlobe.arcsData();
                 const currentPoints = myGlobe.pointsData();
                 
                 myGlobe.arcsData([...currentArcs, newArc]);
                 myGlobe.pointsData([...currentPoints, { lat: dst.lat, lng: dst.lng }]);
 
-                // Limpiar arcos antiguos para performance (mantener máx 15)
                 if (currentArcs.length > 15) {
                     myGlobe.arcsData(currentArcs.slice(1));
                     myGlobe.pointsData(currentPoints.slice(1));
                 }
             }
 
-            // Añadir ataque cada 1.5 segundos
             setInterval(addRandomAttack, 1500);
-            
-            // Posición inicial de la cámara
             myGlobe.pointOfView({ lat: 20, lng: 0, altitude: 2.5 }, 0);
         }
 
         /* =========================================
-           ULTRA MEJORA JS: GSAP PINNED SCROLLYTELLING
+           GSAP PINNED SCROLLYTELLING
            ========================================= */
         gsap.registerPlugin(ScrollTrigger);
 
-        // Prepara los textos para la animación palabra por palabra
         function splitTextForAnimation() {
             document.querySelectorAll('.gsap-split-text').forEach(textEl => {
                 const content = textEl.innerText;
                 const words = content.split(' ');
-                textEl.innerHTML = ''; // Limpiar
+                textEl.innerHTML = '';
                 words.forEach(word => {
                     const span = document.createElement('span');
                     span.className = 'word-span';
-                    span.innerText = word + ' '; // Añadir espacio
+                    span.innerText = word + ' '; 
                     textEl.appendChild(span);
                 });
             });
         }
 
         function initGSAP() {
-            // Animaciones estándar (Hero, Services, Stats)
             gsap.to(".gsap-hero-shield", { y: 200, scale: 0.5, rotationZ: 45, opacity: 0, scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 1 } });
             gsap.to(".gsap-hero-text", { y: -100, opacity: 0, scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 1 } });
             gsap.to("#bgGridLines", { yPercent: 30, scrollTrigger: { trigger: "body", start: "top top", end: "bottom bottom", scrub: true } });
@@ -792,51 +785,39 @@
             const graphLine = document.getElementById('animGraph');
             if(graphLine) gsap.to(graphLine, { strokeDashoffset: 0, scrollTrigger: { trigger: ".graph-container", start: "top 85%", end: "bottom 50%", scrub: 1.5 } });
 
-            // Fade ups genéricos
             gsap.utils.toArray('.gsap-fade-up').forEach(el => gsap.fromTo(el, { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 85%", toggleActions: "play none none reverse" } }));
 
-            // =========================================
-            // LÓGICA SCROLLYTELLING SECCIÓN PINNED (Deep Scroll)
-            // =========================================
             if (window.innerWidth > 1024 && myGlobe) {
-                splitTextForAnimation(); // Preparar spans de palabras
+                splitTextForAnimation(); 
 
-                // Timeline principal atado al scroll de la sección pinned
                 const scrollyTl = gsap.timeline({
                     scrollTrigger: {
                         trigger: "#intel",
                         start: "top top",
-                        end: "+=3500", // "Duración" del scroll deep
-                        scrub: 1, // Suavidad
-                        pin: true, // FIJAR SECCIÓN
+                        end: "+=3500",
+                        scrub: 1,
+                        pin: true,
                         anticipatePin: 1
                     }
                 });
 
-                // Secuencia de animaciones (Texto + Planeta)
+                scrollyTl.to({}, { duration: 0.5 });
                 
-                // 1. Zoom inicial al planeta y rotación rápida al iniciar
-                scrollyTl.to({}, { duration: 0.5 }); // Pausa inicial
-                
-                // 2. Revelar frase 1 (Título) palabra por palabra
                 scrollyTl.to(".reveal-phrase.p1", { opacity: 1, translateY: 0, duration: 1 })
                          .to(".reveal-phrase.p1 .word-span", { opacity: 1, translateY: 0, stagger: 0.1, duration: 1.5 }, "-=0.5");
 
-                // Interacción Planeta: Mover cámara a Europa
                 scrollyTl.to({}, { 
                     duration: 1,
                     onUpdate: function() {
-                        const p = this.progress(); // 0 a 1
+                        const p = this.progress(); 
                         myGlobe.pointOfView({ lat: 40, lng: 10 + p*20, altitude: 2.5 - p*0.5 }, 0);
                     }
                 }, "-=1");
 
-                // 3. Desvanecer frase 1, revelar frase 2
                 scrollyTl.to(".reveal-phrase.p1", { opacity: 0.1, duration: 1 })
                          .to(".reveal-phrase.p2", { opacity: 1, translateY: 0, duration: 1 })
                          .to(".reveal-phrase.p2 .word-span", { opacity: 1, translateY: 0, stagger: 0.08, duration: 2 }, "-=0.8");
 
-                // Interacción Planeta: Zoom in fuerte a un impacto
                 scrollyTl.to({}, { 
                     duration: 2,
                     onUpdate: function() {
@@ -845,12 +826,10 @@
                     }
                 }, "-=2");
 
-                // 4. Desvanecer frase 2, revelar frase 3
                 scrollyTl.to(".reveal-phrase.p2", { opacity: 0.1, duration: 1 })
                          .to(".reveal-phrase.p3", { opacity: 1, translateY: 0, duration: 1 })
                          .to(".reveal-phrase.p3 .word-span", { opacity: 1, translateY: 0, stagger: 0.08, duration: 2 }, "-=0.8");
 
-                // Interacción Planeta: Alejar cámara y rotar
                 scrollyTl.to({}, { 
                     duration: 2,
                     onUpdate: function() {
@@ -859,12 +838,11 @@
                     }
                 }, "-=2");
 
-                // 5. Revelar frase final (Gradient)
                 scrollyTl.to(".reveal-phrase.p3", { opacity: 0.1, duration: 1 })
                          .to(".reveal-phrase.p4", { opacity: 1, translateY: 0, duration: 1 })
                          .to(".reveal-phrase.p4 .word-span", { opacity: 1, translateY: 0, stagger: 0.2, duration: 1.5 }, "-=0.5");
                 
-                scrollyTl.to({}, { duration: 1 }); // Pausa final antes de desbanar
+                scrollyTl.to({}, { duration: 1 });
             }
         }
 
@@ -872,19 +850,17 @@
            INITIALIZATION & EVENTS
            ========================================= */
         window.addEventListener('load', () => {
-            initCore(); // Core, lang, cursor
-            initAttackGlobe(); // Planeta 3D
+            initCore(); 
+            initAttackGlobe(); 
 
-            // Un pequeño delay extra para asegurar que Three.js cargó el globo antes de GSAP
             setTimeout(() => {
                 const body = document.body;
                 body.classList.add('intro-done');
                 body.classList.add('loaded');
-                initGSAP(); // Animaciones Scroll
+                initGSAP(); 
             }, 2500); 
         });
 
-        // Parallax Escudo 3D Hero ratón
         document.addEventListener('mousemove', (e) => {
             const shield = document.getElementById('shieldWrapper');
             if(shield && window.innerWidth > 1024) {
@@ -894,14 +870,12 @@
             }
         });
 
-        // Header scrolled
         window.addEventListener('scroll', () => {
             const header = document.getElementById('navbar');
             if (window.scrollY > 50) header.classList.add('scrolled');
             else header.classList.remove('scrolled');
         });
 
-        // --- BLOQUEO INSPECCIONAR ---
         document.addEventListener('contextmenu', e => e.preventDefault());
         document.onkeydown = e => { if(e.keyCode==123 || (e.ctrlKey && e.shiftKey && (e.keyCode=='I'.charCodeAt(0) || e.keyCode=='J'.charCodeAt(0))) || (e.ctrlKey && e.keyCode=='U'.charCodeAt(0))) return false; }
     </script>
