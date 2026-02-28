@@ -39,6 +39,7 @@
             padding: 0;
             box-sizing: border-box;
             scroll-behavior: smooth;
+            cursor: none; /* Ocultamos cursor normal para usar el nuestro */
         }
 
         ::-webkit-scrollbar { width: 6px; }
@@ -64,6 +65,45 @@
         }
 
         /* =========================================
+           CUSTOM CURSOR
+           ========================================= */
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 10000;
+            transform: translate(-50%, -50%);
+            transition: width 0.2s, height 0.2s, background-color 0.2s;
+        }
+
+        .cursor-ring {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(0, 229, 255, 0.5);
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, border-color 0.3s, background-color 0.3s;
+            box-shadow: 0 0 15px rgba(0, 229, 255, 0.2);
+        }
+
+        .cursor-hover .cursor-ring {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(0, 229, 255, 0.1);
+            border-color: var(--primary);
+        }
+
+        /* =========================================
            INTRO ANIMATION STYLES
            ========================================= */
         #intro-overlay {
@@ -73,7 +113,7 @@
             width: 100%;
             height: 100%;
             background-color: var(--bg-dark);
-            z-index: 9999;
+            z-index: 9998;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -112,13 +152,8 @@
             animation: fillShield 1s ease forwards 1.5s;
         }
 
-        @keyframes drawShield {
-            to { stroke-dashoffset: 0; }
-        }
-
-        @keyframes fillShield {
-            to { opacity: 0.15; }
-        }
+        @keyframes drawShield { to { stroke-dashoffset: 0; } }
+        @keyframes fillShield { to { opacity: 0.15; } }
 
         .intro-title {
             font-size: 3.5rem;
@@ -162,12 +197,8 @@
             transform: scale(1.05);
         }
 
-        @keyframes fadeUpText {
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-        @keyframes fadeInSimple {
-            to { opacity: 1; }
-        }
+        @keyframes fadeUpText { to { opacity: 1; transform: translateY(0) scale(1); } }
+        @keyframes fadeInSimple { to { opacity: 1; } }
         @keyframes pulseGlow {
             from { opacity: 0.2; transform: scale(0.95); }
             to { opacity: 0.4; transform: scale(1.05); }
@@ -199,6 +230,7 @@
                 radial-gradient(circle at 50% 50%, rgba(13, 17, 26, 1) 0%, transparent 100%);
             filter: blur(60px);
             z-index: 1;
+            transition: transform 0.5s ease-out; /* Para que siga al ratón suavemente */
         }
 
         .grid-lines {
@@ -295,11 +327,10 @@
             font-size: 15px;
             transition: all 0.3s;
             position: relative;
+            display: inline-block;
         }
 
-        .nav-links a:hover {
-            color: #fff;
-        }
+        .nav-links a:hover { color: #fff; }
 
         .nav-links a::after {
             content: '';
@@ -313,8 +344,30 @@
             border-radius: 2px;
         }
 
-        .nav-links a:hover::after {
-            width: 100%;
+        .nav-links a:hover::after { width: 100%; }
+
+        /* Botón Idioma */
+        .lang-switch {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: none;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .lang-switch:hover {
+            background: var(--primary);
+            color: var(--bg-dark);
+            border-color: var(--primary);
+            box-shadow: 0 0 15px var(--primary-glow);
         }
 
         .mobile-menu-btn {
@@ -323,7 +376,6 @@
             border: none;
             color: white;
             font-size: 24px;
-            cursor: pointer;
         }
 
         /* =========================================
@@ -414,8 +466,8 @@
             gap: 12px;
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
-            cursor: pointer;
             font-family: 'Inter', sans-serif;
+            display: inline-block;
         }
 
         .btn-primary {
@@ -426,7 +478,6 @@
         }
 
         .btn-primary:hover {
-            transform: translateY(-3px);
             box-shadow: 0 15px 30px rgba(255, 255, 255, 0.2);
             background: #fff;
         }
@@ -525,13 +576,14 @@
         }
 
         /* =========================================
-           SERVICES SECTION
+           SERVICES SECTION (Tarjetas 3D Tilt)
            ========================================= */
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 40px;
             margin-top: 40px;
+            perspective: 1000px;
         }
 
         .service-card {
@@ -539,10 +591,12 @@
             border: var(--glass-border);
             border-radius: 32px;
             padding: 50px 40px;
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: border-color 0.3s, box-shadow 0.3s;
             position: relative;
             overflow: hidden;
             backdrop-filter: blur(20px);
+            transform-style: preserve-3d;
+            /* El transform se maneja en JS con mousemove */
         }
         
         .service-card::before {
@@ -556,14 +610,11 @@
         }
 
         .service-card:hover {
-            transform: translateY(-15px);
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(0, 229, 255, 0.1);
             border-color: rgba(0, 229, 255, 0.3);
         }
 
-        .service-card:hover::before {
-            transform: scaleX(1);
-        }
+        .service-card:hover::before { transform: scaleX(1); }
 
         .service-icon {
             font-size: 48px;
@@ -573,12 +624,14 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             display: inline-block;
+            transform: translateZ(30px); /* Efecto 3D al girar */
         }
 
         .service-card h3 {
             font-size: 28px;
             margin-bottom: 15px;
             color: #fff;
+            transform: translateZ(20px);
         }
 
         .service-card p {
@@ -586,6 +639,7 @@
             font-size: 16px;
             line-height: 1.7;
             margin-bottom: 25px;
+            transform: translateZ(10px);
         }
 
         .service-features {
@@ -593,6 +647,7 @@
             margin-top: 20px;
             border-top: 1px solid rgba(255,255,255,0.05);
             padding-top: 20px;
+            transform: translateZ(10px);
         }
 
         .service-features li {
@@ -727,6 +782,7 @@
             max-width: 900px;
             margin: 0 auto;
             flex-wrap: wrap;
+            perspective: 1000px;
         }
 
         .team-card {
@@ -735,17 +791,16 @@
             border-radius: 30px;
             padding: 50px 40px;
             text-align: center;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: border-color 0.3s, box-shadow 0.3s;
             backdrop-filter: blur(20px);
             flex: 1;
             min-width: 280px;
             max-width: 350px;
+            transform-style: preserve-3d;
         }
 
         .team-card:hover {
-            transform: translateY(-10px);
             border-color: var(--glass-border-hover);
-            background: var(--bg-card-hover);
             box-shadow: var(--shadow-premium);
         }
 
@@ -758,6 +813,7 @@
             background: var(--gradient);
             box-shadow: 0 15px 30px rgba(0,0,0,0.4), 0 0 20px var(--primary-glow);
             overflow: hidden;
+            transform: translateZ(40px);
         }
         
         .team-avatar img {
@@ -772,6 +828,7 @@
             font-size: 26px;
             color: #fff;
             margin-bottom: 8px;
+            transform: translateZ(20px);
         }
 
         .team-role {
@@ -781,6 +838,7 @@
             letter-spacing: 2px;
             font-weight: 700;
             display: block;
+            transform: translateZ(15px);
         }
 
         /* =========================================
@@ -884,9 +942,7 @@
             width: 100%;
         }
 
-        .footer-col a:hover {
-            color: var(--primary);
-        }
+        .footer-col a:hover { color: var(--primary); }
 
         .footer-bottom {
             max-width: 1400px;
@@ -904,16 +960,14 @@
            MEDIA QUERIES
            ========================================= */
         @media (max-width: 1024px) {
-            .hero {
-                flex-direction: column;
-                text-align: center;
-                padding-top: 160px;
-            }
+            .hero { flex-direction: column; text-align: center; padding-top: 160px; }
             .hero-content { margin-bottom: 80px; }
             .cta-group { justify-content: center; }
             .nav-links { display: none; }
             .mobile-menu-btn { display: block; }
             .footer-content { grid-template-columns: 1fr 1fr; }
+            * { cursor: auto; } /* Desactiva cursor custom en móviles */
+            .cursor-dot, .cursor-ring { display: none; }
         }
 
         @media (max-width: 768px) {
@@ -931,6 +985,9 @@
 </head>
 <body>
 
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
     <svg style="width:0;height:0;position:absolute;" aria-hidden="true" focusable="false">
       <defs>
         <linearGradient id="intro-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -947,30 +1004,35 @@
                 <path class="shield-path" d="M50 10 L10 30 V60 C10 85 25 105 50 115 C75 105 90 85 90 60 V30 L50 10 Z" />
                 <path class="shield-fill" d="M50 10 L10 30 V60 C10 85 25 105 50 115 C75 105 90 85 90 60 V30 L50 10 Z" />
             </svg>
-            <h1 class="intro-title">Nova Defense</h1>
-            <p class="intro-subtitle">Empresa de Ciberseguridad</p>
+            <h1 class="intro-title" data-i18n="intro_title">Nova Defense</h1>
+            <p class="intro-subtitle" data-i18n="intro_subtitle">Empresa de Ciberseguridad</p>
         </div>
     </div>
 
     <div class="background-fx">
-        <div class="mesh-gradient"></div>
+        <div class="mesh-gradient" id="bgMesh"></div>
         <div class="grid-lines" id="bgGridLines"></div>
     </div>
 
     <header id="navbar">
         <div class="nav-container">
-            <a href="#" class="logo-container">
+            <a href="#" class="logo-container magnetic-element">
                 <img src="Logo1.png" alt="Logo" class="logo">
                 <span class="logo-text">Nova Defense</span>
             </a>
             
             <div class="nav-right">
                 <nav class="nav-links">
-                    <a href="#services">Servicios</a>
-                    <a href="#about">Orígenes</a>
-                    <a href="#team">Fundadores</a>
-                    <a href="https://discord.gg/FsbvgQWKYy" target="_blank">Contacto</a>
+                    <a href="#services" class="magnetic-element" data-i18n="nav_services">Servicios</a>
+                    <a href="#about" class="magnetic-element" data-i18n="nav_origins">Orígenes</a>
+                    <a href="#team" class="magnetic-element" data-i18n="nav_team">Fundadores</a>
+                    <a href="https://discord.gg/FsbvgQWKYy" target="_blank" class="magnetic-element" data-i18n="nav_contact">Contacto</a>
                 </nav>
+                
+                <button class="lang-switch magnetic-element" id="langToggle">
+                    <i class="fas fa-globe"></i> <span id="langText">ES</span>
+                </button>
+
                 <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
             </div>
         </div>
@@ -980,15 +1042,15 @@
         <div class="hero-content gsap-hero-text">
             <div class="status-badge">
                 <span class="status-dot"></span>
-                Sistemas de Defensa Activos
+                <span data-i18n="hero_badge">Sistemas de Defensa Activos</span>
             </div>
-            <h1>Protección Digital de <br><span class="text-gradient">Siguiente Nivel</span></h1>
-            <p>
+            <h1 data-i18n="hero_title">Protección Digital de <br><span class="text-gradient">Siguiente Nivel</span></h1>
+            <p data-i18n="hero_desc">
                 Aseguramos tu infraestructura. Proveemos software de ciberseguridad corporativa para páginas web y moderación automática blindada para comunidades en Discord y Telegram.
             </p>
             <div class="cta-group">
-                <a href="#services" class="btn btn-primary">
-                    <i class="fas fa-shield-check"></i> Ver Servicios
+                <a href="#services" class="btn btn-primary magnetic-element">
+                    <i class="fas fa-shield-check"></i> <span data-i18n="hero_btn">Ver Servicios</span>
                 </a>
             </div>
         </div>
@@ -1013,41 +1075,41 @@
 
     <section class="section" id="services">
         <div class="section-header gsap-fade-up">
-            <h2 class="section-title">Ecosistema de <span class="text-gradient">Defensa Global</span></h2>
-            <p class="section-desc">Como empresa de ciberseguridad, desarrollamos infraestructuras de protección adaptables a las plataformas más críticas de internet.</p>
+            <h2 class="section-title" data-i18n="srv_title">Ecosistema de <span class="text-gradient">Defensa Global</span></h2>
+            <p class="section-desc" data-i18n="srv_desc">Como empresa de ciberseguridad, desarrollamos infraestructuras de protección adaptables a las plataformas más críticas de internet.</p>
         </div>
 
         <div class="services-grid">
-            <div class="service-card gsap-card-left">
+            <div class="service-card tilt-card gsap-card-left">
                 <i class="fas fa-globe service-icon"></i>
-                <h3>Protección Web</h3>
-                <p>Mitigación de ataques DDoS Capa 7, Web Application Firewall (WAF) y monitoreo de vulnerabilidades en tiempo real para tu negocio online.</p>
+                <h3 data-i18n="srv_1_title">Protección Web</h3>
+                <p data-i18n="srv_1_desc">Mitigación de ataques DDoS Capa 7, Web Application Firewall (WAF) y monitoreo de vulnerabilidades en tiempo real para tu negocio online.</p>
                 <ul class="service-features">
-                    <li><i class="fas fa-check"></i> Redirección de tráfico malicioso</li>
-                    <li><i class="fas fa-check"></i> Cifrado y análisis de logs</li>
-                    <li><i class="fas fa-check"></i> 99.9% de Uptime garantizado</li>
+                    <li><i class="fas fa-check"></i> <span data-i18n="srv_1_f1">Redirección de tráfico malicioso</span></li>
+                    <li><i class="fas fa-check"></i> <span data-i18n="srv_1_f2">Cifrado y análisis de logs</span></li>
+                    <li><i class="fas fa-check"></i> <span data-i18n="srv_1_f3">99.9% de Uptime garantizado</span></li>
                 </ul>
             </div>
             
-            <div class="service-card gsap-card-bottom">
+            <div class="service-card tilt-card gsap-card-bottom">
                 <i class="fab fa-discord service-icon"></i>
-                <h3>Seguridad Discord</h3>
-                <p>Nuestra división especializada. Prevenimos raids masivos, bloqueamos ataques de nuking y filtramos spam con IA antes de que afecte a tus usuarios.</p>
+                <h3 data-i18n="srv_2_title">Seguridad Discord</h3>
+                <p data-i18n="srv_2_desc">Nuestra división especializada. Prevenimos raids masivos, bloqueamos ataques de nuking y filtramos spam con IA antes de que afecte a tus usuarios.</p>
                 <ul class="service-features">
-                    <li><i class="fas fa-check"></i> Algoritmos Anti-Raid Neurales</li>
-                    <li><i class="fas fa-check"></i> Backups de infraestructura</li>
-                    <li><i class="fas fa-check"></i> Integración instantánea</li>
+                    <li><i class="fas fa-check"></i> <span data-i18n="srv_2_f1">Algoritmos Anti-Raid Neurales</span></li>
+                    <li><i class="fas fa-check"></i> <span data-i18n="srv_2_f2">Backups de infraestructura</span></li>
+                    <li><i class="fas fa-check"></i> <span data-i18n="srv_2_f3">Integración instantánea</span></li>
                 </ul>
             </div>
 
-            <div class="service-card gsap-card-right">
+            <div class="service-card tilt-card gsap-card-right">
                 <i class="fab fa-telegram-plane service-icon"></i>
-                <h3>Defensa Telegram</h3>
-                <p>Gestión automatizada de comunidades grandes. Eliminación de bots maliciosos, control de flood y análisis de reputación de usuarios.</p>
+                <h3 data-i18n="srv_3_title">Defensa Telegram</h3>
+                <p data-i18n="srv_3_desc">Gestión automatizada de comunidades grandes. Eliminación de bots maliciosos, control de flood y análisis de reputación de usuarios.</p>
                 <ul class="service-features">
-                    <li><i class="fas fa-check"></i> Captcha multi-nivel</li>
-                    <li><i class="fas fa-check"></i> Global Blacklist sincronizada</li>
-                    <li><i class="fas fa-check"></i> Filtros de contenido avanzado</li>
+                    <li><i class="fas fa-check"></i> <span data-i18n="srv_3_f1">Captcha multi-nivel</span></li>
+                    <li><i class="fas fa-check"></i> <span data-i18n="srv_3_f2">Global Blacklist sincronizada</span></li>
+                    <li><i class="fas fa-check"></i> <span data-i18n="srv_3_f3">Filtros de contenido avanzado</span></li>
                 </ul>
             </div>
         </div>
@@ -1058,47 +1120,47 @@
             <div class="stat-item">
                 <div class="stat-icon"><i class="fas fa-users"></i></div>
                 <span class="stat-number">+23K</span>
-                <span class="stat-label">Usuarios Protegidos</span>
+                <span class="stat-label" data-i18n="stat_1">Usuarios Protegidos</span>
             </div>
             <div class="stat-item">
                 <div class="stat-icon"><i class="fas fa-server"></i></div>
                 <span class="stat-number">+106</span>
-                <span class="stat-label">Servidores/Redes Activas</span>
+                <span class="stat-label" data-i18n="stat_2">Servidores Activos</span>
             </div>
             <div class="stat-item">
                 <div class="stat-icon"><i class="fas fa-shield-alt"></i></div>
                 <span class="stat-number">24/7</span>
-                <span class="stat-label">Monitoreo Activo SOC</span>
+                <span class="stat-label" data-i18n="stat_3">Monitoreo SOC</span>
             </div>
             <div class="stat-item">
                 <div class="stat-icon"><i class="fas fa-bolt"></i></div>
                 <span class="stat-number">20ms</span>
-                <span class="stat-label">Latencia de Defensa</span>
+                <span class="stat-label" data-i18n="stat_4">Latencia Defensa</span>
             </div>
         </div>
     </section>
 
     <section class="section" id="about">
         <div class="bot-project-wrapper gsap-parallax-section">
-            <h2><span class="text-gradient">Nuestros Orígenes:</span> Nova Bot</h2>
-            <p>Nuestra tecnología matriz nació desarrollando uno de los sistemas de seguridad autónomos más avanzados para la plataforma de Discord. Nova Bot fue el cimiento de la empresa y la demostración pública de nuestra capacidad para detener ataques masivos (raids y nuking) en milisegundos, tecnología que ahora aplicamos a gran escala en páginas web y Telegram.</p>
+            <h2 data-i18n="about_title"><span class="text-gradient">Nuestros Orígenes:</span> Nova Bot</h2>
+            <p data-i18n="about_desc">Nuestra tecnología matriz nació desarrollando uno de los sistemas de seguridad autónomos más avanzados para la plataforma de Discord. Nova Bot fue el cimiento de la empresa y la demostración pública de nuestra capacidad para detener ataques masivos (raids y nuking) en milisegundos, tecnología que ahora aplicamos a gran escala en páginas web y Telegram.</p>
         </div>
     </section>
 
     <section class="section" id="team">
         <div class="section-header gsap-fade-up">
-            <h2 class="section-title">Nuestros <span class="text-gradient">Fundadores</span></h2>
-            <p class="section-desc">Los arquitectos principales detrás del núcleo de seguridad y operaciones de Nova Defense.</p>
+            <h2 class="section-title" data-i18n="team_title">Nuestros <span class="text-gradient">Fundadores</span></h2>
+            <p class="section-desc" data-i18n="team_desc">Los arquitectos principales detrás del núcleo de seguridad y operaciones de Nova Defense.</p>
         </div>
         <div class="team-grid">
-            <div class="team-card gsap-card-left">
+            <div class="team-card tilt-card gsap-card-left">
                 <div class="team-avatar">
                     <img src="https://images-ext-1.discordapp.net/external/KzcMTKS-42I-uyzVq0_1sPWHyoP4b7K2mmxp-nvMmjg/https/cdn.discordapp.com/avatars/1008003141553369121/8e69bb368c04a86001a65bc2453a43e7.png?format=webp&quality=lossless&width=176&height=176" alt="Gonzalo">
                 </div>
                 <h3>Gonzalo</h3>
                 <span class="team-role">CEO / Lead Architect</span>
             </div>
-            <div class="team-card gsap-card-right">
+            <div class="team-card tilt-card gsap-card-right">
                 <div class="team-avatar">
                      <img src="https://images-ext-1.discordapp.net/external/7l6dwShgR4VCAh_A8V4bv3zjNSb3aGxGzByK63Yl0Bk/https/cdn.discordapp.com/avatars/1013940337150005279/525f297b1bc1edc4acacabd6b9c8984f.png?format=webp&quality=lossless&width=176&height=176" alt="Kurok">
                 </div>
@@ -1110,10 +1172,10 @@
 
     <section class="raid-graph-section">
         <div class="section-header gsap-fade-up">
-            <h2 class="section-title">Inteligencia de <span class="text-gradient">Amenazas Globales</span></h2>
-            <p class="section-desc">Incremento global de ataques mitigados en nuestra infraestructura durante los últimos 30 días.</p>
+            <h2 class="section-title" data-i18n="graph_title">Inteligencia de <span class="text-gradient">Amenazas Globales</span></h2>
+            <p class="section-desc" data-i18n="graph_desc">Incremento global de ataques mitigados en nuestra infraestructura durante los últimos 30 días.</p>
         </div>
-        <div class="graph-container gsap-draw-svg">
+        <div class="graph-container">
             <svg class="graph-svg" viewBox="0 0 1000 400" preserveAspectRatio="none">
                 <defs>
                     <linearGradient id="graphGradient" x1="0" y1="0" x2="0" y2="1">
@@ -1135,128 +1197,351 @@
         <div class="footer-content">
             <div class="footer-brand">
                 <h2>Nova Defense</h2>
-                <p>Empresa líder en software de ciberseguridad. Protegemos infraestructuras web y moderamos de forma autónoma las comunidades más grandes de Discord y Telegram.</p>
+                <p data-i18n="footer_desc">Empresa líder en software de ciberseguridad. Protegemos infraestructuras web y moderamos de forma autónoma las comunidades más grandes de Discord y Telegram.</p>
             </div>
             <div class="footer-col">
-                <h4>Nuestras Soluciones</h4>
-                <a href="#services">Protección Web WAF</a>
-                <a href="#services">Seguridad Discord</a>
-                <a href="#services">Defensa Telegram</a>
+                <h4 data-i18n="footer_sol_title">Nuestras Soluciones</h4>
+                <a href="#services" data-i18n="footer_sol_1">Protección Web WAF</a>
+                <a href="#services" data-i18n="footer_sol_2">Seguridad Discord</a>
+                <a href="#services" data-i18n="footer_sol_3">Defensa Telegram</a>
             </div>
             <div class="footer-col">
-                <h4>Legal & Empresa</h4>
-                <a href="https://politicadeprivacidadnovadefense.netlify.app">Política de Privacidad</a>
-                <a href="https://terminosdeservicionovadefense.netlify.app">Términos de Servicio</a>
-                <a href="#">Reportar Vulnerabilidad</a>
+                <h4 data-i18n="footer_leg_title">Legal & Empresa</h4>
+                <a href="https://politicadeprivacidadnovadefense.netlify.app" data-i18n="footer_leg_1">Política de Privacidad</a>
+                <a href="https://terminosdeservicionovadefense.netlify.app" data-i18n="footer_leg_2">Términos de Servicio</a>
+                <a href="#" data-i18n="footer_leg_3">Reportar Vulnerabilidad</a>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 Nova Defense Technologies. Todos los derechos reservados.</p>
+            <p data-i18n="footer_copy">&copy; 2026 Nova Defense Technologies. Todos los derechos reservados.</p>
             <div style="display: flex; gap: 15px;">
-                <a href="https://discord.gg/FsbvgQWKYy" style="color: rgba(255,255,255,0.3); font-size: 18px;"><i class="fab fa-discord"></i></a>
-                <a href="#" style="color: rgba(255,255,255,0.3); font-size: 18px;"><i class="fab fa-telegram"></i></a>
-                <a href="#" style="color: rgba(255,255,255,0.3); font-size: 18px;"><i class="fab fa-twitter"></i></a>
+                <a href="https://discord.gg/FsbvgQWKYy" class="magnetic-element" style="color: rgba(255,255,255,0.3); font-size: 18px;"><i class="fab fa-discord"></i></a>
+                <a href="#" class="magnetic-element" style="color: rgba(255,255,255,0.3); font-size: 18px;"><i class="fab fa-telegram"></i></a>
+                <a href="#" class="magnetic-element" style="color: rgba(255,255,255,0.3); font-size: 18px;"><i class="fab fa-twitter"></i></a>
             </div>
         </div>
     </footer>
 
     <script>
+        /* =========================================
+           DICCIONARIO DE IDIOMAS (i18n)
+           ========================================= */
+        const translations = {
+            es: {
+                intro_title: "Nova Defense",
+                intro_subtitle: "Empresa de Ciberseguridad",
+                nav_services: "Servicios",
+                nav_origins: "Orígenes",
+                nav_team: "Fundadores",
+                nav_contact: "Contacto",
+                hero_badge: "Sistemas de Defensa Activos",
+                hero_title: "Protección Digital de <br><span class='text-gradient'>Siguiente Nivel</span>",
+                hero_desc: "Aseguramos tu infraestructura. Proveemos software de ciberseguridad corporativa para páginas web y moderación automática blindada para comunidades en Discord y Telegram.",
+                hero_btn: "Ver Servicios",
+                srv_title: "Ecosistema de <span class='text-gradient'>Defensa Global</span>",
+                srv_desc: "Como empresa de ciberseguridad, desarrollamos infraestructuras de protección adaptables a las plataformas más críticas de internet.",
+                srv_1_title: "Protección Web",
+                srv_1_desc: "Mitigación de ataques DDoS Capa 7, Web Application Firewall (WAF) y monitoreo de vulnerabilidades en tiempo real para tu negocio online.",
+                srv_1_f1: "Redirección de tráfico malicioso",
+                srv_1_f2: "Cifrado y análisis de logs",
+                srv_1_f3: "99.9% de Uptime garantizado",
+                srv_2_title: "Seguridad Discord",
+                srv_2_desc: "Nuestra división especializada. Prevenimos raids masivos, bloqueamos ataques de nuking y filtramos spam con IA antes de que afecte a tus usuarios.",
+                srv_2_f1: "Algoritmos Anti-Raid Neurales",
+                srv_2_f2: "Backups de infraestructura",
+                srv_2_f3: "Integración instantánea",
+                srv_3_title: "Defensa Telegram",
+                srv_3_desc: "Gestión automatizada de comunidades grandes. Eliminación de bots maliciosos, control de flood y análisis de reputación de usuarios.",
+                srv_3_f1: "Captcha multi-nivel",
+                srv_3_f2: "Global Blacklist sincronizada",
+                srv_3_f3: "Filtros de contenido avanzado",
+                stat_1: "Usuarios Protegidos",
+                stat_2: "Servidores Activos",
+                stat_3: "Monitoreo SOC",
+                stat_4: "Latencia Defensa",
+                about_title: "<span class='text-gradient'>Nuestros Orígenes:</span> Nova Bot",
+                about_desc: "Nuestra tecnología matriz nació desarrollando uno de los sistemas de seguridad autónomos más avanzados para la plataforma de Discord. Nova Bot fue el cimiento de la empresa y la demostración pública de nuestra capacidad para detener ataques masivos (raids y nuking) en milisegundos, tecnología que ahora aplicamos a gran escala en páginas web y Telegram.",
+                team_title: "Nuestros <span class='text-gradient'>Fundadores</span>",
+                team_desc: "Los arquitectos principales detrás del núcleo de seguridad y operaciones de Nova Defense.",
+                graph_title: "Inteligencia de <span class='text-gradient'>Amenazas Globales</span>",
+                graph_desc: "Incremento global de ataques mitigados en nuestra infraestructura durante los últimos 30 días.",
+                footer_desc: "Empresa líder en software de ciberseguridad. Protegemos infraestructuras web y moderamos de forma autónoma las comunidades más grandes de Discord y Telegram.",
+                footer_sol_title: "Nuestras Soluciones",
+                footer_sol_1: "Protección Web WAF",
+                footer_sol_2: "Seguridad Discord",
+                footer_sol_3: "Defensa Telegram",
+                footer_leg_title: "Legal & Empresa",
+                footer_leg_1: "Política de Privacidad",
+                footer_leg_2: "Términos de Servicio",
+                footer_leg_3: "Reportar Vulnerabilidad",
+                footer_copy: "© 2026 Nova Defense Technologies. Todos los derechos reservados."
+            },
+            en: {
+                intro_title: "Nova Defense",
+                intro_subtitle: "Cybersecurity Company",
+                nav_services: "Services",
+                nav_origins: "Origins",
+                nav_team: "Founders",
+                nav_contact: "Contact",
+                hero_badge: "Defense Systems Active",
+                hero_title: "Next-Level <br><span class='text-gradient'>Digital Protection</span>",
+                hero_desc: "We secure your infrastructure. Providing corporate cybersecurity software for websites and bulletproof automated moderation for Discord and Telegram communities.",
+                hero_btn: "View Services",
+                srv_title: "Global <span class='text-gradient'>Defense Ecosystem</span>",
+                srv_desc: "As a cybersecurity firm, we develop protective infrastructures adaptable to the internet's most critical platforms.",
+                srv_1_title: "Web Protection",
+                srv_1_desc: "Layer 7 DDoS attack mitigation, Web Application Firewall (WAF), and real-time vulnerability monitoring for your online business.",
+                srv_1_f1: "Malicious traffic redirection",
+                srv_1_f2: "Encryption and log analysis",
+                srv_1_f3: "99.9% Uptime guaranteed",
+                srv_2_title: "Discord Security",
+                srv_2_desc: "Our specialized division. We prevent massive raids, block nuking attacks, and filter AI spam before it affects your users.",
+                srv_2_f1: "Neural Anti-Raid Algorithms",
+                srv_2_f2: "Infrastructure Backups",
+                srv_2_f3: "Instant Integration",
+                srv_3_title: "Telegram Defense",
+                srv_3_desc: "Automated management for large communities. Malicious bot removal, flood control, and user reputation analysis.",
+                srv_3_f1: "Multi-level Captcha",
+                srv_3_f2: "Synchronized Global Blacklist",
+                srv_3_f3: "Advanced content filters",
+                stat_1: "Protected Users",
+                stat_2: "Active Servers",
+                stat_3: "SOC Monitoring",
+                stat_4: "Defense Latency",
+                about_title: "<span class='text-gradient'>Our Origins:</span> Nova Bot",
+                about_desc: "Our core technology was born by developing one of the most advanced autonomous security systems for the Discord platform. Nova Bot was the foundation of the company and the public demonstration of our ability to stop massive attacks (raids and nuking) in milliseconds—technology we now apply on a large scale to websites and Telegram.",
+                team_title: "Our <span class='text-gradient'>Founders</span>",
+                team_desc: "The primary architects behind the security core and operations at Nova Defense.",
+                graph_title: "Global <span class='text-gradient'>Threat Intelligence</span>",
+                graph_desc: "Global increase in mitigated attacks on our infrastructure over the last 30 days.",
+                footer_desc: "Leading company in cybersecurity software. We protect web infrastructures and autonomously moderate the largest communities on Discord and Telegram.",
+                footer_sol_title: "Our Solutions",
+                footer_sol_1: "WAF Web Protection",
+                footer_sol_2: "Discord Security",
+                footer_sol_3: "Telegram Defense",
+                footer_leg_title: "Legal & Company",
+                footer_leg_1: "Privacy Policy",
+                footer_leg_2: "Terms of Service",
+                footer_leg_3: "Report Vulnerability",
+                footer_copy: "© 2026 Nova Defense Technologies. All rights reserved."
+            }
+        };
+
+        let currentLang = 'es';
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang;
+            document.getElementById('langText').innerText = lang.toUpperCase();
+            
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    el.innerHTML = translations[lang][key];
+                }
+            });
+        }
+
+        function initLang() {
+            // Autodetectar idioma
+            const userLang = navigator.language || navigator.userLanguage; 
+            if (userLang.toLowerCase().includes('en')) {
+                setLanguage('en');
+            } else {
+                setLanguage('es');
+            }
+
+            // Botón toggle
+            document.getElementById('langToggle').addEventListener('click', () => {
+                setLanguage(currentLang === 'es' ? 'en' : 'es');
+            });
+        }
+
+        /* =========================================
+           CUSTOM CURSOR & MAGNETIC EFFECTS
+           ========================================= */
+        function initCursorAndInteractions() {
+            const cursorDot = document.getElementById('cursorDot');
+            const cursorRing = document.getElementById('cursorRing');
+            let mouseX = window.innerWidth / 2;
+            let mouseY = window.innerHeight / 2;
+            let ringX = mouseX;
+            let ringY = mouseY;
+
+            // Mover cursor
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                
+                // El dot sigue exacto
+                cursorDot.style.left = `${mouseX}px`;
+                cursorDot.style.top = `${mouseY}px`;
+                
+                // Fondo Mesh gradient sigue al ratón sutilmente
+                const moveX = (mouseX / window.innerWidth - 0.5) * 40;
+                const moveY = (mouseY / window.innerHeight - 0.5) * 40;
+                document.getElementById('bgMesh').style.transform = `translate(${moveX}px, ${moveY}px)`;
+            });
+
+            // Animación fluida del anillo
+            function renderRing() {
+                ringX += (mouseX - ringX) * 0.15; // Velocidad de seguimiento
+                ringY += (mouseY - ringY) * 0.15;
+                cursorRing.style.left = `${ringX}px`;
+                cursorRing.style.top = `${ringY}px`;
+                requestAnimationFrame(renderRing);
+            }
+            renderRing();
+
+            // Hover effects (Agrandar cursor en enlaces)
+            const magneticElements = document.querySelectorAll('.magnetic-element, a, button');
+            magneticElements.forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    document.body.classList.add('cursor-hover');
+                });
+                el.addEventListener('mouseleave', () => {
+                    document.body.classList.remove('cursor-hover');
+                    gsap.to(el, { x: 0, y: 0, duration: 0.5, ease: "elastic.out(1, 0.3)" }); // Reset magnet
+                });
+
+                // Magnetic Button Logic
+                if(el.classList.contains('magnetic-element')) {
+                    el.addEventListener('mousemove', (e) => {
+                        const rect = el.getBoundingClientRect();
+                        const x = e.clientX - rect.left - rect.width / 2;
+                        const y = e.clientY - rect.top - rect.height / 2;
+                        gsap.to(el, {
+                            x: x * 0.3, // Fuerza magnética
+                            y: y * 0.3,
+                            duration: 0.2,
+                            ease: "power2.out"
+                        });
+                    });
+                }
+            });
+
+            // 3D Tilt Cards
+            const tiltCards = document.querySelectorAll('.tilt-card');
+            tiltCards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    // Cálculo de rotación
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = ((y - centerY) / centerY) * -10; // Max 10 grados
+                    const rotateY = ((x - centerX) / centerX) * 10;
+
+                    gsap.to(card, {
+                        rotateX: rotateX,
+                        rotateY: rotateY,
+                        duration: 0.5,
+                        ease: "power2.out"
+                    });
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    gsap.to(card, {
+                        rotateX: 0,
+                        rotateY: 0,
+                        duration: 1,
+                        ease: "elastic.out(1, 0.3)"
+                    });
+                });
+            });
+        }
+
+        /* =========================================
+           GSAP SCROLL ANIMATIONS
+           ========================================= */
         gsap.registerPlugin(ScrollTrigger);
 
-        // LÓGICA DE LA INTRO (SPLASH SCREEN)
         window.addEventListener('load', () => {
             const body = document.body;
+            initLang(); // Cargar idioma
             
             setTimeout(() => {
                 body.classList.add('intro-done');
                 body.classList.add('loaded');
                 
+                if (window.innerWidth > 1024) {
+                    initCursorAndInteractions();
+                }
                 initGSAPAnimations();
 
-            }, 3000); // 3 Segundos de intro
+            }, 2500); // Reducido a 2.5s para no hacer esperar mucho
         });
 
-        // FUNCIONES GSAP PARA SUPER ANIMACIONES LIGADAS AL SCROLL
         function initGSAPAnimations() {
             
-            // 1. Efecto Scroll "Apple" para el Escudo del Hero (Scrub interactivo)
-            // A medida que bajas, el escudo se mueve hacia atrás en 3D y se desvanece
+            // Efecto Hero Escudo (Scroll Scrub)
             gsap.to(".gsap-hero-shield", {
-                y: 200,
-                scale: 0.5,
-                rotationZ: 45,
-                opacity: 0,
-                scrollTrigger: {
-                    trigger: ".hero",
-                    start: "top top",
-                    end: "bottom top",
-                    scrub: 1 // Efecto super fluido atado al scroll
-                }
+                y: 200, scale: 0.5, rotationZ: 45, opacity: 0,
+                scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 1 }
             });
 
-            // 2. Efecto Parallax en el fondo de cuadrícula
+            // Texto de Hero hace fade al bajar
+            gsap.to(".gsap-hero-text", {
+                y: -100, opacity: 0,
+                scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 1 }
+            });
+
+            // Parallax en fondo
             gsap.to("#bgGridLines", {
                 yPercent: 30,
-                scrollTrigger: {
-                    trigger: "body",
-                    start: "top top",
-                    end: "bottom bottom",
-                    scrub: true
-                }
+                scrollTrigger: { trigger: "body", start: "top top", end: "bottom bottom", scrub: true }
             });
 
-            // 3. Animaciones de las tarjetas de Servicios (Entran desde distintas direcciones vinculadas al scroll)
+            // Entradas laterales vinculadas al scroll
             gsap.fromTo(".gsap-card-left", 
                 { x: -150, opacity: 0 },
-                { x: 0, opacity: 1, duration: 1, ease: "power3.out", scrollTrigger: { trigger: ".services-grid", start: "top 80%", toggleActions: "play none none reverse" }}
+                { x: 0, opacity: 1, duration: 1, ease: "power3.out", scrollTrigger: { trigger: ".services-grid", start: "top 85%", toggleActions: "play none none reverse" }}
             );
             
             gsap.fromTo(".gsap-card-bottom", 
                 { y: 150, opacity: 0 },
-                { y: 0, opacity: 1, duration: 1, delay: 0.2, ease: "power3.out", scrollTrigger: { trigger: ".services-grid", start: "top 80%", toggleActions: "play none none reverse" }}
+                { y: 0, opacity: 1, duration: 1, delay: 0.1, ease: "power3.out", scrollTrigger: { trigger: ".services-grid", start: "top 85%", toggleActions: "play none none reverse" }}
             );
 
             gsap.fromTo(".gsap-card-right", 
                 { x: 150, opacity: 0 },
-                { x: 0, opacity: 1, duration: 1, delay: 0.4, ease: "power3.out", scrollTrigger: { trigger: ".services-grid", start: "top 80%", toggleActions: "play none none reverse" }}
+                { x: 0, opacity: 1, duration: 1, delay: 0.2, ease: "power3.out", scrollTrigger: { trigger: ".services-grid", start: "top 85%", toggleActions: "play none none reverse" }}
             );
 
-            // 4. Efecto de "Agrandar" al hacer scroll (Para Stats)
+            // Efecto Scale en Stats
             gsap.fromTo(".gsap-scale-up", 
                 { scale: 0.8, opacity: 0 },
-                { scale: 1, opacity: 1, duration: 0.8, ease: "back.out(1.7)", scrollTrigger: { trigger: ".stats-section", start: "top 85%", toggleActions: "play none none reverse" }}
+                { scale: 1, opacity: 1, duration: 0.8, ease: "back.out(1.7)", scrollTrigger: { trigger: ".stats-section", start: "top 90%", toggleActions: "play none none reverse" }}
             );
 
-            // 5. Parallax interactivo para la caja de "Orígenes" (Se abre al scrollear)
+            // Efecto Expansión de "Orígenes"
             gsap.fromTo(".gsap-parallax-section",
                 { width: "70%", opacity: 0, y: 50 },
-                { width: "100%", opacity: 1, y: 0, duration: 1, scrollTrigger: { trigger: "#about", start: "top 90%", end: "top 40%", scrub: 1 }}
+                { width: "100%", opacity: 1, y: 0, duration: 1, scrollTrigger: { trigger: "#about", start: "top 95%", end: "top 40%", scrub: 1 }}
             );
 
-            // 6. Textos que suben (Fade up estándar pero elegante)
-            gsap.utils.toArray('.gsap-fade-up').forEach(element => {
+            // Textos Fade Up Staggered (En cascada)
+            const fadeUpElements = gsap.utils.toArray('.gsap-fade-up');
+            fadeUpElements.forEach(element => {
                 gsap.fromTo(element, 
                     { y: 60, opacity: 0 },
                     { y: 0, opacity: 1, duration: 0.8, ease: "power3.out", scrollTrigger: { trigger: element, start: "top 85%", toggleActions: "play none none reverse" }}
                 );
             });
 
-            // 7. Gráfico que se "Dibuja" de manera vinculada al Scroll
+            // Dibujar Gráfico con Scroll
             const graphLine = document.getElementById('animGraph');
             if(graphLine) {
                 gsap.to(graphLine, {
                     strokeDashoffset: 0,
-                    scrollTrigger: {
-                        trigger: ".graph-container",
-                        start: "top 80%",
-                        end: "bottom 50%",
-                        scrub: 1.5 // Se va dibujando según bajas
-                    }
+                    scrollTrigger: { trigger: ".graph-container", start: "top 85%", end: "bottom 50%", scrub: 1.5 }
                 });
             }
         }
 
-        // EFECTO PARALLAX ESCUDO HERO CON EL RATÓN (Mantenido)
+        // Parallax Escudo 3D interactivo Hero
         document.addEventListener('mousemove', (e) => {
             const shield = document.getElementById('shieldWrapper');
             if(shield) {
@@ -1266,18 +1551,15 @@
             }
         });
 
-        // SCROLL EFFECTS (Navbar)
+        // Cambio Header al scrollear
         window.addEventListener('scroll', () => {
             const header = document.getElementById('navbar');
             if (window.scrollY > 50) header.classList.add('scrolled');
             else header.classList.remove('scrolled');
         });
 
-        // --- BLOQUEO DE INSPECCIONAR ELEMENTO ---
-        document.addEventListener('contextmenu', function(event) {
-            event.preventDefault();
-        });
-
+        // --- BLOQUEO INSPECCIONAR ---
+        document.addEventListener('contextmenu', function(event) { event.preventDefault(); });
         document.onkeydown = function(e) {
             if(e.keyCode == 123) return false;
             if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false;
