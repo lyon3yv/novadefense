@@ -19,12 +19,11 @@
 
     <style>
         :root {
-            /* Paleta de colores mejorada */
             --primary: #00E5FF;
             --primary-glow: rgba(0, 229, 255, 0.4);
             --accent: #2979FF;
             --accent-glow: rgba(41, 121, 255, 0.4);
-            --bg-dark: #02040a; /* Aún más profundo */
+            --bg-dark: #02040a;
             --bg-card: rgba(13, 17, 26, 0.6);
             --bg-card-hover: rgba(18, 24, 38, 0.8);
             --text-main: #F9FAFB;
@@ -42,7 +41,6 @@
             scroll-behavior: smooth;
         }
 
-        /* Scrollbar Personalizado */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: var(--bg-dark); }
         ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
@@ -61,12 +59,12 @@
             overflow-y: auto;
         }
 
-        h1, h2, h3, h4, .price-amount, .stat-number, .intro-title {
+        h1, h2, h3, h4, .stat-number, .intro-title {
             font-family: 'Outfit', sans-serif;
         }
 
         /* =========================================
-           INTRO ANIMATION STYLES (Mejorada)
+           INTRO ANIMATION STYLES
            ========================================= */
         #intro-overlay {
             position: fixed;
@@ -189,7 +187,6 @@
             overflow: hidden;
         }
 
-        /* Efecto Mesh Gradient Premium */
         .mesh-gradient {
             position: absolute;
             width: 100%;
@@ -215,13 +212,7 @@
                 linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
             background-size: 80px 80px;
             transform: perspective(1000px) rotateX(60deg);
-            animation: gridMove 30s linear infinite;
             z-index: 2;
-        }
-
-        @keyframes gridMove {
-            0% { transform: perspective(1000px) rotateX(60deg) translateY(0); }
-            100% { transform: perspective(1000px) rotateX(60deg) translateY(80px); }
         }
 
         /* =========================================
@@ -263,7 +254,6 @@
             align-items: center;
             gap: 15px;
             text-decoration: none;
-            group: hover;
         }
 
         .logo {
@@ -327,34 +317,6 @@
             width: 100%;
         }
 
-        /* Botón de Dashboard Nav */
-        .btn-nav-dashboard {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #fff !important;
-            padding: 10px 24px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 14px;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            backdrop-filter: blur(10px);
-        }
-
-        .btn-nav-dashboard::after {
-            display: none; /* Quitamos la línea del hover normal */
-        }
-
-        .btn-nav-dashboard:hover {
-            background: var(--primary);
-            color: var(--bg-dark) !important;
-            border-color: var(--primary);
-            box-shadow: 0 0 20px var(--primary-glow);
-            transform: translateY(-2px);
-        }
-
         .mobile-menu-btn {
             display: none;
             background: none;
@@ -408,12 +370,6 @@
             border-radius: 50%;
             box-shadow: 0 0 10px var(--primary);
             animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.5); }
-            70% { box-shadow: 0 0 0 10px rgba(0, 229, 255, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0); }
         }
 
         .hero h1 {
@@ -475,21 +431,6 @@
             background: #fff;
         }
 
-        .btn-glass {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #fff;
-            backdrop-filter: blur(10px);
-        }
-
-        .btn-glass:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: var(--primary);
-            color: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px var(--primary-glow);
-        }
-
         /* --- VISUAL 3D HERO --- */
         .hero-visual {
             flex: 0.8;
@@ -505,7 +446,6 @@
             width: 500px;
             height: 500px;
             transform-style: preserve-3d;
-            transition: transform 0.1s ease-out;
             animation: float3D 6s ease-in-out infinite;
         }
 
@@ -585,7 +525,7 @@
         }
 
         /* =========================================
-           NUEVO: SERVICES SECTION (Empresa)
+           SERVICES SECTION
            ========================================= */
         .services-grid {
             display: grid;
@@ -735,207 +675,71 @@
         }
 
         /* =========================================
-           FEATURES SECTION (Proyecto Bot)
+           ORIGINS (NOVA BOT) SECTION
            ========================================= */
         .bot-project-wrapper {
-            background: radial-gradient(circle at center, rgba(13, 17, 26, 0.8) 0%, transparent 70%);
+            background: linear-gradient(135deg, rgba(13, 17, 26, 0.9) 0%, rgba(0, 229, 255, 0.05) 100%);
             border-radius: 40px;
-            padding: 80px 40px;
-            border: 1px solid rgba(0, 229, 255, 0.05);
-            margin-top: 40px;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-            gap: 30px;
-        }
-
-        .feature-card {
-            background: var(--bg-card);
-            border: var(--glass-border);
-            border-radius: 28px;
-            padding: 50px 40px;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            padding: 60px;
+            border: 1px solid rgba(0, 229, 255, 0.2);
+            text-align: center;
             position: relative;
             overflow: hidden;
-            backdrop-filter: blur(20px);
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
         }
 
-        .feature-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--glass-border-hover);
-            background: var(--bg-card-hover);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 229, 255, 0.05);
-        }
-
-        /* Spotlight Effect */
-        .feature-card::before {
-            content: '';
+        .bot-project-wrapper::before {
+            content: '\f392'; /* Discord icon */
+            font-family: "Font Awesome 6 Brands";
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(255,255,255,0.04), transparent 40%);
-            z-index: 0;
-            opacity: 0;
-            transition: opacity 0.4s;
-            pointer-events: none;
+            font-size: 250px;
+            color: rgba(255,255,255,0.02);
+            top: -50px;
+            right: -50px;
+            transform: rotate(-15deg);
         }
 
-        .feature-card:hover::before {
-            opacity: 1;
-        }
-
-        .feature-icon {
-            width: 75px;
-            height: 75px;
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 32px;
-            color: var(--primary);
-            margin-bottom: 30px;
-            background: linear-gradient(135deg, rgba(0, 229, 255, 0.1), rgba(41, 121, 255, 0.05));
-            border: 1px solid rgba(0, 229, 255, 0.2);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        .bot-project-wrapper h2 {
+            font-size: 36px;
+            color: #fff;
+            margin-bottom: 20px;
             position: relative;
             z-index: 1;
         }
 
-        .feature-card:hover .feature-icon {
-            transform: scale(1.1);
-            background: var(--gradient);
-            color: #fff;
-            border-color: transparent;
-            box-shadow: 0 10px 20px var(--primary-glow);
-        }
-
-        .feature-card h3 {
-            font-size: 24px;
-            margin-bottom: 15px;
-            font-weight: 700;
-            color: #fff;
-            position: relative;
-            z-index: 1;
-        }
-
-        .feature-card p {
+        .bot-project-wrapper p {
             color: var(--text-muted);
-            font-size: 16px;
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto;
             line-height: 1.7;
             position: relative;
             z-index: 1;
         }
 
         /* =========================================
-           COMMANDS (GALLERY)
-           ========================================= */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-            margin-top: 60px;
-        }
-
-        .command-card {
-            border-radius: 24px;
-            overflow: hidden;
-            border: var(--glass-border);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative;
-            cursor: crosshair;
-            background: var(--bg-card);
-        }
-
-        .command-card:hover {
-            transform: translateY(-10px);
-            z-index: 10;
-            border-color: rgba(0, 229, 255, 0.4);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 30px var(--primary-glow);
-        }
-
-        .command-card img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .command-card:hover img {
-            transform: scale(1.08);
-        }
-
-        .command-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: linear-gradient(to top, rgba(2, 4, 10, 0.95) 0%, rgba(2, 4, 10, 0.6) 50%, transparent 100%);
-            padding: 40px 25px 25px;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .command-card:hover .command-overlay {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .command-overlay h4 {
-            color: #fff;
-            font-size: 20px;
-            font-weight: 700;
-        }
-
-        /* =========================================
-           VIDEO TUTORIAL
-           ========================================= */
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-            border-radius: 30px;
-            border: var(--glass-border);
-            box-shadow: var(--shadow-premium), 0 0 40px rgba(0, 229, 255, 0.1);
-            background: #000;
-        }
-
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 30px;
-        }
-
-        /* =========================================
            TEAM SECTION
            ========================================= */
         .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            max-width: 1100px;
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            max-width: 900px;
             margin: 0 auto;
+            flex-wrap: wrap;
         }
 
         .team-card {
             background: var(--bg-card);
             border: var(--glass-border);
             border-radius: 30px;
-            padding: 50px 30px;
+            padding: 50px 40px;
             text-align: center;
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             backdrop-filter: blur(20px);
+            flex: 1;
+            min-width: 280px;
+            max-width: 350px;
         }
 
         .team-card:hover {
@@ -946,8 +750,8 @@
         }
 
         .team-avatar {
-            width: 130px;
-            height: 130px;
+            width: 140px;
+            height: 140px;
             margin: 0 auto 30px;
             border-radius: 50%;
             padding: 4px;
@@ -965,181 +769,18 @@
         }
 
         .team-card h3 {
-            font-size: 24px;
+            font-size: 26px;
             color: #fff;
             margin-bottom: 8px;
         }
 
         .team-role {
             color: var(--primary);
-            font-size: 13px;
+            font-size: 14px;
             text-transform: uppercase;
             letter-spacing: 2px;
             font-weight: 700;
-            margin-bottom: 20px;
             display: block;
-        }
-
-        .team-card p {
-            color: var(--text-muted);
-            font-size: 15px;
-        }
-
-        /* =========================================
-           PRICING SECTION
-           ========================================= */
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            gap: 40px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .price-card {
-            background: var(--bg-card);
-            border: var(--glass-border);
-            border-radius: 32px;
-            padding: 50px 40px;
-            position: relative;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            display: flex;
-            flex-direction: column;
-            backdrop-filter: blur(20px);
-        }
-
-        .price-card.popular {
-            background: linear-gradient(180deg, rgba(13, 17, 26, 0.9) 0%, rgba(0, 229, 255, 0.05) 100%);
-            border: 1px solid rgba(0, 229, 255, 0.3);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 229, 255, 0.05);
-            transform: scale(1.05);
-            z-index: 10;
-        }
-
-        .price-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(255, 255, 255, 0.15);
-        }
-
-        .price-card.popular:hover {
-            transform: scale(1.05) translateY(-10px);
-            border-color: var(--primary);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 40px var(--primary-glow);
-        }
-
-        .popular-badge {
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--gradient);
-            color: #fff;
-            font-weight: 800;
-            font-size: 12px;
-            padding: 8px 20px;
-            border-radius: 50px;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            box-shadow: 0 5px 15px var(--primary-glow);
-        }
-
-        .price-header {
-            margin-bottom: 30px;
-        }
-
-        .price-header h3 {
-            font-size: 24px;
-            color: #fff;
-            margin-bottom: 15px;
-        }
-
-        .price-amount {
-            font-size: 56px;
-            font-weight: 900;
-            color: #fff;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: baseline;
-            gap: 8px;
-            letter-spacing: -2px;
-        }
-
-        .price-amount span {
-            font-size: 18px;
-            color: var(--text-muted);
-            font-weight: 500;
-            letter-spacing: 0;
-        }
-
-        .price-desc {
-            color: var(--text-muted);
-            font-size: 15px;
-            margin-bottom: 35px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            padding-bottom: 30px;
-            line-height: 1.6;
-        }
-
-        .feature-list {
-            list-style: none;
-            margin-bottom: 40px;
-            flex-grow: 1;
-        }
-
-        .feature-list li {
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            color: #E5E7EB;
-            font-size: 16px;
-        }
-
-        .feature-list i {
-            color: var(--primary);
-            font-size: 14px;
-            background: rgba(0, 229, 255, 0.1);
-            padding: 6px;
-            border-radius: 50%;
-        }
-
-        .feature-list li.disabled {
-            color: #4B5563;
-        }
-
-        .feature-list li.disabled i {
-            color: #4B5563;
-            background: rgba(255,255,255,0.02);
-        }
-
-        .btn-price {
-            width: 100%;
-            padding: 18px;
-            border-radius: 14px;
-            font-weight: 600;
-            text-align: center;
-            text-decoration: none;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #fff;
-            transition: all 0.3s;
-            font-size: 16px;
-        }
-
-        .btn-price:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(255, 255, 255, 0.3);
-        }
-
-        .btn-price.glow {
-            background: var(--text-main);
-            color: var(--bg-dark);
-            border: none;
-        }
-
-        .btn-price.glow:hover {
-            background: #fff;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(255,255,255,0.2);
         }
 
         /* =========================================
@@ -1177,11 +818,6 @@
             filter: drop-shadow(0 0 15px var(--primary-glow));
             stroke-dasharray: 2000;
             stroke-dashoffset: 2000;
-            transition: stroke-dashoffset 2.5s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        
-        .graph-line.active {
-            stroke-dashoffset: 0;
         }
 
         .graph-area {
@@ -1265,24 +901,6 @@
         }
 
         /* =========================================
-           ANIMACIONES SCROLL REVEAL CLÁSICO (Fallback)
-           ========================================= */
-        .reveal {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .intro-done .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        /* Clases auxiliares para GSAP */
-        .gsap-fade-up { opacity: 0; transform: translateY(60px); }
-        .gsap-scale-up { opacity: 0; transform: scale(0.9); }
-
-        /* =========================================
            MEDIA QUERIES
            ========================================= */
         @media (max-width: 1024px) {
@@ -1293,10 +911,8 @@
             }
             .hero-content { margin-bottom: 80px; }
             .cta-group { justify-content: center; }
-            .nav-links, .btn-nav-dashboard { display: none; }
+            .nav-links { display: none; }
             .mobile-menu-btn { display: block; }
-            .price-card.popular { transform: scale(1); }
-            .price-card.popular:hover { transform: translateY(-10px); }
             .footer-content { grid-template-columns: 1fr 1fr; }
         }
 
@@ -1338,7 +954,7 @@
 
     <div class="background-fx">
         <div class="mesh-gradient"></div>
-        <div class="grid-lines"></div>
+        <div class="grid-lines" id="bgGridLines"></div>
     </div>
 
     <header id="navbar">
@@ -1351,23 +967,17 @@
             <div class="nav-right">
                 <nav class="nav-links">
                     <a href="#services">Servicios</a>
-                    <a href="#project">Proyecto Bot</a>
-                    <a href="#pricing">Planes</a>
-                    <a href="#team">Equipo</a>
-                    <a href="https://discord.gg/FsbvgQWKYy" target="_blank">Soporte</a>
+                    <a href="#about">Orígenes</a>
+                    <a href="#team">Fundadores</a>
+                    <a href="https://discord.gg/FsbvgQWKYy" target="_blank">Contacto</a>
                 </nav>
-                
-                <a href="https://dashboard.novadefense.es" class="btn-nav-dashboard">
-                    <i class="fas fa-chart-pie"></i> Acceso Clientes
-                </a>
-                
                 <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
             </div>
         </div>
     </header>
 
     <section class="hero" id="home">
-        <div class="hero-content reveal">
+        <div class="hero-content gsap-hero-text">
             <div class="status-badge">
                 <span class="status-dot"></span>
                 Sistemas de Defensa Activos
@@ -1380,13 +990,10 @@
                 <a href="#services" class="btn btn-primary">
                     <i class="fas fa-shield-check"></i> Ver Servicios
                 </a>
-                <a href="#project" class="btn btn-glass">
-                    Nuestro Proyecto Bot
-                </a>
             </div>
         </div>
 
-        <div class="hero-visual reveal gsap-hero-shield">
+        <div class="hero-visual gsap-hero-shield">
             <div class="shield-wrapper" id="shieldWrapper">
                 <div class="shield-ring"></div>
                 <div class="shield-ring inner"></div>
@@ -1411,7 +1018,7 @@
         </div>
 
         <div class="services-grid">
-            <div class="service-card gsap-fade-up">
+            <div class="service-card gsap-card-left">
                 <i class="fas fa-globe service-icon"></i>
                 <h3>Protección Web</h3>
                 <p>Mitigación de ataques DDoS Capa 7, Web Application Firewall (WAF) y monitoreo de vulnerabilidades en tiempo real para tu negocio online.</p>
@@ -1422,7 +1029,7 @@
                 </ul>
             </div>
             
-            <div class="service-card gsap-fade-up">
+            <div class="service-card gsap-card-bottom">
                 <i class="fab fa-discord service-icon"></i>
                 <h3>Seguridad Discord</h3>
                 <p>Nuestra división especializada. Prevenimos raids masivos, bloqueamos ataques de nuking y filtramos spam con IA antes de que afecte a tus usuarios.</p>
@@ -1433,7 +1040,7 @@
                 </ul>
             </div>
 
-            <div class="service-card gsap-fade-up">
+            <div class="service-card gsap-card-right">
                 <i class="fab fa-telegram-plane service-icon"></i>
                 <h3>Defensa Telegram</h3>
                 <p>Gestión automatizada de comunidades grandes. Eliminación de bots maliciosos, control de flood y análisis de reputación de usuarios.</p>
@@ -1471,165 +1078,32 @@
         </div>
     </section>
 
-    <section class="section" id="project">
-        <div class="section-header gsap-fade-up">
-            <h2 class="section-title">Proyecto Destacado: <span class="text-gradient">Nova Bot</span></h2>
-            <p class="section-desc">Conoce nuestro producto insignia para la protección de servidores de Discord. Una herramienta todo en uno impulsada por nuestra tecnología base.</p>
-            
-            <a href="https://discord.com/oauth2/authorize?client_id=1403752400761913445&scope=bot+applications.commands&permissions=8&integration_type=0" target="_blank" class="btn btn-primary" style="margin-top: 20px;">
-                <i class="fab fa-discord"></i> Instalar Nova Bot
-            </a>
-        </div>
-
-        <div class="bot-project-wrapper">
-            <h3 style="color: white; font-size: 32px; margin-bottom: 40px; text-align: center; font-family: 'Outfit';">Herramientas del Bot</h3>
-            <div class="features-grid">
-                <div class="feature-card gsap-fade-up">
-                    <div class="feature-icon"><i class="fas fa-shield-halved"></i></div>
-                    <h3>Anti-Raid Neural</h3>
-                    <p>Detecta y detiene ataques masivos en milisegundos analizando patrones de comportamiento anómalos en el servidor.</p>
-                </div>
-                <div class="feature-card gsap-fade-up">
-                    <div class="feature-icon"><i class="fas fa-robot"></i></div>
-                    <h3>Captcha Verification</h3>
-                    <p>Sistema de verificación interactivo para filtrar bots automatizados antes de que accedan al servidor.</p>
-                </div>
-                <div class="feature-card gsap-fade-up">
-                    <div class="feature-icon"><i class="fas fa-database"></i></div>
-                    <h3>Global Blacklist</h3>
-                    <p>Base de datos de reputación compartida para bloquear preventivamente a usuarios maliciosos conocidos.</p>
-                </div>
-                <div class="feature-card gsap-fade-up">
-                    <div class="feature-icon"><i class="fas fa-server"></i></div>
-                    <h3>Backup & Restore</h3>
-                    <p>Instantáneas completas de la configuración del servidor para una recuperación rápida ante desastres.</p>
-                </div>
-                <div class="feature-card gsap-fade-up">
-                    <div class="feature-icon"><i class="fas fa-fingerprint"></i></div>
-                    <h3>Auditoría Forense</h3>
-                    <p>Logs detallados e inmutables de todas las acciones para un control y transparencia total.</p>
-                </div>
-                <div class="feature-card gsap-fade-up">
-                    <div class="feature-icon"><i class="fas fa-lock"></i></div>
-                    <h3>Cifrado Total</h3>
-                    <p>Tus datos quedan completamente cifrados y protegidos de extremo a extremo en nuestra VPS privada.</p>
-                </div>
-            </div>
-
-            <h3 style="color: white; font-size: 32px; margin-top: 80px; margin-bottom: 20px; text-align: center; font-family: 'Outfit';">Interfaz de Comandos</h3>
-            <p style="color: var(--text-muted); text-align: center; margin-bottom: 40px;">Control total al alcance de tu mano. Diseño limpio, intuitivo y respuestas inmediatas.</p>
-            
-            <div class="gallery-grid">
-                <div class="command-card gsap-fade-up">
-                    <img src="https://i.ibb.co/WpV8k6fs/image-1.webp" alt="Configuración">
-                    <div class="command-overlay"><h4>Configuración Avanzada</h4></div>
-                </div>
-                <div class="command-card gsap-fade-up">
-                    <img src="https://i.ibb.co/V0YBngvH/image-2.webp" alt="Verificación">
-                    <div class="command-overlay"><h4>Configúralo a tu gusto</h4></div>
-                </div>
-                <div class="command-card gsap-fade-up">
-                    <img src="https://i.ibb.co/yckC805D/image-3.webp" alt="Ayuda">
-                    <div class="command-overlay"><h4>Sistema de Análisis de Seguridad</h4></div>
-                </div>
-                <div class="command-card gsap-fade-up">
-                    <img src="https://i.ibb.co/whn88mqP/image-4.webp" alt="Moderación">
-                    <div class="command-overlay"><h4>Herramientas de Moderación</h4></div>
-                </div>
-            </div>
-            
-            <div style="margin-top: 80px;">
-                <h3 style="color: white; font-size: 32px; margin-bottom: 20px; text-align: center; font-family: 'Outfit';">Video Tutorial</h3>
-                <div class="video-container gsap-scale-up" style="max-width: 1000px; margin: 0 auto;">
-                    <iframe src="https://www.youtube.com/embed/wXW_ZQqZ3Bs?si=KxX_jZqQZqQZqQZq" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                </div>
-            </div>
+    <section class="section" id="about">
+        <div class="bot-project-wrapper gsap-parallax-section">
+            <h2><span class="text-gradient">Nuestros Orígenes:</span> Nova Bot</h2>
+            <p>Nuestra tecnología matriz nació desarrollando uno de los sistemas de seguridad autónomos más avanzados para la plataforma de Discord. Nova Bot fue el cimiento de la empresa y la demostración pública de nuestra capacidad para detener ataques masivos (raids y nuking) en milisegundos, tecnología que ahora aplicamos a gran escala en páginas web y Telegram.</p>
         </div>
     </section>
 
     <section class="section" id="team">
         <div class="section-header gsap-fade-up">
-            <h2 class="section-title">Ingeniería y <span class="text-gradient">Liderazgo</span></h2>
-            <p class="section-desc">Los expertos en ciberseguridad y desarrollo de software detrás de la infraestructura corporativa de Nova Defense.</p>
+            <h2 class="section-title">Nuestros <span class="text-gradient">Fundadores</span></h2>
+            <p class="section-desc">Los arquitectos principales detrás del núcleo de seguridad y operaciones de Nova Defense.</p>
         </div>
         <div class="team-grid">
-            <div class="team-card gsap-fade-up">
+            <div class="team-card gsap-card-left">
                 <div class="team-avatar">
                     <img src="https://images-ext-1.discordapp.net/external/KzcMTKS-42I-uyzVq0_1sPWHyoP4b7K2mmxp-nvMmjg/https/cdn.discordapp.com/avatars/1008003141553369121/8e69bb368c04a86001a65bc2453a43e7.png?format=webp&quality=lossless&width=176&height=176" alt="Gonzalo">
                 </div>
                 <h3>Gonzalo</h3>
                 <span class="team-role">CEO / Lead Architect</span>
-                <p>Arquitectura de sistemas cloud y dirección técnica de la empresa.</p>
             </div>
-            <div class="team-card gsap-fade-up">
+            <div class="team-card gsap-card-right">
                 <div class="team-avatar">
                      <img src="https://images-ext-1.discordapp.net/external/7l6dwShgR4VCAh_A8V4bv3zjNSb3aGxGzByK63Yl0Bk/https/cdn.discordapp.com/avatars/1013940337150005279/525f297b1bc1edc4acacabd6b9c8984f.png?format=webp&quality=lossless&width=176&height=176" alt="Kurok">
                 </div>
                 <h3>Kurok</h3>
                 <span class="team-role">CTO / Security Core</span>
-                <p>Optimización en Rust y estabilidad del núcleo de prevención de intrusiones.</p>
-            </div>
-            <div class="team-card gsap-fade-up">
-                <div class="team-avatar">
-                     <img src="https://images-ext-1.discordapp.net/external/kYbTGyhoYJ757k-C6aMnXxkLi_C1Qi4vjoU8-_CPo5M/https/cdn.discordapp.com/avatars/1390643298795917322/3a7790c6d67f5b617b2a0a5f2ae214d9.png?format=webp&quality=lossless&width=176&height=176" alt="Silver">
-                </div>
-                <h3>Silver</h3>
-                <span class="team-role">Co-Founder / DevSecOps</span>
-                <p>Implementación de la lógica empresarial, redes y control de calidad.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="section" id="pricing">
-        <div class="section-header gsap-fade-up">
-            <h2 class="section-title">Suscripciones <span class="text-gradient">Corporativas</span></h2>
-            <p class="section-desc">Seguridad de grado militar, desde comunidades emergentes hasta infraestructura empresarial dedicada.</p>
-        </div>
-        <div class="pricing-grid">
-            <div class="price-card gsap-fade-up">
-                <div class="price-header">
-                    <h3>Community (Discord/Telegram)</h3>
-                    <div class="price-amount">0€ <span>/mes</span></div>
-                    <p class="price-desc">Esencial para comunidades pequeñas que están empezando.</p>
-                </div>
-                <ul class="feature-list">
-                    <li><i class="fas fa-check"></i> Protección básica Anti-Raid</li>
-                    <li><i class="fas fa-check"></i> Logs básicos del sistema</li>
-                    <li class="disabled"><i class="fas fa-times"></i> Backups de Servidor</li>
-                    <li class="disabled"><i class="fas fa-times"></i> WAF Web</li>
-                </ul>
-                <a href="#" class="btn-price">Añadir Gratis</a>
-            </div>
-
-            <div class="price-card popular gsap-scale-up">
-                <div class="popular-badge">Recomendado</div>
-                <div class="price-header">
-                    <h3>Advanced Security</h3>
-                    <div class="price-amount">2€ <span>/mes</span></div>
-                    <p class="price-desc">Seguridad avanzada para proyectos web y comunidades en crecimiento.</p>
-                </div>
-                <ul class="feature-list">
-                    <li><i class="fas fa-check"></i> <strong>Todo lo de Community</strong></li>
-                    <li><i class="fas fa-check"></i> Sistema de Backups Cloud</li>
-                    <li><i class="fas fa-check"></i> Protección Web Básica (DDoS)</li>
-                    <li><i class="fas fa-check"></i> Soporte Técnico Prioritario</li>
-                </ul>
-                <a href="#" class="btn-price glow">Comenzar Ahora</a>
-            </div>
-
-            <div class="price-card gsap-fade-up">
-                <div class="price-header">
-                    <h3>Enterprise Node</h3>
-                    <div class="price-amount">4€ <span>/mes</span></div>
-                    <p class="price-desc">Máxima seguridad sin compromisos y recursos dedicados.</p>
-                </div>
-                <ul class="feature-list">
-                    <li><i class="fas fa-check"></i> <strong>Todo lo de Advanced</strong></li>
-                    <li><i class="fas fa-check"></i> Anti-Nuke Total y Auditoría</li>
-                    <li><i class="fas fa-check"></i> Gestión Web Multi-dominio</li>
-                    <li><i class="fas fa-check"></i> Asesor / Account Manager</li>
-                </ul>
-                <a href="#" class="btn-price">Contactar Ventas</a>
             </div>
         </div>
     </section>
@@ -1637,9 +1111,9 @@
     <section class="raid-graph-section">
         <div class="section-header gsap-fade-up">
             <h2 class="section-title">Inteligencia de <span class="text-gradient">Amenazas Globales</span></h2>
-            <p class="section-desc">Incremento global de intentos de ataque (Web, Discord, Telegram) bloqueados con éxito en nuestra red durante los últimos 30 días.</p>
+            <p class="section-desc">Incremento global de ataques mitigados en nuestra infraestructura durante los últimos 30 días.</p>
         </div>
-        <div class="graph-container gsap-scale-up">
+        <div class="graph-container gsap-draw-svg">
             <svg class="graph-svg" viewBox="0 0 1000 400" preserveAspectRatio="none">
                 <defs>
                     <linearGradient id="graphGradient" x1="0" y1="0" x2="0" y2="1">
@@ -1666,9 +1140,8 @@
             <div class="footer-col">
                 <h4>Nuestras Soluciones</h4>
                 <a href="#services">Protección Web WAF</a>
-                <a href="#project">Nova Bot (Discord)</a>
+                <a href="#services">Seguridad Discord</a>
                 <a href="#services">Defensa Telegram</a>
-                <a href="https://dashboard.novadefense.es">Acceso Clientes</a>
             </div>
             <div class="footer-col">
                 <h4>Legal & Empresa</h4>
@@ -1688,7 +1161,6 @@
     </footer>
 
     <script>
-        // Registrar ScrollTrigger de GSAP
         gsap.registerPlugin(ScrollTrigger);
 
         // LÓGICA DE LA INTRO (SPLASH SCREEN)
@@ -1699,74 +1171,92 @@
                 body.classList.add('intro-done');
                 body.classList.add('loaded');
                 
-                // Fallback para elementos reveal clásicos del hero
-                const heroReveals = document.querySelectorAll('.hero .reveal');
-                heroReveals.forEach(el => el.classList.add('active'));
-
-                // Iniciar animaciones GSAP después de la carga
                 initGSAPAnimations();
 
-            }, 3200);
+            }, 3000); // 3 Segundos de intro
         });
 
-        // FUNCIONES GSAP PARA SUPER ANIMACIONES
+        // FUNCIONES GSAP PARA SUPER ANIMACIONES LIGADAS AL SCROLL
         function initGSAPAnimations() {
-            // Parallax increíble para el escudo del hero al hacer scroll
+            
+            // 1. Efecto Scroll "Apple" para el Escudo del Hero (Scrub interactivo)
+            // A medida que bajas, el escudo se mueve hacia atrás en 3D y se desvanece
             gsap.to(".gsap-hero-shield", {
-                y: 150,
-                scale: 0.8,
-                rotationZ: 15,
-                opacity: 0.3,
+                y: 200,
+                scale: 0.5,
+                rotationZ: 45,
+                opacity: 0,
                 scrollTrigger: {
                     trigger: ".hero",
                     start: "top top",
                     end: "bottom top",
-                    scrub: 1 // Efecto atado al scroll
+                    scrub: 1 // Efecto super fluido atado al scroll
                 }
             });
 
-            // Aparecer elementos hacia arriba (Fade Up)
+            // 2. Efecto Parallax en el fondo de cuadrícula
+            gsap.to("#bgGridLines", {
+                yPercent: 30,
+                scrollTrigger: {
+                    trigger: "body",
+                    start: "top top",
+                    end: "bottom bottom",
+                    scrub: true
+                }
+            });
+
+            // 3. Animaciones de las tarjetas de Servicios (Entran desde distintas direcciones vinculadas al scroll)
+            gsap.fromTo(".gsap-card-left", 
+                { x: -150, opacity: 0 },
+                { x: 0, opacity: 1, duration: 1, ease: "power3.out", scrollTrigger: { trigger: ".services-grid", start: "top 80%", toggleActions: "play none none reverse" }}
+            );
+            
+            gsap.fromTo(".gsap-card-bottom", 
+                { y: 150, opacity: 0 },
+                { y: 0, opacity: 1, duration: 1, delay: 0.2, ease: "power3.out", scrollTrigger: { trigger: ".services-grid", start: "top 80%", toggleActions: "play none none reverse" }}
+            );
+
+            gsap.fromTo(".gsap-card-right", 
+                { x: 150, opacity: 0 },
+                { x: 0, opacity: 1, duration: 1, delay: 0.4, ease: "power3.out", scrollTrigger: { trigger: ".services-grid", start: "top 80%", toggleActions: "play none none reverse" }}
+            );
+
+            // 4. Efecto de "Agrandar" al hacer scroll (Para Stats)
+            gsap.fromTo(".gsap-scale-up", 
+                { scale: 0.8, opacity: 0 },
+                { scale: 1, opacity: 1, duration: 0.8, ease: "back.out(1.7)", scrollTrigger: { trigger: ".stats-section", start: "top 85%", toggleActions: "play none none reverse" }}
+            );
+
+            // 5. Parallax interactivo para la caja de "Orígenes" (Se abre al scrollear)
+            gsap.fromTo(".gsap-parallax-section",
+                { width: "70%", opacity: 0, y: 50 },
+                { width: "100%", opacity: 1, y: 0, duration: 1, scrollTrigger: { trigger: "#about", start: "top 90%", end: "top 40%", scrub: 1 }}
+            );
+
+            // 6. Textos que suben (Fade up estándar pero elegante)
             gsap.utils.toArray('.gsap-fade-up').forEach(element => {
-                gsap.to(element, {
-                    scrollTrigger: {
-                        trigger: element,
-                        start: "top 85%",
-                        toggleActions: "play none none reverse"
-                    },
-                    y: 0,
-                    opacity: 1,
-                    duration: 0.8,
-                    ease: "power3.out"
-                });
+                gsap.fromTo(element, 
+                    { y: 60, opacity: 0 },
+                    { y: 0, opacity: 1, duration: 0.8, ease: "power3.out", scrollTrigger: { trigger: element, start: "top 85%", toggleActions: "play none none reverse" }}
+                );
             });
 
-            // Efecto Zoom in (Scale Up) para tarjetas de stats y pricing
-            gsap.utils.toArray('.gsap-scale-up').forEach(element => {
-                gsap.to(element, {
-                    scrollTrigger: {
-                        trigger: element,
-                        start: "top 85%",
-                        toggleActions: "play none none reverse"
-                    },
-                    scale: 1,
-                    opacity: 1,
-                    duration: 0.8,
-                    ease: "back.out(1.7)"
-                });
-            });
-
-            // Animación del gráfico al hacer scroll
+            // 7. Gráfico que se "Dibuja" de manera vinculada al Scroll
             const graphLine = document.getElementById('animGraph');
             if(graphLine) {
-                ScrollTrigger.create({
-                    trigger: ".graph-container",
-                    start: "top 75%",
-                    onEnter: () => graphLine.classList.add('active')
+                gsap.to(graphLine, {
+                    strokeDashoffset: 0,
+                    scrollTrigger: {
+                        trigger: ".graph-container",
+                        start: "top 80%",
+                        end: "bottom 50%",
+                        scrub: 1.5 // Se va dibujando según bajas
+                    }
                 });
             }
         }
 
-        // EFECTO PARALLAX ESCUDO HERO CON EL RATÓN (Se mantiene intacto)
+        // EFECTO PARALLAX ESCUDO HERO CON EL RATÓN (Mantenido)
         document.addEventListener('mousemove', (e) => {
             const shield = document.getElementById('shieldWrapper');
             if(shield) {
@@ -1776,34 +1266,14 @@
             }
         });
 
-        // EFECTO SPOTLIGHT CARDS
-        document.querySelectorAll('.feature-card, .service-card').forEach(card => {
-            card.addEventListener('mousemove', e => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                card.style.setProperty('--mouse-x', `${x}px`);
-                card.style.setProperty('--mouse-y', `${y}px`);
-            });
-        });
-
         // SCROLL EFFECTS (Navbar)
         window.addEventListener('scroll', () => {
             const header = document.getElementById('navbar');
             if (window.scrollY > 50) header.classList.add('scrolled');
             else header.classList.remove('scrolled');
-            
-            // Fallback clásico reveal si GSAP falla por algo
-            if(document.body.classList.contains('intro-done')){
-                const windowHeight = window.innerHeight;
-                document.querySelectorAll('.reveal:not(.gsap-fade-up):not(.gsap-scale-up)').forEach(el => {
-                    const top = el.getBoundingClientRect().top;
-                    if(top < windowHeight - 100) el.classList.add('active');
-                });
-            }
         });
 
-        // --- BLOQUEO DE INSPECCIONAR ELEMENTO (Requisito mantenido) ---
+        // --- BLOQUEO DE INSPECCIONAR ELEMENTO ---
         document.addEventListener('contextmenu', function(event) {
             event.preventDefault();
         });
