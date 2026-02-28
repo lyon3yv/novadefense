@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nova Defense | Ciberseguridad Avanzada para Web y Comunidades</title>
-    <meta name="description" content="Empresa de ciberseguridad especializada en protección de páginas web, servidores de Discord y Telegram. Conoce nuestro ecosistema de defensa.">
+    <title>Nova Defense | Ciberseguridad Avanzada Corporativa y para Comunidades</title>
+    <meta name="description" content="Empresa de ciberseguridad especializada en protección corporativa web, servidores de Discord y Telegram. SOC con monitoreo global automatizado.">
 
     <link rel="icon" type="image/png" href="Logo1.png">
     
@@ -16,6 +16,9 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <script src="//unpkg.com/three"></script>
+    <script src="//unpkg.com/globe.gl"></script>
 
     <style>
         :root {
@@ -39,7 +42,7 @@
             padding: 0;
             box-sizing: border-box;
             scroll-behavior: smooth;
-            cursor: none; /* Ocultamos cursor normal para usar el nuestro */
+            cursor: none; /* Ocultamos cursor normal */
         }
 
         ::-webkit-scrollbar { width: 6px; }
@@ -108,857 +111,231 @@
            ========================================= */
         #intro-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             background-color: var(--bg-dark);
             z-index: 9998;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
             transition: opacity 0.8s cubic-bezier(0.8, 0, 0.2, 1), visibility 0.8s;
         }
 
-        .intro-content {
-            text-align: center;
-            position: relative;
-            z-index: 2;
-        }
-
-        .intro-shield-svg {
-            width: 130px;
-            height: 130px;
-            margin-bottom: 30px;
-            overflow: visible;
-        }
-
+        .intro-content { text-align: center; position: relative; z-index: 2; }
+        .intro-shield-svg { width: 130px; height: 130px; margin-bottom: 30px; overflow: visible; }
         .shield-path {
-            fill: none;
-            stroke: var(--primary);
-            stroke-width: 2.5;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            stroke-dasharray: 400;
-            stroke-dashoffset: 400;
+            fill: none; stroke: var(--primary); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;
+            stroke-dasharray: 400; stroke-dashoffset: 400;
             animation: drawShield 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
             filter: drop-shadow(0 0 20px var(--primary-glow));
         }
-
-        .shield-fill {
-            fill: url(#intro-gradient);
-            opacity: 0;
-            animation: fillShield 1s ease forwards 1.5s;
-        }
-
+        .shield-fill { fill: url(#intro-gradient); opacity: 0; animation: fillShield 1s ease forwards 1.5s; }
         @keyframes drawShield { to { stroke-dashoffset: 0; } }
         @keyframes fillShield { to { opacity: 0.15; } }
-
         .intro-title {
-            font-size: 3.5rem;
-            font-weight: 900;
-            color: #fff;
-            letter-spacing: 6px;
-            opacity: 0;
-            transform: translateY(20px) scale(0.95);
-            animation: fadeUpText 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards 1s;
-            text-transform: uppercase;
-            text-shadow: 0 0 30px rgba(255,255,255,0.1);
+            font-size: 3.5rem; font-weight: 900; color: #fff; letter-spacing: 6px; opacity: 0;
+            transform: translateY(20px) scale(0.95); animation: fadeUpText 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards 1s;
+            text-transform: uppercase; text-shadow: 0 0 30px rgba(255,255,255,0.1);
         }
-
         .intro-subtitle {
-            font-size: 1.1rem;
-            color: var(--primary);
-            letter-spacing: 4px;
-            opacity: 0;
-            margin-top: 15px;
-            animation: fadeInSimple 0.8s ease forwards 1.6s;
-            text-transform: uppercase;
-            font-weight: 500;
+            font-size: 1.1rem; color: var(--primary); letter-spacing: 4px; opacity: 0; margin-top: 15px;
+            animation: fadeInSimple 0.8s ease forwards 1.6s; text-transform: uppercase; font-weight: 500;
         }
-
         .intro-particles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background-image: radial-gradient(circle at 50% 50%, var(--primary-glow) 0%, transparent 60%);
-            opacity: 0.3;
-            z-index: 1;
-            animation: pulseGlow 4s infinite alternate;
+            opacity: 0.3; z-index: 1; animation: pulseGlow 4s infinite alternate;
         }
-
-        body.loaded #intro-overlay {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-            transform: scale(1.05);
-        }
-
+        body.loaded #intro-overlay { opacity: 0; visibility: hidden; pointer-events: none; transform: scale(1.05); }
         @keyframes fadeUpText { to { opacity: 1; transform: translateY(0) scale(1); } }
         @keyframes fadeInSimple { to { opacity: 1; } }
-        @keyframes pulseGlow {
-            from { opacity: 0.2; transform: scale(0.95); }
-            to { opacity: 0.4; transform: scale(1.05); }
-        }
+        @keyframes pulseGlow { from { opacity: 0.2; transform: scale(0.95); } to { opacity: 0.4; transform: scale(1.05); } }
 
         /* =========================================
            BACKGROUND & MESH GRAIDENT
            ========================================= */
         .background-fx {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background-color: var(--bg-dark);
-            overflow: hidden;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; background-color: var(--bg-dark); overflow: hidden;
         }
-
         .mesh-gradient {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
+            position: absolute; width: 100%; height: 100%; top: 0; left: 0;
             background: 
                 radial-gradient(circle at 15% 10%, rgba(41, 121, 255, 0.08) 0%, transparent 40%), 
                 radial-gradient(circle at 85% 80%, rgba(0, 229, 255, 0.08) 0%, transparent 40%),
                 radial-gradient(circle at 50% 50%, rgba(13, 17, 26, 1) 0%, transparent 100%);
-            filter: blur(60px);
-            z-index: 1;
-            transition: transform 0.5s ease-out; /* Para que siga al ratón suavemente */
+            filter: blur(60px); z-index: 1; transition: transform 0.5s ease-out;
         }
-
         .grid-lines {
-            position: absolute;
-            width: 200%;
-            height: 200%;
-            top: -50%;
-            left: -50%;
+            position: absolute; width: 200%; height: 200%; top: -50%; left: -50%;
             background-image: 
                 linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-            background-size: 80px 80px;
-            transform: perspective(1000px) rotateX(60deg);
-            z-index: 2;
+            background-size: 80px 80px; transform: perspective(1000px) rotateX(60deg); z-index: 2;
         }
 
         /* =========================================
            HEADER & NAV
            ========================================= */
         header {
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            padding: 25px 0;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            opacity: 0;
+            position: fixed; width: 100%; top: 0; z-index: 1000; padding: 25px 0;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); opacity: 0;
             animation: fadeInHeader 1s ease forwards 3s;
         }
-
         @keyframes fadeInHeader { to { opacity: 1; } }
-
         header.scrolled {
-            background: rgba(2, 4, 10, 0.85);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 15px 0;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            background: rgba(2, 4, 10, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05); padding: 15px 0; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
-
         .nav-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            max-width: 1400px; margin: 0 auto; padding: 0 40px;
+            display: flex; justify-content: space-between; align-items: center;
         }
-
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            text-decoration: none;
-        }
-
+        .logo-container { display: flex; align-items: center; gap: 15px; text-decoration: none; }
         .logo {
-            width: 44px;
-            height: 44px;
-            object-fit: contain;
-            filter: drop-shadow(0 0 15px var(--primary-glow));
+            width: 44px; height: 44px; object-fit: contain; filter: drop-shadow(0 0 15px var(--primary-glow));
             transition: transform 0.3s ease;
         }
-
-        .logo-container:hover .logo {
-            transform: scale(1.1) rotate(-5deg);
-        }
-
-        .logo-text {
-            font-size: 24px;
-            font-weight: 800;
-            color: #fff;
-            letter-spacing: -0.5px;
-            font-family: 'Outfit', sans-serif;
-        }
-
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 40px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 35px;
-            align-items: center;
-        }
-
+        .logo-container:hover .logo { transform: scale(1.1) rotate(-5deg); }
+        .logo-text { font-size: 24px; font-weight: 800; color: #fff; letter-spacing: -0.5px; font-family: 'Outfit', sans-serif; }
+        .nav-right { display: flex; align-items: center; gap: 40px; }
+        .nav-links { display: flex; gap: 35px; align-items: center; }
         .nav-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 15px;
-            transition: all 0.3s;
-            position: relative;
-            display: inline-block;
+            color: var(--text-muted); text-decoration: none; font-weight: 500; font-size: 15px;
+            transition: all 0.3s; position: relative; display: inline-block;
         }
-
         .nav-links a:hover { color: #fff; }
-
         .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0%;
-            height: 2px;
-            background: var(--gradient);
-            transition: width 0.3s ease;
-            border-radius: 2px;
+            content: ''; position: absolute; bottom: -5px; left: 0; width: 0%; height: 2px;
+            background: var(--gradient); transition: width 0.3s ease; border-radius: 2px;
         }
-
         .nav-links a:hover::after { width: 100%; }
-
-        /* Botón Idioma */
         .lang-switch {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #fff;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: none;
-            transition: all 0.3s;
-            backdrop-filter: blur(10px);
-            display: flex;
-            align-items: center;
-            gap: 5px;
+            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff; padding: 6px 12px; border-radius: 20px; font-size: 13px; font-weight: 600;
+            cursor: none; transition: all 0.3s; backdrop-filter: blur(10px); display: flex; align-items: center; gap: 5px;
         }
-
-        .lang-switch:hover {
-            background: var(--primary);
-            color: var(--bg-dark);
-            border-color: var(--primary);
-            box-shadow: 0 0 15px var(--primary-glow);
-        }
-
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 24px;
-        }
+        .lang-switch:hover { background: var(--primary); color: var(--bg-dark); border-color: var(--primary); box-shadow: 0 0 15px var(--primary-glow); }
+        .mobile-menu-btn { display: none; background: none; border: none; color: white; font-size: 24px; }
 
         /* =========================================
            HERO SECTION
            ========================================= */
         .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 180px 40px 100px;
-            max-width: 1400px;
-            margin: 0 auto;
-            position: relative;
+            min-height: 100vh; display: flex; align-items: center; justify-content: center;
+            padding: 180px 40px 100px; max-width: 1400px; margin: 0 auto; position: relative;
         }
-
-        .hero-content {
-            flex: 1.2;
-            max-width: 700px;
-            z-index: 2;
-        }
-
+        .hero-content { flex: 1.2; max-width: 700px; z-index: 2; }
         .status-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            background: rgba(0, 229, 255, 0.05);
-            border: 1px solid rgba(0, 229, 255, 0.2);
-            padding: 8px 20px;
-            border-radius: 50px;
-            font-size: 14px;
-            color: var(--primary);
-            font-weight: 600;
-            margin-bottom: 35px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 0 20px rgba(0, 229, 255, 0.05);
-            letter-spacing: 0.5px;
+            display: inline-flex; align-items: center; gap: 12px; background: rgba(0, 229, 255, 0.05);
+            border: 1px solid rgba(0, 229, 255, 0.2); padding: 8px 20px; border-radius: 50px;
+            font-size: 14px; color: var(--primary); font-weight: 600; margin-bottom: 35px;
+            backdrop-filter: blur(10px); box-shadow: 0 0 20px rgba(0, 229, 255, 0.05); letter-spacing: 0.5px;
         }
-
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            background: var(--primary);
-            border-radius: 50%;
-            box-shadow: 0 0 10px var(--primary);
-            animation: pulse 2s infinite;
-        }
-
-        .hero h1 {
-            font-size: 76px;
-            line-height: 1.05;
-            font-weight: 900;
-            margin-bottom: 30px;
-            letter-spacing: -2.5px;
-            color: #fff;
-        }
-
-        .text-gradient {
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            position: relative;
-            display: inline-block;
-        }
-
-        .hero p {
-            font-size: 20px;
-            color: var(--text-muted);
-            margin-bottom: 50px;
-            max-width: 580px;
-            font-weight: 400;
-            line-height: 1.7;
-        }
-
-        .cta-group {
-            display: flex;
-            gap: 20px;
-        }
-
+        .status-dot { width: 8px; height: 8px; background: var(--primary); border-radius: 50%; box-shadow: 0 0 10px var(--primary); animation: pulse 2s infinite; }
+        .hero h1 { font-size: 76px; line-height: 1.05; font-weight: 900; margin-bottom: 30px; letter-spacing: -2.5px; color: #fff; }
+        .text-gradient { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; position: relative; display: inline-block; }
+        .hero p { font-size: 20px; color: var(--text-muted); margin-bottom: 50px; max-width: 580px; font-weight: 400; line-height: 1.7; }
+        .cta-group { display: flex; gap: 20px; }
         .btn {
-            padding: 18px 40px;
-            border-radius: 14px;
-            font-weight: 600;
-            font-size: 16px;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative;
-            font-family: 'Inter', sans-serif;
-            display: inline-block;
+            padding: 18px 40px; border-radius: 14px; font-weight: 600; font-size: 16px; text-decoration: none;
+            display: inline-flex; align-items: center; gap: 12px; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative; font-family: 'Inter', sans-serif; display: inline-block;
         }
-
-        .btn-primary {
-            background: var(--text-main);
-            color: var(--bg-dark);
-            border: none;
-            box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
-        }
-
-        .btn-primary:hover {
-            box-shadow: 0 15px 30px rgba(255, 255, 255, 0.2);
-            background: #fff;
-        }
-
-        /* --- VISUAL 3D HERO --- */
-        .hero-visual {
-            flex: 0.8;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            perspective: 1200px;
-        }
-
-        .shield-wrapper {
-            position: relative;
-            width: 500px;
-            height: 500px;
-            transform-style: preserve-3d;
-            animation: float3D 6s ease-in-out infinite;
-        }
-
-        @keyframes float3D {
-            0%, 100% { transform: translateY(0) rotateX(0) rotateY(0); }
-            50% { transform: translateY(-20px) rotateX(5deg) rotateY(-5deg); }
-        }
-
-        .shield-core {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) translateZ(80px);
-            width: 320px;
-            filter: drop-shadow(0 0 80px rgba(0, 229, 255, 0.3));
-            z-index: 10;
-        }
-
-        .shield-ring {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) translateZ(30px);
-            width: 460px;
-            height: 460px;
-            border: 1px solid rgba(0, 229, 255, 0.15);
-            border-radius: 50%;
-            border-top: 2px solid var(--primary);
-            border-right: 2px solid transparent;
-            animation: spin 20s linear infinite;
-            box-shadow: inset 0 0 40px rgba(0, 229, 255, 0.05);
-        }
-
-        .shield-ring.inner {
-            width: 380px;
-            height: 380px;
-            border: 1px solid rgba(41, 121, 255, 0.15);
-            border-bottom: 2px solid var(--accent);
-            border-left: 2px solid transparent;
-            animation: spin 25s linear infinite reverse;
-            transform: translate(-50%, -50%) translateZ(50px);
-        }
-
-        @keyframes spin {
-            100% { transform: translate(-50%, -50%) translateZ(30px) rotate(360deg); }
-        }
+        .btn-primary { background: var(--text-main); color: var(--bg-dark); border: none; box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1); }
+        .btn-primary:hover { box-shadow: 0 15px 30px rgba(255, 255, 255, 0.2); background: #fff; }
+        .hero-visual { flex: 0.8; display: flex; justify-content: center; align-items: center; position: relative; perspective: 1200px; }
+        .shield-wrapper { position: relative; width: 500px; height: 500px; transform-style: preserve-3d; animation: float3D 6s ease-in-out infinite; }
+        @keyframes float3D { 0%, 100% { transform: translateY(0) rotateX(0) rotateY(0); } 50% { transform: translateY(-20px) rotateX(5deg) rotateY(-5deg); } }
+        .shield-core { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) translateZ(80px); width: 320px; filter: drop-shadow(0 0 80px rgba(0, 229, 255, 0.3)); z-index: 10; }
+        .shield-ring { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) translateZ(30px); width: 460px; height: 460px; border: 1px solid rgba(0, 229, 255, 0.15); border-radius: 50%; border-top: 2px solid var(--primary); border-right: 2px solid transparent; animation: spin 20s linear infinite; box-shadow: inset 0 0 40px rgba(0, 229, 255, 0.05); }
+        .shield-ring.inner { width: 380px; height: 380px; border: 1px solid rgba(41, 121, 255, 0.15); border-bottom: 2px solid var(--accent); border-left: 2px solid transparent; animation: spin 25s linear infinite reverse; transform: translate(-50%, -50%) translateZ(50px); }
+        @keyframes spin { 100% { transform: translate(-50%, -50%) translateZ(30px) rotate(360deg); } }
 
         /* =========================================
            SECCIONES COMUNES
            ========================================= */
-        .section {
-            padding: 140px 40px;
-            max-width: 1400px;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 100px;
-        }
-
-        .section-title {
-            font-size: 48px;
-            font-weight: 800;
-            margin-bottom: 25px;
-            color: #fff;
-            letter-spacing: -1px;
-        }
-
-        .section-desc {
-            color: var(--text-muted);
-            font-size: 19px;
-            max-width: 650px;
-            margin: 0 auto;
-            line-height: 1.7;
-        }
-
-        /* =========================================
-           SERVICES SECTION (Tarjetas 3D Tilt)
-           ========================================= */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 40px;
-            margin-top: 40px;
-            perspective: 1000px;
-        }
-
+        .section { padding: 140px 40px; max-width: 1400px; margin: 0 auto; position: relative; }
+        .section-header { text-align: center; margin-bottom: 100px; }
+        .section-title { font-size: 48px; font-weight: 800; margin-bottom: 25px; color: #fff; letter-spacing: -1px; }
+        .section-desc { color: var(--text-muted); font-size: 19px; max-width: 650px; margin: 0 auto; line-height: 1.7; }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; margin-top: 40px; perspective: 1000px; }
         .service-card {
             background: linear-gradient(180deg, rgba(13, 17, 26, 0.8) 0%, rgba(2, 4, 10, 0.9) 100%);
-            border: var(--glass-border);
-            border-radius: 32px;
-            padding: 50px 40px;
-            transition: border-color 0.3s, box-shadow 0.3s;
-            position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(20px);
-            transform-style: preserve-3d;
-            /* El transform se maneja en JS con mousemove */
+            border: var(--glass-border); border-radius: 32px; padding: 50px 40px; transition: border-color 0.3s, box-shadow 0.3s;
+            position: relative; overflow: hidden; backdrop-filter: blur(20px); transform-style: preserve-3d;
         }
-        
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; height: 4px;
-            background: var(--gradient);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.5s ease;
-        }
-
-        .service-card:hover {
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(0, 229, 255, 0.1);
-            border-color: rgba(0, 229, 255, 0.3);
-        }
-
+        .service-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--gradient); transform: scaleX(0); transform-origin: left; transition: transform 0.5s ease; }
+        .service-card:hover { box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(0, 229, 255, 0.1); border-color: rgba(0, 229, 255, 0.3); }
         .service-card:hover::before { transform: scaleX(1); }
-
-        .service-icon {
-            font-size: 48px;
-            color: var(--primary);
-            margin-bottom: 30px;
-            background: -webkit-linear-gradient(135deg, #00E5FF, #2979FF);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: inline-block;
-            transform: translateZ(30px); /* Efecto 3D al girar */
-        }
-
-        .service-card h3 {
-            font-size: 28px;
-            margin-bottom: 15px;
-            color: #fff;
-            transform: translateZ(20px);
-        }
-
-        .service-card p {
-            color: var(--text-muted);
-            font-size: 16px;
-            line-height: 1.7;
-            margin-bottom: 25px;
-            transform: translateZ(10px);
-        }
-
-        .service-features {
-            list-style: none;
-            margin-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            padding-top: 20px;
-            transform: translateZ(10px);
-        }
-
-        .service-features li {
-            color: #E5E7EB;
-            margin-bottom: 12px;
-            font-size: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+        .service-icon { font-size: 48px; color: var(--primary); margin-bottom: 30px; background: -webkit-linear-gradient(135deg, #00E5FF, #2979FF); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block; transform: translateZ(30px); }
+        .service-card h3 { font-size: 28px; margin-bottom: 15px; color: #fff; transform: translateZ(20px); }
+        .service-card p { color: var(--text-muted); font-size: 16px; line-height: 1.7; margin-bottom: 25px; transform: translateZ(10px); }
+        .service-features { list-style: none; margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px; transform: translateZ(10px); }
+        .service-features li { color: #E5E7EB; margin-bottom: 12px; font-size: 15px; display: flex; align-items: center; gap: 10px; }
         .service-features li i { color: var(--primary); font-size: 12px; }
+
+        /* =========================================
+           ULTRA MEJORA: PINNED ATTACK GLOBE SECTION
+           ========================================= */
+        .pinned-globe-section {
+            height: 100vh; width: 100%; position: relative; overflow: hidden;
+            display: flex; align-items: center; background-color: #000;
+            max-width: 100%; /* Rompemos el max-width común */
+            padding: 0;
+        }
+        #attackGlobe {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1; /* Fondo de la sección */
+        }
+        .scrollytelling-content {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 2; /* Texto sobre el globo */
+            display: flex; flex-direction: column; justify-content: center;
+            padding: 0 10%; pointer-events: none; /* No interrumpir el scroll */
+        }
+        .reveal-phrase {
+            opacity: 0; transform: translateY(50px);
+            margin-bottom: 30px; max-width: 600px;
+        }
+        .intel-title-main { font-size: 56px; line-height: 1.1; margin-bottom: 15px; text-shadow: 0 0 20px rgba(0,0,0,0.5); }
+        
+        /* Estilos específicos para la formación de texto (palabra por palabra) */
+        .word-span { display: inline-block; opacity: 0; transform: translateY(20px); }
 
         /* =========================================
            STATS SECTION
            ========================================= */
-        .stats-section {
-            padding: 80px 40px;
-            position: relative;
-            z-index: 5;
-            margin-top: -50px;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            max-width: 1200px;
-            margin: 0 auto;
-            background: var(--bg-card);
-            border: var(--glass-border);
-            border-radius: 24px;
-            padding: 40px;
-            backdrop-filter: blur(20px);
-            box-shadow: var(--shadow-premium);
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 20px;
-            position: relative;
-        }
-
-        .stat-item:not(:last-child)::after {
-            content: '';
-            position: absolute;
-            right: 0;
-            top: 20%;
-            height: 60%;
-            width: 1px;
-            background: rgba(255,255,255,0.05);
-        }
-
-        .stat-icon {
-            font-size: 28px;
-            color: var(--primary);
-            margin-bottom: 15px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 60px;
-            height: 60px;
-            background: rgba(0, 229, 255, 0.05);
-            border-radius: 16px;
-            border: 1px solid rgba(0, 229, 255, 0.1);
-        }
-
-        .stat-number {
-            display: block;
-            font-size: 46px;
-            font-weight: 800;
-            color: #fff;
-            margin-bottom: 5px;
-            line-height: 1;
-        }
-
-        .stat-label {
-            font-size: 14px;
-            color: var(--text-muted);
-            font-weight: 500;
-        }
-
-        /* =========================================
-           ORIGINS (NOVA BOT) SECTION
-           ========================================= */
-        .bot-project-wrapper {
-            background: linear-gradient(135deg, rgba(13, 17, 26, 0.9) 0%, rgba(0, 229, 255, 0.05) 100%);
-            border-radius: 40px;
-            padding: 60px;
-            border: 1px solid rgba(0, 229, 255, 0.2);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-        }
-
-        .bot-project-wrapper::before {
-            content: '\f392'; /* Discord icon */
-            font-family: "Font Awesome 6 Brands";
-            position: absolute;
-            font-size: 250px;
-            color: rgba(255,255,255,0.02);
-            top: -50px;
-            right: -50px;
-            transform: rotate(-15deg);
-        }
-
-        .bot-project-wrapper h2 {
-            font-size: 36px;
-            color: #fff;
-            margin-bottom: 20px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .bot-project-wrapper p {
-            color: var(--text-muted);
-            font-size: 18px;
-            max-width: 700px;
-            margin: 0 auto;
-            line-height: 1.7;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* =========================================
-           TEAM SECTION
-           ========================================= */
-        .team-grid {
-            display: flex;
-            justify-content: center;
-            gap: 60px;
-            max-width: 900px;
-            margin: 0 auto;
-            flex-wrap: wrap;
-            perspective: 1000px;
-        }
-
-        .team-card {
-            background: var(--bg-card);
-            border: var(--glass-border);
-            border-radius: 30px;
-            padding: 50px 40px;
-            text-align: center;
-            transition: border-color 0.3s, box-shadow 0.3s;
-            backdrop-filter: blur(20px);
-            flex: 1;
-            min-width: 280px;
-            max-width: 350px;
-            transform-style: preserve-3d;
-        }
-
-        .team-card:hover {
-            border-color: var(--glass-border-hover);
-            box-shadow: var(--shadow-premium);
-        }
-
-        .team-avatar {
-            width: 140px;
-            height: 140px;
-            margin: 0 auto 30px;
-            border-radius: 50%;
-            padding: 4px;
-            background: var(--gradient);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.4), 0 0 20px var(--primary-glow);
-            overflow: hidden;
-            transform: translateZ(40px);
-        }
-        
-        .team-avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 4px solid var(--bg-dark);
-        }
-
-        .team-card h3 {
-            font-size: 26px;
-            color: #fff;
-            margin-bottom: 8px;
-            transform: translateZ(20px);
-        }
-
-        .team-role {
-            color: var(--primary);
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 700;
-            display: block;
-            transform: translateZ(15px);
-        }
-
-        /* =========================================
-           RAID GRAPH SECTION
-           ========================================= */
-        .raid-graph-section {
-            padding: 100px 40px;
-            position: relative;
-        }
-
-        .graph-container {
-            max-width: 1100px;
-            margin: 0 auto;
-            background: var(--bg-card);
-            border: var(--glass-border);
-            border-radius: 32px;
-            padding: 60px;
-            position: relative;
-            backdrop-filter: blur(20px);
-            box-shadow: var(--shadow-premium);
-        }
-
-        .graph-svg {
-            width: 100%;
-            height: auto;
-            overflow: visible;
-        }
-
-        .graph-line {
-            fill: none;
-            stroke: var(--primary);
-            stroke-width: 4;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            filter: drop-shadow(0 0 15px var(--primary-glow));
-            stroke-dasharray: 2000;
-            stroke-dashoffset: 2000;
-        }
-
-        .graph-area {
-            fill: url(#graphGradient);
-            opacity: 0.15;
-        }
-
-        .graph-axis {
-            stroke: rgba(255,255,255,0.05);
-            stroke-width: 1;
-            stroke-dasharray: 5,5;
-        }
-
-        /* =========================================
-           FOOTER
-           ========================================= */
-        footer {
-            border-top: 1px solid rgba(255,255,255,0.05);
-            background: rgba(2, 4, 10, 0.95);
-            padding: 100px 40px 40px;
-            position: relative;
-            z-index: 10;
-        }
-
-        .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            gap: 60px;
-            margin-bottom: 80px;
-        }
-
-        .footer-brand h2 {
-            font-size: 32px;
-            margin-bottom: 20px;
-            color: #fff;
-            letter-spacing: -0.5px;
-        }
-
-        .footer-brand p {
-            color: var(--text-muted);
-            max-width: 360px;
-            font-size: 16px;
-            line-height: 1.8;
-        }
-
-        .footer-col h4 {
-            color: #fff;
-            margin-bottom: 25px;
-            font-size: 18px;
-            font-weight: 700;
-        }
-
-        .footer-col a {
-            display: inline-block;
-            color: var(--text-muted);
-            text-decoration: none;
-            margin-bottom: 16px;
-            font-size: 15px;
-            transition: color 0.3s;
-            clear: both;
-            float: left;
-            width: 100%;
-        }
-
+        .stats-section { padding: 80px 40px; position: relative; z-index: 5; margin-top: -50px; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; max-width: 1200px; margin: 0 auto; background: var(--bg-card); border: var(--glass-border); border-radius: 24px; padding: 40px; backdrop-filter: blur(20px); box-shadow: var(--shadow-premium); }
+        .stat-item { text-align: center; padding: 20px; position: relative; }
+        .stat-item:not(:last-child)::after { content: ''; position: absolute; right: 0; top: 20%; height: 60%; width: 1px; background: rgba(255,255,255,0.05); }
+        .stat-icon { font-size: 28px; color: var(--primary); margin-bottom: 15px; display: inline-flex; align-items: center; justify-content: center; width: 60px; height: 60px; background: rgba(0, 229, 255, 0.05); border-radius: 16px; border: 1px solid rgba(0, 229, 255, 0.1); }
+        .stat-number { display: block; font-size: 46px; font-weight: 800; color: #fff; margin-bottom: 5px; line-height: 1; }
+        .stat-label { font-size: 14px; color: var(--text-muted); font-weight: 500; }
+        .bot-project-wrapper { background: linear-gradient(135deg, rgba(13, 17, 26, 0.9) 0%, rgba(0, 229, 255, 0.05) 100%); border-radius: 40px; padding: 60px; border: 1px solid rgba(0, 229, 255, 0.2); text-align: center; position: relative; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+        .bot-project-wrapper::before { content: '\f392'; font-family: "Font Awesome 6 Brands"; position: absolute; font-size: 250px; color: rgba(255,255,255,0.02); top: -50px; right: -50px; transform: rotate(-15deg); }
+        .bot-project-wrapper h2 { font-size: 36px; color: #fff; margin-bottom: 20px; position: relative; z-index: 1; }
+        .bot-project-wrapper p { color: var(--text-muted); font-size: 18px; max-width: 700px; margin: 0 auto; line-height: 1.7; position: relative; z-index: 1; }
+        .team-grid { display: flex; justify-content: center; gap: 60px; max-width: 900px; margin: 0 auto; flex-wrap: wrap; perspective: 1000px; }
+        .team-card { background: var(--bg-card); border: var(--glass-border); border-radius: 30px; padding: 50px 40px; text-align: center; transition: border-color 0.3s, box-shadow 0.3s; backdrop-filter: blur(20px); flex: 1; min-width: 280px; max-width: 350px; transform-style: preserve-3d; }
+        .team-card:hover { border-color: var(--glass-border-hover); box-shadow: var(--shadow-premium); }
+        .team-avatar { width: 140px; height: 140px; margin: 0 auto 30px; border-radius: 50%; padding: 4px; background: var(--gradient); box-shadow: 0 15px 30px rgba(0,0,0,0.4), 0 0 20px var(--primary-glow); overflow: hidden; transform: translateZ(40px); }
+        .team-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; border: 4px solid var(--bg-dark); }
+        .team-card h3 { font-size: 26px; color: #fff; margin-bottom: 8px; transform: translateZ(20px); }
+        .team-role { color: var(--primary); font-size: 14px; text-transform: uppercase; letter-spacing: 2px; font-weight: 700; display: block; transform: translateZ(15px); }
+        .raid-graph-section { padding: 100px 40px; position: relative; }
+        .graph-container { max-width: 1100px; margin: 0 auto; background: var(--bg-card); border: var(--glass-border); border-radius: 32px; padding: 60px; position: relative; backdrop-filter: blur(20px); box-shadow: var(--shadow-premium); }
+        .graph-svg { width: 100%; height: auto; overflow: visible; }
+        .graph-line { fill: none; stroke: var(--primary); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 0 15px var(--primary-glow)); stroke-dasharray: 2000; stroke-dashoffset: 2000; }
+        .graph-area { fill: url(#graphGradient); opacity: 0.15; }
+        .graph-axis { stroke: rgba(255,255,255,0.05); stroke-width: 1; stroke-dasharray: 5,5; }
+        footer { border-top: 1px solid rgba(255,255,255,0.05); background: rgba(2, 4, 10, 0.95); padding: 100px 40px 40px; position: relative; z-index: 10; }
+        .footer-content { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 80px; }
+        .footer-brand h2 { font-size: 32px; margin-bottom: 20px; color: #fff; letter-spacing: -0.5px; }
+        .footer-brand p { color: var(--text-muted); max-width: 360px; font-size: 16px; line-height: 1.8; }
+        .footer-col h4 { color: #fff; margin-bottom: 25px; font-size: 18px; font-weight: 700; }
+        .footer-col a { display: inline-block; color: var(--text-muted); text-decoration: none; margin-bottom: 16px; font-size: 15px; transition: color 0.3s; clear: both; float: left; width: 100%; }
         .footer-col a:hover { color: var(--primary); }
+        .footer-bottom { max-width: 1400px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 40px; display: flex; justify-content: space-between; align-items: center; color: rgba(255,255,255,0.3); font-size: 14px; }
 
-        .footer-bottom {
-            max-width: 1400px;
-            margin: 0 auto;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            padding-top: 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: rgba(255,255,255,0.3);
-            font-size: 14px;
-        }
-
-        /* =========================================
-           MEDIA QUERIES
-           ========================================= */
         @media (max-width: 1024px) {
             .hero { flex-direction: column; text-align: center; padding-top: 160px; }
             .hero-content { margin-bottom: 80px; }
@@ -966,10 +343,15 @@
             .nav-links { display: none; }
             .mobile-menu-btn { display: block; }
             .footer-content { grid-template-columns: 1fr 1fr; }
-            * { cursor: auto; } /* Desactiva cursor custom en móviles */
-            .cursor-dot, .cursor-ring { display: none; }
+            * { cursor: auto !important; } .cursor-dot, .cursor-ring { display: none !important; }
+            
+            /* Ajustes para la sección pinned en móvil */
+            .pinned-globe-section { height: auto; min-height: 100vh; display: block; }
+            #attackGlobe { position: relative; height: 50vh; }
+            .scrollytelling-content { position: relative; height: auto; padding: 60px 20px; pointer-events: auto; }
+            .reveal-phrase { opacity: 1; transform: none; }
+            .intel-title-main { font-size: 36px; }
         }
-
         @media (max-width: 768px) {
             .hero h1 { font-size: 48px; }
             .section-title { font-size: 36px; }
@@ -1020,19 +402,16 @@
                 <img src="Logo1.png" alt="Logo" class="logo">
                 <span class="logo-text">Nova Defense</span>
             </a>
-            
             <div class="nav-right">
                 <nav class="nav-links">
                     <a href="#services" class="magnetic-element" data-i18n="nav_services">Servicios</a>
-                    <a href="#about" class="magnetic-element" data-i18n="nav_origins">Orígenes</a>
+                    <a href="#intel" class="magnetic-element" data-i18n="nav_intel">Inteligencia</a>
                     <a href="#team" class="magnetic-element" data-i18n="nav_team">Fundadores</a>
                     <a href="https://discord.gg/FsbvgQWKYy" target="_blank" class="magnetic-element" data-i18n="nav_contact">Contacto</a>
                 </nav>
-                
                 <button class="lang-switch magnetic-element" id="langToggle">
                     <i class="fas fa-globe"></i> <span id="langText">ES</span>
                 </button>
-
                 <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
             </div>
         </div>
@@ -1045,16 +424,13 @@
                 <span data-i18n="hero_badge">Sistemas de Defensa Activos</span>
             </div>
             <h1 data-i18n="hero_title">Protección Digital de <br><span class="text-gradient">Siguiente Nivel</span></h1>
-            <p data-i18n="hero_desc">
-                Aseguramos tu infraestructura. Proveemos software de ciberseguridad corporativa para páginas web y moderación automática blindada para comunidades en Discord y Telegram.
-            </p>
+            <p data-i18n="hero_desc">Aseguramos tu infraestructura. Proveemos software de ciberseguridad corporativa para páginas web y moderación automática blindada para comunidades en Discord y Telegram.</p>
             <div class="cta-group">
                 <a href="#services" class="btn btn-primary magnetic-element">
                     <i class="fas fa-shield-check"></i> <span data-i18n="hero_btn">Ver Servicios</span>
                 </a>
             </div>
         </div>
-
         <div class="hero-visual gsap-hero-shield">
             <div class="shield-wrapper" id="shieldWrapper">
                 <div class="shield-ring"></div>
@@ -1064,8 +440,7 @@
                     <path d="M12 6L12 18M12 12L16 12M8 12L12 12" stroke="white" stroke-width="2" stroke-linecap="round"/>
                     <defs>
                         <linearGradient id="shield-gradient" x1="12" y1="2" x2="12" y2="22" gradientUnits="userSpaceOnUse">
-                            <stop stop-color="#00E5FF" stop-opacity="0.3"/>
-                            <stop offset="1" stop-color="#2979FF" stop-opacity="0.6"/>
+                            <stop stop-color="#00E5FF" stop-opacity="0.3"/><stop offset="1" stop-color="#2979FF" stop-opacity="0.6"/>
                         </linearGradient>
                     </defs>
                 </svg>
@@ -1078,7 +453,6 @@
             <h2 class="section-title" data-i18n="srv_title">Ecosistema de <span class="text-gradient">Defensa Global</span></h2>
             <p class="section-desc" data-i18n="srv_desc">Como empresa de ciberseguridad, desarrollamos infraestructuras de protección adaptables a las plataformas más críticas de internet.</p>
         </div>
-
         <div class="services-grid">
             <div class="service-card tilt-card gsap-card-left">
                 <i class="fas fa-globe service-icon"></i>
@@ -1090,7 +464,6 @@
                     <li><i class="fas fa-check"></i> <span data-i18n="srv_1_f3">99.9% de Uptime garantizado</span></li>
                 </ul>
             </div>
-            
             <div class="service-card tilt-card gsap-card-bottom">
                 <i class="fab fa-discord service-icon"></i>
                 <h3 data-i18n="srv_2_title">Seguridad Discord</h3>
@@ -1101,7 +474,6 @@
                     <li><i class="fas fa-check"></i> <span data-i18n="srv_2_f3">Integración instantánea</span></li>
                 </ul>
             </div>
-
             <div class="service-card tilt-card gsap-card-right">
                 <i class="fab fa-telegram-plane service-icon"></i>
                 <h3 data-i18n="srv_3_title">Defensa Telegram</h3>
@@ -1115,28 +487,31 @@
         </div>
     </section>
 
+    <section class="pinned-globe-section" id="intel">
+        <div id="attackGlobe"></div>
+        
+        <div class="scrollytelling-content">
+            <div class="reveal-phrase p1">
+                <h2 class="section-title intel-title-main gsap-split-text" data-i18n="intel_title">Monitoreo Global Automatizado</h2>
+            </div>
+            <div class="reveal-phrase p2">
+                <p class="section-desc gsap-split-text" data-i18n="intel_p1">Nuestro SOC (Security Operations Center) rastrea billones de eventos por segundo, identificando patrones de ataque antes de que impacten.</p>
+            </div>
+            <div class="reveal-phrase p3">
+                <p class="section-desc gsap-split-text" data-i18n="intel_p2">La visualización 3D simula intentos de DDoS y Raids mitigados en nuestra infraestructura de red global en tiempo real.</p>
+            </div>
+            <div class="reveal-phrase p4">
+                <p class="section-desc text-gradient gsap-split-text" data-i18n="intel_p3">Blindaje Total Inteligente.</p>
+            </div>
+        </div>
+    </section>
+
     <section class="stats-section" id="stats">
         <div class="stats-grid gsap-scale-up">
-            <div class="stat-item">
-                <div class="stat-icon"><i class="fas fa-users"></i></div>
-                <span class="stat-number">+23K</span>
-                <span class="stat-label" data-i18n="stat_1">Usuarios Protegidos</span>
-            </div>
-            <div class="stat-item">
-                <div class="stat-icon"><i class="fas fa-server"></i></div>
-                <span class="stat-number">+106</span>
-                <span class="stat-label" data-i18n="stat_2">Servidores Activos</span>
-            </div>
-            <div class="stat-item">
-                <div class="stat-icon"><i class="fas fa-shield-alt"></i></div>
-                <span class="stat-number">24/7</span>
-                <span class="stat-label" data-i18n="stat_3">Monitoreo SOC</span>
-            </div>
-            <div class="stat-item">
-                <div class="stat-icon"><i class="fas fa-bolt"></i></div>
-                <span class="stat-number">20ms</span>
-                <span class="stat-label" data-i18n="stat_4">Latencia Defensa</span>
-            </div>
+            <div class="stat-item"><div class="stat-icon"><i class="fas fa-users"></i></div><span class="stat-number">+23K</span><span class="stat-label" data-i18n="stat_1">Usuarios Protegidos</span></div>
+            <div class="stat-item"><div class="stat-icon"><i class="fas fa-server"></i></div><span class="stat-number">+106</span><span class="stat-label" data-i18n="stat_2">Redes Corporativas</span></div>
+            <div class="stat-item"><div class="stat-icon"><i class="fas fa-shield-alt"></i></div><span class="stat-number">24/7</span><span class="stat-label" data-i18n="stat_3">Monitoreo SOC</span></div>
+            <div class="stat-item"><div class="stat-icon"><i class="fas fa-bolt"></i></div><span class="stat-number">20ms</span><span class="stat-label" data-i18n="stat_4">Latencia Defensa</span></div>
         </div>
     </section>
 
@@ -1154,18 +529,12 @@
         </div>
         <div class="team-grid">
             <div class="team-card tilt-card gsap-card-left">
-                <div class="team-avatar">
-                    <img src="https://images-ext-1.discordapp.net/external/KzcMTKS-42I-uyzVq0_1sPWHyoP4b7K2mmxp-nvMmjg/https/cdn.discordapp.com/avatars/1008003141553369121/8e69bb368c04a86001a65bc2453a43e7.png?format=webp&quality=lossless&width=176&height=176" alt="Gonzalo">
-                </div>
-                <h3>Gonzalo</h3>
-                <span class="team-role">CEO / Lead Architect</span>
+                <div class="team-avatar"><img src="https://images-ext-1.discordapp.net/external/KzcMTKS-42I-uyzVq0_1sPWHyoP4b7K2mmxp-nvMmjg/https/cdn.discordapp.com/avatars/1008003141553369121/8e69bb368c04a86001a65bc2453a43e7.png?format=webp&quality=lossless&width=176&height=176" alt="Gonzalo"></div>
+                <h3>Gonzalo</h3><span class="team-role">CEO / Lead Architect</span>
             </div>
             <div class="team-card tilt-card gsap-card-right">
-                <div class="team-avatar">
-                     <img src="https://images-ext-1.discordapp.net/external/7l6dwShgR4VCAh_A8V4bv3zjNSb3aGxGzByK63Yl0Bk/https/cdn.discordapp.com/avatars/1013940337150005279/525f297b1bc1edc4acacabd6b9c8984f.png?format=webp&quality=lossless&width=176&height=176" alt="Kurok">
-                </div>
-                <h3>Kurok</h3>
-                <span class="team-role">CTO / Security Core</span>
+                <div class="team-avatar"><img src="https://images-ext-1.discordapp.net/external/7l6dwShgR4VCAh_A8V4bv3zjNSb3aGxGzByK63Yl0Bk/https/cdn.discordapp.com/avatars/1013940337150005279/525f297b1bc1edc4acacabd6b9c8984f.png?format=webp&quality=lossless&width=176&height=176" alt="Kurok"></div>
+                <h3>Kurok</h3><span class="team-role">CTO / Security Core</span>
             </div>
         </div>
     </section>
@@ -1177,381 +546,355 @@
         </div>
         <div class="graph-container">
             <svg class="graph-svg" viewBox="0 0 1000 400" preserveAspectRatio="none">
-                <defs>
-                    <linearGradient id="graphGradient" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stop-color="#00E5FF" stop-opacity="0.5"/>
-                        <stop offset="100%" stop-color="#00E5FF" stop-opacity="0"/>
-                    </linearGradient>
-                </defs>
-                <line x1="0" y1="100" x2="1000" y2="100" class="graph-axis" />
-                <line x1="0" y1="200" x2="1000" y2="200" class="graph-axis" />
-                <line x1="0" y1="300" x2="1000" y2="300" class="graph-axis" />
-                
-                <path d="M0,350 Q100,340 200,250 T400,200 T600,150 T800,80 T1000,20 V400 H0 Z" class="graph-area" />
-                <path id="animGraph" d="M0,350 Q100,340 200,250 T400,200 T600,150 T800,80 T1000,20" class="graph-line" />
+                <defs><linearGradient id="graphGradient" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#00E5FF" stop-opacity="0.5"/><stop offset="100%" stop-color="#00E5FF" stop-opacity="0"/></linearGradient></defs>
+                <line x1="0" y1="100" x2="1000" y2="100" class="graph-axis" /><line x1="0" y1="200" x2="1000" y2="200" class="graph-axis" /><line x1="0" y1="300" x2="1000" y2="300" class="graph-axis" />
+                <path d="M0,350 Q100,340 200,250 T400,200 T600,150 T800,80 T1000,20 V400 H0 Z" class="graph-area" /><path id="animGraph" d="M0,350 Q100,340 200,250 T400,200 T600,150 T800,80 T1000,20" class="graph-line" />
             </svg>
         </div>
     </section>
 
     <footer>
         <div class="footer-content">
-            <div class="footer-brand">
-                <h2>Nova Defense</h2>
-                <p data-i18n="footer_desc">Empresa líder en software de ciberseguridad. Protegemos infraestructuras web y moderamos de forma autónoma las comunidades más grandes de Discord y Telegram.</p>
-            </div>
-            <div class="footer-col">
-                <h4 data-i18n="footer_sol_title">Nuestras Soluciones</h4>
-                <a href="#services" data-i18n="footer_sol_1">Protección Web WAF</a>
-                <a href="#services" data-i18n="footer_sol_2">Seguridad Discord</a>
-                <a href="#services" data-i18n="footer_sol_3">Defensa Telegram</a>
-            </div>
-            <div class="footer-col">
-                <h4 data-i18n="footer_leg_title">Legal & Empresa</h4>
-                <a href="https://politicadeprivacidadnovadefense.netlify.app" data-i18n="footer_leg_1">Política de Privacidad</a>
-                <a href="https://terminosdeservicionovadefense.netlify.app" data-i18n="footer_leg_2">Términos de Servicio</a>
-                <a href="#" data-i18n="footer_leg_3">Reportar Vulnerabilidad</a>
-            </div>
+            <div class="footer-brand"><h2>Nova Defense</h2><p data-i18n="footer_desc">Empresa líder en software de ciberseguridad. Protegemos infraestructuras web y moderamos de forma autónoma las comunidades más grandes de Discord y Telegram.</p></div>
+            <div class="footer-col"><h4 data-i18n="footer_sol_title">Soluciones</h4><a href="#services" data-i18n="footer_sol_1">Protección Web WAF</a><a href="#services" data-i18n="footer_sol_2">Seguridad Discord</a><a href="#services" data-i18n="footer_sol_3">Defensa Telegram</a></div>
+            <div class="footer-col"><h4 data-i18n="footer_leg_title">Empresa</h4><a href="https://politicadeprivacidadnovadefense.netlify.app" data-i18n="footer_leg_1">Privacidad</a><a href="https://terminosdeservicionovadefense.netlify.app" data-i18n="footer_leg_2">Términos</a><a href="#" data-i18n="footer_leg_3">Reportar</a></div>
         </div>
-        <div class="footer-bottom">
-            <p data-i18n="footer_copy">&copy; 2026 Nova Defense Technologies. Todos los derechos reservados.</p>
+        <div class="footer-bottom"><p data-i18n="footer_copy">© 2026 Nova Defense Technologies. Reservados todos los derechos.</p>
             <div style="display: flex; gap: 15px;">
                 <a href="https://discord.gg/FsbvgQWKYy" class="magnetic-element" style="color: rgba(255,255,255,0.3); font-size: 18px;"><i class="fab fa-discord"></i></a>
                 <a href="#" class="magnetic-element" style="color: rgba(255,255,255,0.3); font-size: 18px;"><i class="fab fa-telegram"></i></a>
-                <a href="#" class="magnetic-element" style="color: rgba(255,255,255,0.3); font-size: 18px;"><i class="fab fa-twitter"></i></a>
             </div>
         </div>
     </footer>
 
     <script>
         /* =========================================
-           DICCIONARIO DE IDIOMAS (i18n)
+           i18n DICTIONARY (Updated with Pinned section)
            ========================================= */
         const translations = {
             es: {
-                intro_title: "Nova Defense",
-                intro_subtitle: "Empresa de Ciberseguridad",
-                nav_services: "Servicios",
-                nav_origins: "Orígenes",
-                nav_team: "Fundadores",
-                nav_contact: "Contacto",
+                intro_title: "Nova Defense", intro_subtitle: "Empresa de Ciberseguridad",
+                nav_services: "Servicios", nav_intel: "SOC Global", nav_team: "Fundadores", nav_contact: "Contacto",
                 hero_badge: "Sistemas de Defensa Activos",
                 hero_title: "Protección Digital de <br><span class='text-gradient'>Siguiente Nivel</span>",
                 hero_desc: "Aseguramos tu infraestructura. Proveemos software de ciberseguridad corporativa para páginas web y moderación automática blindada para comunidades en Discord y Telegram.",
                 hero_btn: "Ver Servicios",
                 srv_title: "Ecosistema de <span class='text-gradient'>Defensa Global</span>",
                 srv_desc: "Como empresa de ciberseguridad, desarrollamos infraestructuras de protección adaptables a las plataformas más críticas de internet.",
-                srv_1_title: "Protección Web",
-                srv_1_desc: "Mitigación de ataques DDoS Capa 7, Web Application Firewall (WAF) y monitoreo de vulnerabilidades en tiempo real para tu negocio online.",
-                srv_1_f1: "Redirección de tráfico malicioso",
-                srv_1_f2: "Cifrado y análisis de logs",
-                srv_1_f3: "99.9% de Uptime garantizado",
-                srv_2_title: "Seguridad Discord",
-                srv_2_desc: "Nuestra división especializada. Prevenimos raids masivos, bloqueamos ataques de nuking y filtramos spam con IA antes de que afecte a tus usuarios.",
-                srv_2_f1: "Algoritmos Anti-Raid Neurales",
-                srv_2_f2: "Backups de infraestructura",
-                srv_2_f3: "Integración instantánea",
-                srv_3_title: "Defensa Telegram",
-                srv_3_desc: "Gestión automatizada de comunidades grandes. Eliminación de bots maliciosos, control de flood y análisis de reputación de usuarios.",
-                srv_3_f1: "Captcha multi-nivel",
-                srv_3_f2: "Global Blacklist sincronizada",
-                srv_3_f3: "Filtros de contenido avanzado",
-                stat_1: "Usuarios Protegidos",
-                stat_2: "Servidores Activos",
-                stat_3: "Monitoreo SOC",
-                stat_4: "Latencia Defensa",
+                srv_1_title: "Protección Web", srv_1_desc: "Mitigación de ataques DDoS Capa 7, Web Application Firewall (WAF) y monitoreo de vulnerabilidades en tiempo real.",
+                srv_1_f1: "Tráfico malicioso mitigado", srv_1_f2: "Análisis forense de logs", srv_1_f3: "99.9% Uptime garantizado",
+                srv_2_title: "Seguridad Discord", srv_2_desc: "Prevención de raids, bloqueo de nuking y filtrado inteligente de spam impulsado por IA.",
+                srv_2_f1: "Anti-Raid Neural", srv_2_f2: "Backups automatizados", srv_2_f3: "Instalación instantánea",
+                srv_3_title: "Defensa Telegram", srv_3_desc: "Gestión autónoma de comunidades grandes. Eliminación de bots y control de flood avanzado.",
+                srv_3_f1: "Captcha multi-nivel", srv_3_f2: "Blacklist Global sincronizada", srv_3_f3: "Filtros inteligentes",
+                stat_1: "Usuarios Protegidos", stat_2: "Redes Corporativas", stat_3: "Monitoreo SOC 24/7", stat_4: "Latencia Defensa",
+                intel_title: "Monitoreo Global Automatizado",
+                intel_p1: "Nuestro SOC (Security Operations Center) rastrea billones de eventos por segundo, identificando patrones de ataque antes de que impacten.",
+                intel_p2: "La visualización 3D simula intentos de DDoS y Raids mitigados en nuestra infraestructura de red global en tiempo real.",
+                intel_p3: "Blindaje Total Inteligente.",
                 about_title: "<span class='text-gradient'>Nuestros Orígenes:</span> Nova Bot",
-                about_desc: "Nuestra tecnología matriz nació desarrollando uno de los sistemas de seguridad autónomos más avanzados para la plataforma de Discord. Nova Bot fue el cimiento de la empresa y la demostración pública de nuestra capacidad para detener ataques masivos (raids y nuking) en milisegundos, tecnología que ahora aplicamos a gran escala en páginas web y Telegram.",
-                team_title: "Nuestros <span class='text-gradient'>Fundadores</span>",
-                team_desc: "Los arquitectos principales detrás del núcleo de seguridad y operaciones de Nova Defense.",
-                graph_title: "Inteligencia de <span class='text-gradient'>Amenazas Globales</span>",
-                graph_desc: "Incremento global de ataques mitigados en nuestra infraestructura durante los últimos 30 días.",
-                footer_desc: "Empresa líder en software de ciberseguridad. Protegemos infraestructuras web y moderamos de forma autónoma las comunidades más grandes de Discord y Telegram.",
-                footer_sol_title: "Nuestras Soluciones",
-                footer_sol_1: "Protección Web WAF",
-                footer_sol_2: "Seguridad Discord",
-                footer_sol_3: "Defensa Telegram",
-                footer_leg_title: "Legal & Empresa",
-                footer_leg_1: "Política de Privacidad",
-                footer_leg_2: "Términos de Servicio",
-                footer_leg_3: "Reportar Vulnerabilidad",
-                footer_copy: "© 2026 Nova Defense Technologies. Todos los derechos reservados."
+                about_desc: "Nuestra tecnología matriz nació en Discord. Nova Bot demostró nuestra capacidad para detener ataques masivos en milisegundos, tecnología que ahora aplicamos a gran escala corporativa.",
+                team_title: "Nuestros <span class='text-gradient'>Fundadores</span>", team_desc: "Los arquitectos principales del núcleo de seguridad de Nova Defense.",
+                graph_title: "Inteligencia de <span class='text-gradient'>Amenazas Globales</span>", graph_desc: "Incremento global de ataques mitigados en nuestra infraestructura durante los últimos 30 días.",
+                footer_desc: "Líder en software de ciberseguridad corporativa y para comunidades modernas.",
+                footer_sol_title: "Soluciones", footer_sol_1: "Web WAF", footer_sol_2: "Discord Pro", footer_sol_3: "Telegram Auth",
+                footer_leg_title: "Empresa", footer_leg_1: "Privacidad", footer_leg_2: "Términos", footer_leg_3: "Reportar",
+                footer_copy: "© 2026 Nova Defense Technologies. Reservados todos los derechos."
             },
             en: {
-                intro_title: "Nova Defense",
-                intro_subtitle: "Cybersecurity Company",
-                nav_services: "Services",
-                nav_origins: "Origins",
-                nav_team: "Founders",
-                nav_contact: "Contact",
+                intro_title: "Nova Defense", intro_subtitle: "Cybersecurity Company",
+                nav_services: "Services", nav_intel: "Global SOC", nav_team: "Founders", nav_contact: "Contact",
                 hero_badge: "Defense Systems Active",
                 hero_title: "Next-Level <br><span class='text-gradient'>Digital Protection</span>",
                 hero_desc: "We secure your infrastructure. Providing corporate cybersecurity software for websites and bulletproof automated moderation for Discord and Telegram communities.",
                 hero_btn: "View Services",
                 srv_title: "Global <span class='text-gradient'>Defense Ecosystem</span>",
                 srv_desc: "As a cybersecurity firm, we develop protective infrastructures adaptable to the internet's most critical platforms.",
-                srv_1_title: "Web Protection",
-                srv_1_desc: "Layer 7 DDoS attack mitigation, Web Application Firewall (WAF), and real-time vulnerability monitoring for your online business.",
-                srv_1_f1: "Malicious traffic redirection",
-                srv_1_f2: "Encryption and log analysis",
-                srv_1_f3: "99.9% Uptime guaranteed",
-                srv_2_title: "Discord Security",
-                srv_2_desc: "Our specialized division. We prevent massive raids, block nuking attacks, and filter AI spam before it affects your users.",
-                srv_2_f1: "Neural Anti-Raid Algorithms",
-                srv_2_f2: "Infrastructure Backups",
-                srv_2_f3: "Instant Integration",
-                srv_3_title: "Telegram Defense",
-                srv_3_desc: "Automated management for large communities. Malicious bot removal, flood control, and user reputation analysis.",
-                srv_3_f1: "Multi-level Captcha",
-                srv_3_f2: "Synchronized Global Blacklist",
-                srv_3_f3: "Advanced content filters",
-                stat_1: "Protected Users",
-                stat_2: "Active Servers",
-                stat_3: "SOC Monitoring",
-                stat_4: "Defense Latency",
+                srv_1_title: "Web Protection", srv_1_desc: "Layer 7 DDoS mitigation, Web Application Firewall (WAF), and real-time vulnerability monitoring.",
+                srv_1_f1: "Malicious traffic mitigated", srv_1_f2: "Forensic log analysis", srv_1_f3: "99.9% Uptime guaranteed",
+                srv_2_title: "Discord Security", srv_2_desc: "Raid prevention, nuking blocking, and AI-powered smart spam filtering.",
+                srv_2_f1: "Neural Anti-Raid", srv_2_f2: "Automated Backups", srv_2_f3: "Instant Install",
+                srv_3_title: "Telegram Defense", srv_3_desc: "Autonomous management for large communities. Bot removal and advanced flood control.",
+                srv_3_f1: "Multi-level Captcha", srv_3_f2: "Synchronized Global Blacklist", srv_3_f3: "Smart Filters",
+                stat_1: "Protected Users", stat_2: "Corporate Networks", stat_3: "24/7 SOC Monitoring", stat_4: "Defense Latency",
+                intel_title: "Automated Global Monitoring",
+                intel_p1: "Our SOC (Security Operations Center) tracks trillions of events per second, identifying attack patterns before impact.",
+                intel_p2: "The 3D visualization simulates DDoS and Raid attempts mitigated across our global network infrastructure in real-time.",
+                intel_p3: "Intelligent Total Shield.",
                 about_title: "<span class='text-gradient'>Our Origins:</span> Nova Bot",
-                about_desc: "Our core technology was born by developing one of the most advanced autonomous security systems for the Discord platform. Nova Bot was the foundation of the company and the public demonstration of our ability to stop massive attacks (raids and nuking) in milliseconds—technology we now apply on a large scale to websites and Telegram.",
-                team_title: "Our <span class='text-gradient'>Founders</span>",
-                team_desc: "The primary architects behind the security core and operations at Nova Defense.",
-                graph_title: "Global <span class='text-gradient'>Threat Intelligence</span>",
-                graph_desc: "Global increase in mitigated attacks on our infrastructure over the last 30 days.",
-                footer_desc: "Leading company in cybersecurity software. We protect web infrastructures and autonomously moderate the largest communities on Discord and Telegram.",
-                footer_sol_title: "Our Solutions",
-                footer_sol_1: "WAF Web Protection",
-                footer_sol_2: "Discord Security",
-                footer_sol_3: "Telegram Defense",
-                footer_leg_title: "Legal & Company",
-                footer_leg_1: "Privacy Policy",
-                footer_leg_2: "Terms of Service",
-                footer_leg_3: "Report Vulnerability",
+                about_desc: "Our core tech was born on Discord. Nova Bot proved our ability to stop massive attacks in milliseconds, technology we now apply at scale for corporations.",
+                team_title: "Our <span class='text-gradient'>Founders</span>", team_desc: "The primary architects behind Nova Defense's security core.",
+                graph_title: "Global <span class='text-gradient'>Threat Intelligence</span>", graph_desc: "Global increase in attacks mitigated across our infrastructure in the last 30 days.",
+                footer_desc: "Leader in corporate and modern community cybersecurity software.",
+                footer_sol_title: "Solutions", footer_sol_1: "WAF Web", footer_sol_2: "Discord Pro", footer_sol_3: "Telegram Auth",
+                footer_leg_title: "Company", footer_leg_1: "Privacy", footer_leg_2: "Terms", footer_leg_3: "Report",
                 footer_copy: "© 2026 Nova Defense Technologies. All rights reserved."
             }
         };
 
+        /* =========================================
+           CORE FUNCTIONS (Lang, Cursor, Tilt)
+           ========================================= */
         let currentLang = 'es';
-
         function setLanguage(lang) {
-            currentLang = lang;
-            document.documentElement.lang = lang;
-            document.getElementById('langText').innerText = lang.toUpperCase();
-            
+            currentLang = lang; document.documentElement.lang = lang; document.getElementById('langText').innerText = lang.toUpperCase();
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
-                if (translations[lang] && translations[lang][key]) {
-                    el.innerHTML = translations[lang][key];
-                }
+                if (translations[lang] && translations[lang][key]) el.innerHTML = translations[lang][key];
             });
+            // Re-trigger split text if language changes after init
+            if(document.body.classList.contains('loaded')) { splitTextForAnimation(); }
         }
 
-        function initLang() {
-            // Autodetectar idioma
+        function initCore() {
+            // Lang init
             const userLang = navigator.language || navigator.userLanguage; 
-            if (userLang.toLowerCase().includes('en')) {
-                setLanguage('en');
-            } else {
-                setLanguage('es');
-            }
+            setLanguage(userLang.toLowerCase().includes('en') ? 'en' : 'es');
+            document.getElementById('langToggle').addEventListener('click', () => setLanguage(currentLang === 'es' ? 'en' : 'es'));
 
-            // Botón toggle
-            document.getElementById('langToggle').addEventListener('click', () => {
-                setLanguage(currentLang === 'es' ? 'en' : 'es');
-            });
+            // Cursor and interactions (Desktop only)
+            if (window.innerWidth > 1024) {
+                const dot = document.getElementById('cursorDot'); const ring = document.getElementById('cursorRing');
+                let mX = window.innerWidth / 2, mY = window.innerHeight / 2, rX = mX, rY = mY;
+                document.addEventListener('mousemove', (e) => {
+                    mX = e.clientX; mY = e.clientY; dot.style.left = `${mX}px`; dot.style.top = `${mY}px`;
+                    const meshMoveX = (mX / window.innerWidth - 0.5) * 30, meshMoveY = (mY / window.innerHeight - 0.5) * 30;
+                    document.getElementById('bgMesh').style.transform = `translate(${meshMoveX}px, ${meshMoveY}px)`;
+                });
+                gsap.ticker.add(() => { rX += (mX - rX) * 0.15; rY += (mY - rY) * 0.15; ring.style.left = `${rX}px`; ring.style.top = `${rY}px`; });
+                document.querySelectorAll('.magnetic-element, a, button, .tilt-card').forEach(el => {
+                    el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+                    el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+                });
+
+                // Tilt cards
+                document.querySelectorAll('.tilt-card').forEach(card => {
+                    card.addEventListener('mousemove', (e) => {
+                        const r = card.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
+                        const rotX = ((y - r.height/2) / (r.height/2)) * -8, rotY = ((x - r.width/2) / (r.width/2)) * 8;
+                        gsap.to(card, { rotateX: rotX, rotateY: rotY, duration: 0.4, ease: "power2.out" });
+                    });
+                    card.addEventListener('mouseleave', () => gsap.to(card, { rotateX: 0, rotateY: 0, duration: 1, ease: "elastic.out(1, 0.3)" }));
+                });
+            }
         }
 
         /* =========================================
-           CUSTOM CURSOR & MAGNETIC EFFECTS
+           ULTRA MEJORA JS: GLOBE 3D SIMULATION
            ========================================= */
-        function initCursorAndInteractions() {
-            const cursorDot = document.getElementById('cursorDot');
-            const cursorRing = document.getElementById('cursorRing');
-            let mouseX = window.innerWidth / 2;
-            let mouseY = window.innerHeight / 2;
-            let ringX = mouseX;
-            let ringY = mouseY;
+        let myGlobe;
+        function initAttackGlobe() {
+            const globeContainer = document.getElementById('attackGlobe');
+            if (!globeContainer || window.innerWidth <= 1024) return; // No globe on mobile
 
-            // Mover cursor
-            document.addEventListener('mousemove', (e) => {
-                mouseX = e.clientX;
-                mouseY = e.clientY;
+            // Coordenadas aproximadas de ciudades principales para simular ataques
+            const cities = [
+                { name: 'Madrid', lat: 40.41, lng: -3.70 }, { name: 'Paris', lat: 48.85, lng: 2.35 },
+                { name: 'London', lat: 51.50, lng: -0.12 }, { name: 'New York', lat: 40.71, lng: -74.00 },
+                { name: 'Tokyo', lat: 35.68, lng: 139.69 }, { name: 'Frankfurt', lat: 50.11, lng: 8.68 },
+                { name: 'Singapore', lat: 1.35, lng: 103.81 }, { name: 'Sao Paulo', lat: -23.55, lng: -46.63 },
+                { name: 'Sydney', lat: -33.86, lng: 151.20 }, { name: 'Moscow', lat: 55.75, lng: 37.61 }
+            ];
+
+            // Inicializar globo con Globe.gl
+            myGlobe = Globe()(globeContainer)
+                .globeImageUrl('//unpkg.com/three-globe/example/img/earth-dark.jpg') // Textura oscura premium
+                .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')
+                .backgroundColor('rgba(0,0,0,0)') // Transparente para integrar con el fondo CSS
+                .showAtmosphere(true)
+                .atmosphereColor('#00E5FF') // Cyan atmosphere
+                .atmosphereAltitude(0.15)
                 
-                // El dot sigue exacto
-                cursorDot.style.left = `${mouseX}px`;
-                cursorDot.style.top = `${mouseY}px`;
+                // Configuración de Arcos (Ataques)
+                .arcColor(() => ['#2979FF', '#00E5FF']) // Gradiente Azul -> Cyan
+                .arcAltitudeAutoScaling(0.5)
+                .arcStroke(0.5)
+                .arcCurveResolution(64)
+                .arcCircularResolution(64)
+                .arcDashLength(0.9)
+                .arcDashGap(4)
+                .arcDashInitialOffset(() => Math.random() * 5)
+                .arcDashAnimateTime(1000) // Velocidad de la animación del ataque
+
+                // Configuración de Puntos (Impactos mitigados)
+                .pointColor(() => '#00E5FF')
+                .pointAltitude(0.01)
+                .pointRadius(0.2)
+                .pointsMerge(true);
+
+            // Ajustar controles
+            const controls = myGlobe.controls();
+            controls.enableZoom = false; controls.autoRotate = true; controls.autoRotateSpeed = 0.5;
+
+            // Simulación dinámica de ataques
+            function addRandomAttack() {
+                const src = cities[Math.floor(Math.random() * cities.length)];
+                let dst = cities[Math.floor(Math.random() * cities.length)];
+                while (src === dst) dst = cities[Math.floor(Math.random() * cities.length)]; // Evitar misma ciudad
+
+                const newArc = {
+                    startLat: src.lat, startLng: src.lng,
+                    endLat: dst.lat, endLng: dst.lng,
+                    name: `Attack: ${src.name} -> ${dst.name}`
+                };
+
+                // Añadir arco y punto de impacto
+                const currentArcs = myGlobe.arcsData();
+                const currentPoints = myGlobe.pointsData();
                 
-                // Fondo Mesh gradient sigue al ratón sutilmente
-                const moveX = (mouseX / window.innerWidth - 0.5) * 40;
-                const moveY = (mouseY / window.innerHeight - 0.5) * 40;
-                document.getElementById('bgMesh').style.transform = `translate(${moveX}px, ${moveY}px)`;
-            });
+                myGlobe.arcsData([...currentArcs, newArc]);
+                myGlobe.pointsData([...currentPoints, { lat: dst.lat, lng: dst.lng }]);
 
-            // Animación fluida del anillo
-            function renderRing() {
-                ringX += (mouseX - ringX) * 0.15; // Velocidad de seguimiento
-                ringY += (mouseY - ringY) * 0.15;
-                cursorRing.style.left = `${ringX}px`;
-                cursorRing.style.top = `${ringY}px`;
-                requestAnimationFrame(renderRing);
-            }
-            renderRing();
-
-            // Hover effects (Agrandar cursor en enlaces)
-            const magneticElements = document.querySelectorAll('.magnetic-element, a, button');
-            magneticElements.forEach(el => {
-                el.addEventListener('mouseenter', () => {
-                    document.body.classList.add('cursor-hover');
-                });
-                el.addEventListener('mouseleave', () => {
-                    document.body.classList.remove('cursor-hover');
-                    gsap.to(el, { x: 0, y: 0, duration: 0.5, ease: "elastic.out(1, 0.3)" }); // Reset magnet
-                });
-
-                // Magnetic Button Logic
-                if(el.classList.contains('magnetic-element')) {
-                    el.addEventListener('mousemove', (e) => {
-                        const rect = el.getBoundingClientRect();
-                        const x = e.clientX - rect.left - rect.width / 2;
-                        const y = e.clientY - rect.top - rect.height / 2;
-                        gsap.to(el, {
-                            x: x * 0.3, // Fuerza magnética
-                            y: y * 0.3,
-                            duration: 0.2,
-                            ease: "power2.out"
-                        });
-                    });
+                // Limpiar arcos antiguos para performance (mantener máx 15)
+                if (currentArcs.length > 15) {
+                    myGlobe.arcsData(currentArcs.slice(1));
+                    myGlobe.pointsData(currentPoints.slice(1));
                 }
-            });
+            }
 
-            // 3D Tilt Cards
-            const tiltCards = document.querySelectorAll('.tilt-card');
-            tiltCards.forEach(card => {
-                card.addEventListener('mousemove', (e) => {
-                    const rect = card.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    
-                    // Cálculo de rotación
-                    const centerX = rect.width / 2;
-                    const centerY = rect.height / 2;
-                    const rotateX = ((y - centerY) / centerY) * -10; // Max 10 grados
-                    const rotateY = ((x - centerX) / centerX) * 10;
-
-                    gsap.to(card, {
-                        rotateX: rotateX,
-                        rotateY: rotateY,
-                        duration: 0.5,
-                        ease: "power2.out"
-                    });
-                });
-
-                card.addEventListener('mouseleave', () => {
-                    gsap.to(card, {
-                        rotateX: 0,
-                        rotateY: 0,
-                        duration: 1,
-                        ease: "elastic.out(1, 0.3)"
-                    });
-                });
-            });
+            // Añadir ataque cada 1.5 segundos
+            setInterval(addRandomAttack, 1500);
+            
+            // Posición inicial de la cámara
+            myGlobe.pointOfView({ lat: 20, lng: 0, altitude: 2.5 }, 0);
         }
 
         /* =========================================
-           GSAP SCROLL ANIMATIONS
+           ULTRA MEJORA JS: GSAP PINNED SCROLLYTELLING
            ========================================= */
         gsap.registerPlugin(ScrollTrigger);
 
-        window.addEventListener('load', () => {
-            const body = document.body;
-            initLang(); // Cargar idioma
-            
-            setTimeout(() => {
-                body.classList.add('intro-done');
-                body.classList.add('loaded');
-                
-                if (window.innerWidth > 1024) {
-                    initCursorAndInteractions();
-                }
-                initGSAPAnimations();
-
-            }, 2500); // Reducido a 2.5s para no hacer esperar mucho
-        });
-
-        function initGSAPAnimations() {
-            
-            // Efecto Hero Escudo (Scroll Scrub)
-            gsap.to(".gsap-hero-shield", {
-                y: 200, scale: 0.5, rotationZ: 45, opacity: 0,
-                scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 1 }
-            });
-
-            // Texto de Hero hace fade al bajar
-            gsap.to(".gsap-hero-text", {
-                y: -100, opacity: 0,
-                scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 1 }
-            });
-
-            // Parallax en fondo
-            gsap.to("#bgGridLines", {
-                yPercent: 30,
-                scrollTrigger: { trigger: "body", start: "top top", end: "bottom bottom", scrub: true }
-            });
-
-            // Entradas laterales vinculadas al scroll
-            gsap.fromTo(".gsap-card-left", 
-                { x: -150, opacity: 0 },
-                { x: 0, opacity: 1, duration: 1, ease: "power3.out", scrollTrigger: { trigger: ".services-grid", start: "top 85%", toggleActions: "play none none reverse" }}
-            );
-            
-            gsap.fromTo(".gsap-card-bottom", 
-                { y: 150, opacity: 0 },
-                { y: 0, opacity: 1, duration: 1, delay: 0.1, ease: "power3.out", scrollTrigger: { trigger: ".services-grid", start: "top 85%", toggleActions: "play none none reverse" }}
-            );
-
-            gsap.fromTo(".gsap-card-right", 
-                { x: 150, opacity: 0 },
-                { x: 0, opacity: 1, duration: 1, delay: 0.2, ease: "power3.out", scrollTrigger: { trigger: ".services-grid", start: "top 85%", toggleActions: "play none none reverse" }}
-            );
-
-            // Efecto Scale en Stats
-            gsap.fromTo(".gsap-scale-up", 
-                { scale: 0.8, opacity: 0 },
-                { scale: 1, opacity: 1, duration: 0.8, ease: "back.out(1.7)", scrollTrigger: { trigger: ".stats-section", start: "top 90%", toggleActions: "play none none reverse" }}
-            );
-
-            // Efecto Expansión de "Orígenes"
-            gsap.fromTo(".gsap-parallax-section",
-                { width: "70%", opacity: 0, y: 50 },
-                { width: "100%", opacity: 1, y: 0, duration: 1, scrollTrigger: { trigger: "#about", start: "top 95%", end: "top 40%", scrub: 1 }}
-            );
-
-            // Textos Fade Up Staggered (En cascada)
-            const fadeUpElements = gsap.utils.toArray('.gsap-fade-up');
-            fadeUpElements.forEach(element => {
-                gsap.fromTo(element, 
-                    { y: 60, opacity: 0 },
-                    { y: 0, opacity: 1, duration: 0.8, ease: "power3.out", scrollTrigger: { trigger: element, start: "top 85%", toggleActions: "play none none reverse" }}
-                );
-            });
-
-            // Dibujar Gráfico con Scroll
-            const graphLine = document.getElementById('animGraph');
-            if(graphLine) {
-                gsap.to(graphLine, {
-                    strokeDashoffset: 0,
-                    scrollTrigger: { trigger: ".graph-container", start: "top 85%", end: "bottom 50%", scrub: 1.5 }
+        // Prepara los textos para la animación palabra por palabra
+        function splitTextForAnimation() {
+            document.querySelectorAll('.gsap-split-text').forEach(textEl => {
+                const content = textEl.innerText;
+                const words = content.split(' ');
+                textEl.innerHTML = ''; // Limpiar
+                words.forEach(word => {
+                    const span = document.createElement('span');
+                    span.className = 'word-span';
+                    span.innerText = word + ' '; // Añadir espacio
+                    textEl.appendChild(span);
                 });
+            });
+        }
+
+        function initGSAP() {
+            // Animaciones estándar (Hero, Services, Stats)
+            gsap.to(".gsap-hero-shield", { y: 200, scale: 0.5, rotationZ: 45, opacity: 0, scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 1 } });
+            gsap.to(".gsap-hero-text", { y: -100, opacity: 0, scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 1 } });
+            gsap.to("#bgGridLines", { yPercent: 30, scrollTrigger: { trigger: "body", start: "top top", end: "bottom bottom", scrub: true } });
+            gsap.fromTo(".gsap-card-left", { x: -150, opacity: 0 }, { x: 0, opacity: 1, duration: 1, ease: "power3.out", scrollTrigger: { trigger: ".services-grid", start: "top 85%", toggleActions: "play none none reverse" } });
+            gsap.fromTo(".gsap-card-bottom", { y: 150, opacity: 0 }, { y: 0, opacity: 1, duration: 1, delay: 0.1, ease: "power3.out", scrollTrigger: { trigger: ".services-grid", start: "top 85%", toggleActions: "play none none reverse" } });
+            gsap.fromTo(".gsap-card-right", { x: 150, opacity: 0 }, { x: 0, opacity: 1, duration: 1, delay: 0.2, ease: "power3.out", scrollTrigger: { trigger: ".services-grid", start: "top 85%", toggleActions: "play none none reverse" } });
+            gsap.fromTo(".gsap-scale-up", { scale: 0.8, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.8, ease: "back.out(1.7)", scrollTrigger: { trigger: ".stats-section", start: "top 90%", toggleActions: "play none none reverse" } });
+            gsap.fromTo(".gsap-parallax-section", { width: "70%", opacity: 0, y: 50 }, { width: "100%", opacity: 1, y: 0, duration: 1, scrollTrigger: { trigger: "#about", start: "top 95%", end: "top 40%", scrub: 1 } });
+            const graphLine = document.getElementById('animGraph');
+            if(graphLine) gsap.to(graphLine, { strokeDashoffset: 0, scrollTrigger: { trigger: ".graph-container", start: "top 85%", end: "bottom 50%", scrub: 1.5 } });
+
+            // Fade ups genéricos
+            gsap.utils.toArray('.gsap-fade-up').forEach(el => gsap.fromTo(el, { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 85%", toggleActions: "play none none reverse" } }));
+
+            // =========================================
+            // LÓGICA SCROLLYTELLING SECCIÓN PINNED (Deep Scroll)
+            // =========================================
+            if (window.innerWidth > 1024 && myGlobe) {
+                splitTextForAnimation(); // Preparar spans de palabras
+
+                // Timeline principal atado al scroll de la sección pinned
+                const scrollyTl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: "#intel",
+                        start: "top top",
+                        end: "+=3500", // "Duración" del scroll deep
+                        scrub: 1, // Suavidad
+                        pin: true, // FIJAR SECCIÓN
+                        anticipatePin: 1
+                    }
+                });
+
+                // Secuencia de animaciones (Texto + Planeta)
+                
+                // 1. Zoom inicial al planeta y rotación rápida al iniciar
+                scrollyTl.to({}, { duration: 0.5 }); // Pausa inicial
+                
+                // 2. Revelar frase 1 (Título) palabra por palabra
+                scrollyTl.to(".reveal-phrase.p1", { opacity: 1, translateY: 0, duration: 1 })
+                         .to(".reveal-phrase.p1 .word-span", { opacity: 1, translateY: 0, stagger: 0.1, duration: 1.5 }, "-=0.5");
+
+                // Interacción Planeta: Mover cámara a Europa
+                scrollyTl.to({}, { 
+                    duration: 1,
+                    onUpdate: function() {
+                        const p = this.progress(); // 0 a 1
+                        myGlobe.pointOfView({ lat: 40, lng: 10 + p*20, altitude: 2.5 - p*0.5 }, 0);
+                    }
+                }, "-=1");
+
+                // 3. Desvanecer frase 1, revelar frase 2
+                scrollyTl.to(".reveal-phrase.p1", { opacity: 0.1, duration: 1 })
+                         .to(".reveal-phrase.p2", { opacity: 1, translateY: 0, duration: 1 })
+                         .to(".reveal-phrase.p2 .word-span", { opacity: 1, translateY: 0, stagger: 0.08, duration: 2 }, "-=0.8");
+
+                // Interacción Planeta: Zoom in fuerte a un impacto
+                scrollyTl.to({}, { 
+                    duration: 2,
+                    onUpdate: function() {
+                        const p = this.progress();
+                        myGlobe.pointOfView({ lat: 40 + p*10, lng: 30 + p*10, altitude: 2.0 - p*0.8 }, 0);
+                    }
+                }, "-=2");
+
+                // 4. Desvanecer frase 2, revelar frase 3
+                scrollyTl.to(".reveal-phrase.p2", { opacity: 0.1, duration: 1 })
+                         .to(".reveal-phrase.p3", { opacity: 1, translateY: 0, duration: 1 })
+                         .to(".reveal-phrase.p3 .word-span", { opacity: 1, translateY: 0, stagger: 0.08, duration: 2 }, "-=0.8");
+
+                // Interacción Planeta: Alejar cámara y rotar
+                scrollyTl.to({}, { 
+                    duration: 2,
+                    onUpdate: function() {
+                        const p = this.progress();
+                        myGlobe.pointOfView({ lat: 50 - p*30, lng: 40 - p*100, altitude: 1.2 + p*1.3 }, 0);
+                    }
+                }, "-=2");
+
+                // 5. Revelar frase final (Gradient)
+                scrollyTl.to(".reveal-phrase.p3", { opacity: 0.1, duration: 1 })
+                         .to(".reveal-phrase.p4", { opacity: 1, translateY: 0, duration: 1 })
+                         .to(".reveal-phrase.p4 .word-span", { opacity: 1, translateY: 0, stagger: 0.2, duration: 1.5 }, "-=0.5");
+                
+                scrollyTl.to({}, { duration: 1 }); // Pausa final antes de desbanar
             }
         }
 
-        // Parallax Escudo 3D interactivo Hero
+        /* =========================================
+           INITIALIZATION & EVENTS
+           ========================================= */
+        window.addEventListener('load', () => {
+            initCore(); // Core, lang, cursor
+            initAttackGlobe(); // Planeta 3D
+
+            // Un pequeño delay extra para asegurar que Three.js cargó el globo antes de GSAP
+            setTimeout(() => {
+                const body = document.body;
+                body.classList.add('intro-done');
+                body.classList.add('loaded');
+                initGSAP(); // Animaciones Scroll
+            }, 2500); 
+        });
+
+        // Parallax Escudo 3D Hero ratón
         document.addEventListener('mousemove', (e) => {
             const shield = document.getElementById('shieldWrapper');
-            if(shield) {
+            if(shield && window.innerWidth > 1024) {
                 const x = (window.innerWidth / 2 - e.pageX) / 40;
                 const y = (window.innerHeight / 2 - e.pageY) / 40;
                 shield.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
             }
         });
 
-        // Cambio Header al scrollear
+        // Header scrolled
         window.addEventListener('scroll', () => {
             const header = document.getElementById('navbar');
             if (window.scrollY > 50) header.classList.add('scrolled');
@@ -1559,13 +902,8 @@
         });
 
         // --- BLOQUEO INSPECCIONAR ---
-        document.addEventListener('contextmenu', function(event) { event.preventDefault(); });
-        document.onkeydown = function(e) {
-            if(e.keyCode == 123) return false;
-            if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false;
-            if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false;
-            if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false;
-        }
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.onkeydown = e => { if(e.keyCode==123 || (e.ctrlKey && e.shiftKey && (e.keyCode=='I'.charCodeAt(0) || e.keyCode=='J'.charCodeAt(0))) || (e.ctrlKey && e.keyCode=='U'.charCodeAt(0))) return false; }
     </script>
 </body>
 </html>
